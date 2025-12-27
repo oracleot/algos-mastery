@@ -137,18 +137,14 @@ src/
 ├── App.tsx
 ├── main.tsx
 └── index.css
-
-tests/                 # Test files (colocated alternative)
-├── lib/
-│   └── db.test.ts
-├── hooks/
-│   └── useProblems.test.ts
-└── components/
-    ├── ProblemForm.test.tsx
-    └── ProblemList.test.tsx
 ```
 
-**Structure Decision**: Using the single-project React SPA structure from PRODUCT_PLAN.md. Tests will be colocated with source files (e.g., `db.test.ts` next to `db.ts`) per Constitution requirement II.
+**Test Collocation**: Per Constitution II.4, test files are colocated with source files:
+- `src/lib/db.ts` → `src/lib/db.test.ts`
+- `src/hooks/useProblems.ts` → `src/hooks/useProblems.test.ts`
+- `src/components/ProblemForm.tsx` → `src/components/ProblemForm.test.tsx`
+
+**Structure Decision**: Using the single-project React SPA structure from PRODUCT_PLAN.md. Tests are colocated with source files per Constitution requirement II.4.
 
 ## Complexity Tracking
 

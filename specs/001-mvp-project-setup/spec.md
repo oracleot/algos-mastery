@@ -93,6 +93,8 @@ A user wants to quickly mark a problem as attempted or solved without opening th
 - **FR-008**: System MUST validate that title is non-empty before saving
 - **FR-009**: System MUST display appropriate empty state when no problems exist or filter returns no results
 - **FR-010**: System MUST show loading state during async operations
+- **FR-011**: System MUST allow duplicate problem titles (same title, same topic) without warning; users may track multiple attempts
+- **FR-012**: System MUST display a user-friendly error message if IndexedDB is unavailable or storage quota is exceeded
 
 ### Key Entities
 
