@@ -99,14 +99,14 @@
 
 ### Implementation for User Story 2
 
-- [ ] T038 [US2] Implement useFilters hook in src/hooks/useFilters.ts with filter state and URL sync
-- [ ] T039 [US2] Create FilterBar component in src/components/FilterBar.tsx with topic, difficulty, status dropdowns
-- [ ] T040 [US2] Add search input to FilterBar for text search across title and notes
-- [ ] T041 [US2] Extend useProblems hook to accept filters parameter and apply filtering logic
-- [ ] T042 [US2] Integrate FilterBar into Problems page with filter state management
-- [ ] T043 [US2] Add clear all filters button when any filter is active
-- [ ] T044 [US2] Show empty state with clear filters action when filter returns no results
-- [ ] T045 [US2] Ensure filter operations complete in under 100ms for responsive UX
+- [X] T038 [US2] Implement useFilters hook in src/hooks/useFilters.ts with filter state and URL sync
+- [X] T039 [US2] Create FilterBar component in src/components/FilterBar.tsx with topic, difficulty, status dropdowns
+- [X] T040 [US2] Add search input to FilterBar for text search across title and notes
+- [X] T041 [US2] Extend useProblems hook to accept filters parameter and apply filtering logic
+- [X] T042 [US2] Integrate FilterBar into Problems page with filter state management
+- [X] T043 [US2] Add clear all filters button when any filter is active
+- [X] T044 [US2] Show empty state with clear filters action when filter returns no results
+- [X] T045 [US2] Ensure filter operations complete in under 100ms for responsive UX
 
 **Checkpoint**: User Story 2 complete - users can filter and search their problem list
 

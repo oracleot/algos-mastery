@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Plus } from 'lucide-react';
+import { ArrowLeft, Plus, SearchX } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import {
@@ -15,12 +15,24 @@ import { EmptyState } from '@/components/EmptyState';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { ProblemForm } from '@/components/ProblemForm';
 import { ProblemList } from '@/components/ProblemList';
+import { FilterBar } from '@/components/FilterBar';
 import { useProblems } from '@/hooks/useProblems';
+import { useFilters } from '@/hooks/useFilters';
 import type { Problem, ProblemFormData, Status } from '@/types';
 
 function Problems() {
+  const {
+    filters,
+    setTopic,
+    setDifficulty,
+    setStatus,
+    setSearch,
+    clearFilters,
+    hasActiveFilters,
+  } = useFilters();
+
   const { problems, isLoading, addProblem, updateProblem, deleteProblem, updateStatus } =
-    useProblems();
+    useProblems(filters);
 
   // Modal states
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -121,7 +133,19 @@ function Problems() {
       </header>
 
       {/* Content */}
-      <main className="max-w-6xl mx-auto px-4 py-8">
+      <main className="max-w-6xl mx-auto px-4 py-8 space-y-6">
+        {/* Filter Bar */}
+        <FilterBar
+          filters={filters}
+          onTopicChange={setTopic}
+          onDifficultyChange={setDifficulty}
+          onStatusChange={(status) => setStatus(status)}
+          onSearchChange={setSearch}
+          onClearAll={clearFilters}
+          hasActiveFilters={hasActiveFilters}
+        />
+
+        {/* Problems List or Empty State */}
         {isLoading ? (
           <ProblemList
             problems={[]}
@@ -129,6 +153,16 @@ function Problems() {
             onDelete={() => {}}
             onStatusChange={() => {}}
             isLoading={true}
+          />
+        ) : problemsList.length === 0 && hasActiveFilters ? (
+          <EmptyState
+            icon={<SearchX className="h-12 w-12" />}
+            title="No matching problems"
+            description="Try adjusting your filters or search query to find what you're looking for."
+            action={{
+              label: 'Clear All Filters',
+              onClick: clearFilters,
+            }}
           />
         ) : problemsList.length === 0 ? (
           <EmptyState
