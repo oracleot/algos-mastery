@@ -190,4 +190,46 @@ describe('Database Operations', () => {
       expect(count).toBe(2);
     });
   });
+
+  describe('Performance', () => {
+    it('should handle 100+ problems with CRUD operations under 200ms', async () => {
+      // Create 100 problems
+      const problems = Array.from({ length: 100 }, (_, i) =>
+        createTestProblem({
+          id: `perf-test-${i}`,
+          title: `Problem ${i}`,
+          topic: ['arrays-hashing', 'two-pointers', 'trees', 'graphs'][i % 4] as Problem['topic'],
+          difficulty: ['easy', 'medium', 'hard'][i % 3] as Problem['difficulty'],
+          status: ['unsolved', 'attempted', 'solved'][i % 3] as Problem['status'],
+        })
+      );
+
+      // Test bulk add performance
+      const addStart = performance.now();
+      for (const problem of problems) {
+        await addProblem(problem);
+      }
+      const addDuration = performance.now() - addStart;
+      expect(addDuration).toBeLessThan(5000); // 5 seconds for all 100 adds
+
+      // Test read performance
+      const readStart = performance.now();
+      const allProblems = await getAllProblems();
+      const readDuration = performance.now() - readStart;
+      expect(allProblems).toHaveLength(100);
+      expect(readDuration).toBeLessThan(100); // Under 100ms for read
+
+      // Test update performance
+      const updateStart = performance.now();
+      await updateProblem('perf-test-50', { title: 'Updated Problem 50' });
+      const updateDuration = performance.now() - updateStart;
+      expect(updateDuration).toBeLessThan(200); // Under 200ms for update
+
+      // Test delete performance
+      const deleteStart = performance.now();
+      await deleteProblem('perf-test-99');
+      const deleteDuration = performance.now() - deleteStart;
+      expect(deleteDuration).toBeLessThan(200); // Under 200ms for delete
+    });
+  });
 });

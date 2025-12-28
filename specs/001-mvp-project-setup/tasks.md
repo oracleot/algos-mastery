@@ -120,15 +120,15 @@
 
 ### Implementation for User Story 3
 
-- [ ] T046 [US3] Add updateProblem function to useProblems hook in src/hooks/useProblems.ts
-- [ ] T047 [US3] Add deleteProblem function to useProblems hook in src/hooks/useProblems.ts
-- [ ] T048 [US3] Add getProblem function to useProblems hook for fetching single problem
-- [ ] T049 [US3] Add edit button to ProblemCard that triggers onEdit callback
-- [ ] T050 [US3] Add delete button to ProblemCard that triggers onDelete callback
-- [ ] T051 [US3] Modify ProblemForm to support edit mode with initialData prop
-- [ ] T052 [US3] Integrate edit functionality in Problems page with modal pre-populated with problem data
-- [ ] T053 [US3] Integrate delete functionality in Problems page with ConfirmDialog
-- [ ] T054 [US3] Add toast notifications for successful edit and delete operations
+- [X] T046 [US3] Add updateProblem function to useProblems hook in src/hooks/useProblems.ts
+- [X] T047 [US3] Add deleteProblem function to useProblems hook in src/hooks/useProblems.ts
+- [X] T048 [US3] Add getProblem function to useProblems hook for fetching single problem
+- [X] T049 [US3] Add edit button to ProblemCard that triggers onEdit callback
+- [X] T050 [US3] Add delete button to ProblemCard that triggers onDelete callback
+- [X] T051 [US3] Modify ProblemForm to support edit mode with initialData prop
+- [X] T052 [US3] Integrate edit functionality in Problems page with modal pre-populated with problem data
+- [X] T053 [US3] Integrate delete functionality in Problems page with ConfirmDialog
+- [X] T054 [US3] Add toast notifications for successful edit and delete operations
 
 **Checkpoint**: User Story 3 complete - users can fully manage their problems (CRUD complete)
 
@@ -142,12 +142,12 @@
 
 ### Implementation for User Story 4
 
-- [ ] T055 [US4] Add updateStatus function to useProblems hook in src/hooks/useProblems.ts
-- [ ] T056 [US4] Create StatusButton component in src/components/StatusButton.tsx with status cycle logic
-- [ ] T057 [US4] Add StatusButton to ProblemCard with visual feedback on status change
-- [ ] T058 [US4] Style status states differently in ProblemCard (unsolved: gray, attempted: yellow, solved: green)
-- [ ] T059 [US4] Add toast notification for status updates
-- [ ] T060 [US4] Ensure status persists across page refresh
+- [X] T055 [US4] Add updateStatus function to useProblems hook in src/hooks/useProblems.ts
+- [X] T056 [US4] Create StatusButton component in src/components/StatusButton.tsx with status cycle logic
+- [X] T057 [US4] Add StatusButton to ProblemCard with visual feedback on status change
+- [X] T058 [US4] Style status states differently in ProblemCard (unsolved: gray, attempted: yellow, solved: green)
+- [X] T059 [US4] Add toast notification for status updates
+- [X] T060 [US4] Ensure status persists across page refresh
 
 **Checkpoint**: User Story 4 complete - users can track progress with quick status updates
 
@@ -157,16 +157,16 @@
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T061 [P] Add keyboard navigation support to all interactive elements (buttons, form fields)
-- [ ] T062 [P] Ensure all form inputs have proper aria attributes for accessibility
-- [ ] T063 [P] Add responsive styling for mobile (320px) to desktop (1920px) breakpoints
-- [ ] T064 [P] Add IndexedDB error handling with user-friendly error messages
-- [ ] T065 [P] Add loading skeleton states during initial data load
-- [ ] T066 Verify bundle size is under 500KB gzipped using Vite build analysis
-- [ ] T067 Test performance with 100+ problems to ensure filter <100ms and CRUD <200ms
-- [ ] T068 Run quickstart.md verification checklist
-- [ ] T069 Clean up any unused code, ensure lint passes with zero errors
-- [ ] T070 Final typecheck verification with tsc --noEmit
+- [X] T061 [P] Add keyboard navigation support to all interactive elements (buttons, form fields)
+- [X] T062 [P] Ensure all form inputs have proper aria attributes for accessibility
+- [X] T063 [P] Add responsive styling for mobile (320px) to desktop (1920px) breakpoints
+- [X] T064 [P] Add IndexedDB error handling with user-friendly error messages
+- [X] T065 [P] Add loading skeleton states during initial data load
+- [X] T066 Verify bundle size is under 500KB gzipped using Vite build analysis
+- [X] T067 Test performance with 100+ problems to ensure filter <100ms and CRUD <200ms
+- [X] T068 Run quickstart.md verification checklist
+- [X] T069 Clean up any unused code, ensure lint passes with zero errors
+- [X] T070 Final typecheck verification with tsc --noEmit
 
 ---
 

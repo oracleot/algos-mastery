@@ -246,14 +246,14 @@ describe('useProblems', () => {
         problemId = await result.current.addProblem(formData);
       });
 
-      let fetchedProblem;
+      let fetchedProblem: Awaited<ReturnType<typeof result.current.getProblem>>;
       await act(async () => {
         fetchedProblem = await result.current.getProblem(problemId!);
       });
 
       expect(fetchedProblem).toBeDefined();
-      expect(fetchedProblem?.title).toBe('Get Test');
-      expect(fetchedProblem?.url).toBe('https://example.com');
+      expect(fetchedProblem!.title).toBe('Get Test');
+      expect(fetchedProblem!.url).toBe('https://example.com');
     });
 
     it('should return undefined for non-existent problem', async () => {
