@@ -25,16 +25,16 @@
 
 **Purpose**: Project initialization with Vite + React + TypeScript + Tailwind
 
-- [ ] T001 Initialize Vite project with React TypeScript template using `npm create vite@latest . -- --template react-ts`
-- [ ] T002 Install and configure Tailwind CSS with postcss and autoprefixer in tailwind.config.js
-- [ ] T003 [P] Configure TypeScript strict mode in tsconfig.json per Constitution requirements
-- [ ] T004 [P] Install production dependencies: dexie, dexie-react-hooks, lucide-react, react-router-dom
-- [ ] T005 [P] Install dev dependencies: vitest, @testing-library/react, @testing-library/jest-dom, jsdom, fake-indexeddb
-- [ ] T006 [P] Configure Vitest with jsdom and fake-indexeddb in vitest.config.ts
-- [ ] T007 [P] Create test setup file with fake-indexeddb auto-import in src/tests/setup.ts
-- [ ] T008 Update package.json scripts for dev, build, test, typecheck, and lint
-- [ ] T009 Create project directory structure: src/components/ui, src/hooks, src/lib, src/data, src/types, src/pages
-- [ ] T010 [P] Replace src/index.css with Tailwind directives
+- [X] T001 Initialize Vite project with React TypeScript template using `npm create vite@latest . -- --template react-ts`
+- [X] T002 Install and configure Tailwind CSS with postcss and autoprefixer in tailwind.config.js
+- [X] T003 [P] Configure TypeScript strict mode in tsconfig.json per Constitution requirements
+- [X] T004 [P] Install production dependencies: dexie, dexie-react-hooks, lucide-react, react-router-dom
+- [X] T005 [P] Install dev dependencies: vitest, @testing-library/react, @testing-library/jest-dom, jsdom, fake-indexeddb
+- [X] T006 [P] Configure Vitest with jsdom and fake-indexeddb in vitest.config.ts
+- [X] T007 [P] Create test setup file with fake-indexeddb auto-import in src/tests/setup.ts
+- [X] T008 Update package.json scripts for dev, build, test, typecheck, and lint
+- [X] T009 Create project directory structure: src/components/ui, src/hooks, src/lib, src/data, src/types, src/pages
+- [X] T010 [P] Replace src/index.css with Tailwind directives
 
 ---
 
