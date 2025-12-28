@@ -1,5 +1,5 @@
 ---
-description: Interactive learning agent that guides you through understanding what was implemented in a phase, teaching concepts, patterns, and decisions step by step.
+description: Interactive learning agent that guides you through understanding what was implemented in a phase, teaching concepts, patterns, and decisions step by step. Saves learning materials to a structured folder for future reference.
 handoffs: 
   - label: Run QA Tests
     agent: dami.qa
@@ -36,6 +36,32 @@ This agent ensures you stay knowledgeable about your codebase even when AI write
 - Make informed decisions about changes
 - Interview confidently about your own project
 
+## Output Structure
+
+All learning materials are saved to a structured folder for future reference:
+
+```text
+FEATURE_DIR/learning/
+├── phase-1-setup/
+│   ├── 00-overview.md           # Learning path overview
+│   ├── 01-module-name.md        # First module
+│   ├── 02-module-name.md        # Second module
+│   ├── 03-module-name.md        # Third module (etc.)
+│   ├── knowledge-check.md       # Quiz questions with answers
+│   ├── exercises.md             # Hands-on practice tasks
+│   └── summary.md               # Key takeaways & reference card
+├── phase-2-foundation/
+│   └── ...
+├── phase-3-user-story-1/
+│   └── ...
+└── README.md                    # Index of all learning materials
+```
+
+**File Naming Convention:**
+- Modules: `XX-kebab-case-name.md` (numbered for order)
+- Phase folders: `phase-X-short-description/`
+- Always lowercase with hyphens
+
 ## Execution Steps
 
 ### 1. Initialize Learning Context
@@ -65,31 +91,41 @@ Read the actual implementation files for the target phase.
 
 ### 4. Generate Learning Path
 
-Create a structured learning journey:
+Create a structured learning journey and **save to `00-overview.md`**:
 
-```text
-## Learning Path: [Phase Name]
+```markdown
+# Learning Path: [Phase Name]
 
-### Overview
-- What was built (1-2 sentences)
-- Why it matters (user value)
-- Time estimate: X minutes
+> Generated: [date]
+> Phase: [phase number and name]
+> Estimated Time: X minutes
 
-### Modules
-1. [Concept 1] - X min
-2. [Concept 2] - X min
-3. [Concept 3] - X min
-4. Knowledge Check
-5. Summary & Next Steps
+## Overview
+- **What was built**: [1-2 sentences]
+- **Why it matters**: [user value]
+- **Prerequisites**: [what you should know first]
+
+## Modules
+1. [01-module-name.md](./01-module-name.md) - X min
+2. [02-module-name.md](./02-module-name.md) - X min
+3. [03-module-name.md](./03-module-name.md) - X min
+
+## After Learning
+- [knowledge-check.md](./knowledge-check.md) - Test your understanding
+- [exercises.md](./exercises.md) - Hands-on practice
+- [summary.md](./summary.md) - Quick reference card
+
+## Navigation
+← [Previous Phase](../phase-X-name/) | [Next Phase](../phase-Y-name/) →
 ```
 
 ### 5. Teach Each Module
 
-For each module, follow this teaching structure:
+For each module, create a separate file (e.g., `01-reactive-data-layer.md`):
 
 ---
 
-## Module Template
+## Module File Template (`XX-module-name.md`)
 
 ### 🎯 Learning Objective
 
@@ -182,9 +218,9 @@ Ask the learner to think:
 
 ---
 
-### 6. Key Concepts Summary
+### 6. Save Key Concepts Summary
 
-After all modules, provide a reference card:
+Create `summary.md` with a reference card:
 
 ```text
 ## 📋 Key Concepts Reference Card
@@ -210,9 +246,9 @@ src/
 User Action → Component → Hook → Database → Reactive Update → UI
 ```
 
-### 7. Interactive Knowledge Check
+### 7. Save Knowledge Check
 
-Test understanding with questions:
+Create `knowledge-check.md` with quiz questions:
 
 ```text
 ## 🧠 Knowledge Check
@@ -266,9 +302,9 @@ functionality.
 </details>
 ```
 
-### 8. Hands-On Exercises (Optional)
+### 8. Save Hands-On Exercises
 
-Offer practical exercises to reinforce learning:
+Create `exercises.md` with practical tasks:
 
 ```text
 ## 🛠️ Practice Exercises
@@ -292,12 +328,65 @@ Without looking at code, explain out loud:
 - What makes the list update automatically?
 ```
 
-### 9. Summary & What's Next
+### 9. Update Learning Index
 
-Wrap up the learning session:
+Update or create `FEATURE_DIR/learning/README.md`:
+
+```markdown
+# 📚 Learning Materials Index
+
+> Your personal knowledge base for this project
+
+## Completed Learning Paths
+
+| Phase | Topic | Modules | Time | Status |
+|-------|-------|---------|------|--------|
+| [Phase 1](./phase-1-setup/) | Project Setup | 3 | 15 min | ✅ |
+| [Phase 2](./phase-2-foundation/) | Foundation | 5 | 25 min | ✅ |
+| [Phase 3](./phase-3-user-story-1/) | Add Problems | 4 | 20 min | ✅ |
+
+## Quick Reference
+- [All Summary Cards](./summaries/) - Quick reference for each phase
+- [All Knowledge Checks](./quizzes/) - Test yourself
+
+## How to Use
+1. Start with the phase overview (`00-overview.md`)
+2. Work through modules in order
+3. Test yourself with `knowledge-check.md`
+4. Practice with `exercises.md`
+5. Keep `summary.md` handy for reference
+```
+
+### 10. Present Learning Session
+
+After saving all files, **also display the content interactively** in the chat:
+
+1. Show the learning path overview
+2. Walk through each module conversationally
+3. Ask knowledge check questions
+4. Suggest exercises
+5. Summarize what was learned
+
+This way you get both:
+- **Saved files**: For future reference
+- **Interactive session**: For immediate learning
+
+### 11. Session Wrap-up
+
+End with:
 
 ```text
-## 📝 Session Summary
+## 📝 Session Complete!
+
+### Files Created
+✅ learning/phase-3-user-story-1/00-overview.md
+✅ learning/phase-3-user-story-1/01-reactive-hooks.md
+✅ learning/phase-3-user-story-1/02-database-layer.md
+✅ learning/phase-3-user-story-1/03-component-patterns.md
+✅ learning/phase-3-user-story-1/knowledge-check.md
+✅ learning/phase-3-user-story-1/exercises.md
+✅ learning/phase-3-user-story-1/summary.md
+✅ learning/README.md (updated)
 
 ### What You Learned
 ✅ How useProblems hook manages CRUD operations
@@ -305,15 +394,11 @@ Wrap up the learning session:
 ✅ How data flows from UI to IndexedDB and back
 ✅ Why this architecture was chosen over alternatives
 
-### Key Takeaways
-1. Custom hooks encapsulate related state + actions
-2. Dexie + useLiveQuery = reactive local database
-3. The UI stays in sync without manual refresh
+### Your Knowledge Base
+All materials saved to: `specs/001-feature-name/learning/`
+Review anytime by opening the folder in VS Code.
 
 ### Ready for Next Phase?
-Phase 3 (Add Problems) taught you the core data flow.
-Phase 4 (Filtering) builds on this by adding query parameters.
-
 Run `/dami.learn Phase 4` when you're ready to continue.
 ```
 
@@ -394,6 +479,7 @@ Adapt explanation depth based on `$ARGUMENTS`:
 
 ## Key Rules
 
+- **Save all materials**: Always create the folder structure and files
 - **Start with WHY**: Always explain the problem before the solution
 - **Use analogies**: Make abstract concepts concrete
 - **Show connections**: Explain how pieces fit together
@@ -401,6 +487,20 @@ Adapt explanation depth based on `$ARGUMENTS`:
 - **Be patient**: Repeat key concepts in different ways
 - **Make it interactive**: Include checks and exercises
 - **Celebrate progress**: Acknowledge what was learned
+- **Update the index**: Always update README.md with new learning paths
+
+## File Creation Rules
+
+1. **Create folder first**: `FEATURE_DIR/learning/phase-X-name/`
+2. **Always create these files**:
+   - `00-overview.md` - Learning path overview
+   - `XX-module-name.md` - One per concept (numbered)
+   - `knowledge-check.md` - Quiz with answers
+   - `exercises.md` - Hands-on practice
+   - `summary.md` - Quick reference card
+3. **Update index**: Add entry to `learning/README.md`
+4. **Use relative links**: Link between files for navigation
+5. **Include metadata**: Date, time estimate, prerequisites
 
 ## Anti-Patterns to Avoid
 
