@@ -76,16 +76,16 @@
 
 ### Implementation for User Story 1
 
-- [ ] T029 [US1] Implement useDB hook in src/hooks/useDB.ts with isReady, error, clearAllData, exportData, importData
-- [ ] T030a [US1] Write useProblems.test.ts for addProblem, updateProblem, deleteProblem in src/hooks/useProblems.test.ts (test-first per Constitution II)
-- [ ] T030b [US1] Implement useProblems hook in src/hooks/useProblems.ts with addProblem function using useLiveQuery (tests from T030a must fail first)
-- [ ] T031 [US1] Create ProblemForm component in src/components/ProblemForm.tsx with all form fields and validation
-- [ ] T032 [US1] Create ProblemCard component in src/components/ProblemCard.tsx displaying problem details with badges
-- [ ] T033 [US1] Create ProblemList component in src/components/ProblemList.tsx rendering array of ProblemCards
-- [ ] T034 [US1] Wire up Problems page in src/pages/Problems.tsx with Add Problem button and form modal
-- [ ] T035 [US1] Add toast notifications for successful problem creation in Problems page
-- [ ] T036 [US1] Handle loading state during async operations in Problems page
-- [ ] T037 [US1] Add empty state when no problems exist with call-to-action to add first problem
+- [X] T029 [US1] Implement useDB hook in src/hooks/useDB.ts with isReady, error, clearAllData, exportData, importData
+- [X] T030a [US1] Write useProblems.test.ts for addProblem, updateProblem, deleteProblem in src/hooks/useProblems.test.ts (test-first per Constitution II)
+- [X] T030b [US1] Implement useProblems hook in src/hooks/useProblems.ts with addProblem function using useLiveQuery (tests from T030a must fail first)
+- [X] T031 [US1] Create ProblemForm component in src/components/ProblemForm.tsx with all form fields and validation
+- [X] T032 [US1] Create ProblemCard component in src/components/ProblemCard.tsx displaying problem details with badges
+- [X] T033 [US1] Create ProblemList component in src/components/ProblemList.tsx rendering array of ProblemCards
+- [X] T034 [US1] Wire up Problems page in src/pages/Problems.tsx with Add Problem button and form modal
+- [X] T035 [US1] Add toast notifications for successful problem creation in Problems page
+- [X] T036 [US1] Handle loading state during async operations in Problems page
+- [X] T037 [US1] Add empty state when no problems exist with call-to-action to add first problem
 
 **Checkpoint**: User Story 1 complete - users can add problems and see them persisted
 

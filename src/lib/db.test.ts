@@ -2,7 +2,6 @@
 
 import { describe, it, expect, beforeEach } from 'vitest';
 import {
-  db,
   addProblem,
   getProblem,
   getAllProblems,
