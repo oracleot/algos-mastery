@@ -44,25 +44,25 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T011 Define TypeScript types and interfaces in src/types/index.ts (Problem, Topic, Difficulty, Status, ProblemFormData, ProblemFilters)
-- [ ] T012 [P] Create static topic taxonomy data in src/data/topics.ts with 15 ordered algorithm topics
-- [ ] T013a [P] Write db.test.ts with fake-indexeddb for Problem CRUD operations in src/lib/db.test.ts (test-first per Constitution II)
-- [ ] T013b [P] Implement Dexie database schema with Problem table in src/lib/db.ts (tests from T013a must fail first)
-- [ ] T014 [P] Create validation utility functions in src/lib/validation.ts (validateProblem, isValid)
-- [ ] T015 [P] Create utility functions in src/lib/utils.ts (cn for className merging, generateId for UUID)
-- [ ] T016 [P] Create Button component in src/components/ui/Button.tsx with variants (primary, secondary, ghost, danger)
-- [ ] T017 [P] Create Input component in src/components/ui/Input.tsx with label, error, and hint support
-- [ ] T018 [P] Create Select component in src/components/ui/Select.tsx with options and placeholder support
-- [ ] T019 [P] Create Card component in src/components/ui/Card.tsx with padding variants
-- [ ] T020 [P] Create Modal component in src/components/ui/Modal.tsx using native dialog element
-- [ ] T021 [P] Create Toast component in src/components/Toast.tsx with success/error/info types
-- [ ] T022 [P] Create EmptyState component in src/components/EmptyState.tsx with icon, title, description, action
-- [ ] T023 [P] Create ConfirmDialog component in src/components/ConfirmDialog.tsx for destructive actions
-- [ ] T024 [P] Create TopicBadge component in src/components/TopicBadge.tsx for displaying topic labels
-- [ ] T025 [P] Create DifficultyBadge component in src/components/DifficultyBadge.tsx with color coding (green/yellow/red)
-- [ ] T026 Setup React Router with routes in src/App.tsx (Home, Problems pages)
-- [ ] T027 [P] Create basic Home page in src/pages/Home.tsx with navigation to Problems
-- [ ] T028 Update src/main.tsx with BrowserRouter wrapper
+- [X] T011 Define TypeScript types and interfaces in src/types/index.ts (Problem, Topic, Difficulty, Status, ProblemFormData, ProblemFilters)
+- [X] T012 [P] Create static topic taxonomy data in src/data/topics.ts with 15 ordered algorithm topics
+- [X] T013a [P] Write db.test.ts with fake-indexeddb for Problem CRUD operations in src/lib/db.test.ts (test-first per Constitution II)
+- [X] T013b [P] Implement Dexie database schema with Problem table in src/lib/db.ts (tests from T013a must fail first)
+- [X] T014 [P] Create validation utility functions in src/lib/validation.ts (validateProblem, isValid)
+- [X] T015 [P] Create utility functions in src/lib/utils.ts (cn for className merging, generateId for UUID)
+- [X] T016 [P] Create Button component in src/components/ui/Button.tsx with variants (primary, secondary, ghost, danger)
+- [X] T017 [P] Create Input component in src/components/ui/Input.tsx with label, error, and hint support
+- [X] T018 [P] Create Select component in src/components/ui/Select.tsx with options and placeholder support
+- [X] T019 [P] Create Card component in src/components/ui/Card.tsx with padding variants
+- [X] T020 [P] Create Modal component in src/components/ui/Modal.tsx using native dialog element
+- [X] T021 [P] Create Toast component in src/components/Toast.tsx with success/error/info types
+- [X] T022 [P] Create EmptyState component in src/components/EmptyState.tsx with icon, title, description, action
+- [X] T023 [P] Create ConfirmDialog component in src/components/ConfirmDialog.tsx for destructive actions
+- [X] T024 [P] Create TopicBadge component in src/components/TopicBadge.tsx for displaying topic labels
+- [X] T025 [P] Create DifficultyBadge component in src/components/DifficultyBadge.tsx with color coding (green/yellow/red)
+- [X] T026 Setup React Router with routes in src/App.tsx (Home, Problems pages)
+- [X] T027 [P] Create basic Home page in src/pages/Home.tsx with navigation to Problems
+- [X] T028 Update src/main.tsx with BrowserRouter wrapper
 
 **Checkpoint**: Foundation ready - user story implementation can now begin
 
