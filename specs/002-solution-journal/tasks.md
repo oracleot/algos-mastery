@@ -78,13 +78,13 @@
 
 ### Implementation for User Story 2
 
-- [ ] T018 [P] [US2] Create SolutionCard component with expand/collapse in src/components/SolutionCard.tsx
-- [ ] T019 [P] [US2] Create SolutionList component in src/components/SolutionList.tsx
-- [ ] T020 [US2] Extend useSolutions hook with updateSolution, deleteSolution methods in src/hooks/useSolutions.ts
-- [ ] T021 [US2] Add copy-to-clipboard functionality with toast feedback in SolutionCard.tsx
-- [ ] T022 [US2] Add edit mode with SolutionEditor in SolutionCard.tsx
-- [ ] T023 [US2] Add delete confirmation dialog integration in SolutionCard.tsx
-- [ ] T024 [US2] Integrate SolutionList into Problem detail page in src/pages/Problem.tsx
+- [X] T018 [P] [US2] Create SolutionCard component with expand/collapse in src/components/SolutionCard.tsx
+- [X] T019 [P] [US2] Create SolutionList component in src/components/SolutionList.tsx
+- [X] T020 [US2] Extend useSolutions hook with updateSolution, deleteSolution methods in src/hooks/useSolutions.ts
+- [X] T021 [US2] Add copy-to-clipboard functionality with toast feedback in SolutionCard.tsx
+- [X] T022 [US2] Add edit mode with SolutionEditor in SolutionCard.tsx
+- [X] T023 [US2] Add delete confirmation dialog integration in SolutionCard.tsx
+- [X] T024 [US2] Integrate SolutionList into Problem detail page in src/pages/Problem.tsx
 
 **Checkpoint**: User Stories 1 & 2 complete - full solution CRUD with copy functionality
 
@@ -98,10 +98,10 @@
 
 ### Implementation for User Story 3
 
-- [ ] T025 [P] [US3] Create useTemplates hook in src/hooks/useTemplates.ts
-- [ ] T026 [US3] Create TemplateSelector dropdown component in src/components/TemplateSelector.tsx
-- [ ] T027 [US3] Add template insertion handler to SolutionEditor in src/components/SolutionEditor.tsx
-- [ ] T028 [US3] Integrate TemplateSelector into SolutionForm in src/components/SolutionForm.tsx
+- [X] T025 [P] [US3] Create useTemplates hook in src/hooks/useTemplates.ts
+- [X] T026 [US3] Create TemplateSelector dropdown component in src/components/TemplateSelector.tsx
+- [X] T027 [US3] Add template insertion handler to SolutionEditor in src/components/SolutionEditor.tsx
+- [X] T028 [US3] Integrate TemplateSelector into SolutionForm in src/components/SolutionForm.tsx
 
 **Checkpoint**: User Story 3 complete - can insert pattern templates into editor
 
@@ -115,10 +115,10 @@
 
 ### Implementation for User Story 4
 
-- [ ] T029 [P] [US4] Create useProgress hook in src/hooks/useProgress.ts
-- [ ] T030 [P] [US4] Create MasteryBadge component in src/components/MasteryBadge.tsx
-- [ ] T031 [US4] Update topic selector to show locked/unlocked state in src/components/ProblemForm.tsx
-- [ ] T032 [US4] Add mastery percentage display to topic badges in src/components/TopicBadge.tsx
+- [X] T029 [P] [US4] Create useProgress hook in src/hooks/useProgress.ts
+- [X] T030 [P] [US4] Create MasteryBadge component in src/components/MasteryBadge.tsx
+- [X] T031 [US4] Update topic selector to show locked/unlocked state in src/components/ProblemForm.tsx
+- [X] T032 [US4] Add mastery percentage display to topic badges in src/components/TopicBadge.tsx
 
 **Checkpoint**: User Story 4 complete - topic mastery tracking functional
 
@@ -132,11 +132,11 @@
 
 ### Implementation for User Story 5
 
-- [ ] T033 [P] [US5] Create TopicProgressCard component in src/components/TopicProgressCard.tsx
-- [ ] T034 [US5] Create ProgressLadder component in src/components/ProgressLadder.tsx
-- [ ] T035 [US5] Create Progress page in src/pages/Progress.tsx
-- [ ] T036 [US5] Add navigation link to Progress page in src/App.tsx
-- [ ] T037 [US5] Add responsive layout for ladder (vertical/horizontal) in ProgressLadder.tsx
+- [X] T033 [P] [US5] Create TopicProgressCard component in src/components/TopicProgressCard.tsx
+- [X] T034 [US5] Create ProgressLadder component in src/components/ProgressLadder.tsx
+- [X] T035 [US5] Create Progress page in src/pages/Progress.tsx
+- [X] T036 [US5] Add navigation link to Progress page in src/App.tsx
+- [X] T037 [US5] Add responsive layout for ladder (vertical/horizontal) in ProgressLadder.tsx
 
 **Checkpoint**: User Story 5 complete - progress ladder visualization functional
 
@@ -146,12 +146,22 @@
 
 **Purpose**: Performance optimization and refinements
 
-- [ ] T038 [P] Implement lazy loading for SolutionEditor component in src/pages/Problem.tsx
-- [ ] T039 [P] Add loading skeleton for editor in src/components/EditorSkeleton.tsx
-- [ ] T040 [P] Add empty state for solutions list in SolutionList.tsx
-- [ ] T041 Verify bundle size stays under 500KB gzipped
-- [ ] T042 Run quickstart.md verification checklist
-- [ ] T043 Code cleanup: ensure all files under 200 lines per constitution
+- [X] T038 [P] Implement lazy loading for SolutionEditor component in src/pages/Problem.tsx
+- [X] T039 [P] Add loading skeleton for editor in src/components/EditorSkeleton.tsx
+- [X] T040 [P] Add empty state for solutions list in SolutionList.tsx
+- [X] T041 Verify bundle size stays under 500KB gzipped
+- [X] T042 Run quickstart.md verification checklist
+- [X] T043 Code cleanup: ensure all files under 200 lines per constitution
+- [X] T044 [P] Enlarge solution editor modal to max-w-5xl for better code editing UX
+- [X] T045 [P] Add shadcn/ui Tooltip component for icon button accessibility (ProblemCard, SolutionCard)
+
+---
+
+## Phase 9: Future Enhancements (Backlog)
+
+**Purpose**: Planned improvements discovered during QA and user testing
+
+- [ ] T046 [US3] Make pattern templates language-agnostic: generate template code in the selected language (Python, JavaScript, TypeScript, Java, C++, Go, Rust) instead of always Python. Requires updating src/data/templates.ts to include multi-language variants or a code generation utility.
 
 ---
 

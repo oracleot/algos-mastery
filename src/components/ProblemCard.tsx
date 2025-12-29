@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom';
 import { ExternalLink, Pencil, Trash2, Code } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { TopicBadge } from '@/components/TopicBadge';
 import { DifficultyBadge } from '@/components/DifficultyBadge';
 import { cn } from '@/lib/utils';
@@ -67,32 +72,47 @@ function ProblemCard({ problem, onEdit, onDelete, onStatusChange }: ProblemCardP
             </CardTitle>
           </div>
           <div className="flex items-center gap-1 shrink-0">
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              asChild
-              aria-label="View solutions"
-            >
-              <Link to={`/problems/${problem.id}`}>
-                <Code className="h-4 w-4" />
-              </Link>
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              onClick={onEdit}
-              aria-label="Edit problem"
-            >
-              <Pencil className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              onClick={onDelete}
-              aria-label="Delete problem"
-            >
-              <Trash2 className="h-4 w-4 text-destructive" />
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon-sm"
+                  asChild
+                  aria-label="View solutions"
+                >
+                  <Link to={`/problems/${problem.id}`}>
+                    <Code className="h-4 w-4" />
+                  </Link>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>View solutions</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon-sm"
+                  onClick={onEdit}
+                  aria-label="Edit problem"
+                >
+                  <Pencil className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Edit problem</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon-sm"
+                  onClick={onDelete}
+                  aria-label="Delete problem"
+                >
+                  <Trash2 className="h-4 w-4 text-destructive" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Delete problem</TooltipContent>
+            </Tooltip>
           </div>
         </div>
       </CardHeader>

@@ -27,4 +27,12 @@ TypeScript ^5.0.0 (strict mode enabled): Follow standard conventions
 - 001-mvp-project-setup: Added TypeScript ^5.0.0 (strict mode enabled) + React ^18.0.0, Vite ^5.0.0, Tailwind CSS ^3.0.0, Dexie.js ^4.0.0, Lucide React (icons)
 
 <!-- MANUAL ADDITIONS START -->
+
+## UI Components
+
+- **Always check shadcn/ui first** before implementing custom UI components
+- Use `npx shadcn@latest add <component>` to add new components
+- shadcn/ui components are located in `src/components/ui/`
+- Prefer shadcn/ui for consistent styling and behavior across the app
+
 <!-- MANUAL ADDITIONS END -->

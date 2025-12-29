@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, Plus, ExternalLink, Code } from 'lucide-react';
+import { ArrowLeft, Plus, ExternalLink } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -12,21 +12,26 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { EmptyState } from '@/components/EmptyState';
 import { SolutionForm } from '@/components/SolutionForm';
+import { SolutionList } from '@/components/SolutionList';
 import { TopicBadge } from '@/components/TopicBadge';
 import { DifficultyBadge } from '@/components/DifficultyBadge';
 import { useProblems } from '@/hooks/useProblems';
 import { useSolutions } from '@/hooks/useSolutions';
 import { getTopicName } from '@/data/topics';
-import { LANGUAGE_DISPLAY_NAMES } from '@/lib/editor';
-import type { Problem as ProblemType, SolutionFormData } from '@/types';
+import type { Problem as ProblemType, SolutionFormData, SupportedLanguage } from '@/types';
 
 function Problem() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { getProblem } = useProblems();
-  const { solutions, isLoading: solutionsLoading, addSolution } = useSolutions(id ?? '');
+  const {
+    solutions,
+    isLoading: solutionsLoading,
+    addSolution,
+    updateSolution,
+    deleteSolution,
+  } = useSolutions(id ?? '');
 
   const [problem, setProblem] = useState<ProblemType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -79,6 +84,17 @@ function Problem() {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleUpdateSolution = async (
+    solutionId: string,
+    data: { code: string; language: SupportedLanguage }
+  ) => {
+    await updateSolution(solutionId, data);
+  };
+
+  const handleDeleteSolution = async (solutionId: string) => {
+    await deleteSolution(solutionId);
   };
 
   // Loading state
@@ -193,55 +209,24 @@ function Problem() {
             </h2>
           </div>
 
-          {solutionsLoading ? (
-            <Card>
-              <CardContent className="py-8">
-                <div className="h-32 bg-muted animate-pulse rounded" />
-              </CardContent>
-            </Card>
-          ) : solutionsList.length === 0 ? (
-            <EmptyState
-              icon={<Code className="h-12 w-12" />}
-              title="No solutions yet"
-              description="Add your first solution to track your progress on this problem."
-              action={{
-                label: 'Add Solution',
-                onClick: handleOpenAddForm,
-              }}
-            />
-          ) : (
-            <div className="space-y-4">
-              {solutionsList.map((solution) => (
-                <Card key={solution.id}>
-                  <CardHeader className="pb-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium">
-                        {LANGUAGE_DISPLAY_NAMES[solution.language]}
-                      </span>
-                      <span className="text-xs text-muted-foreground">
-                        {solution.createdAt.toLocaleDateString()}
-                      </span>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <pre className="text-sm bg-muted p-4 rounded-md overflow-x-auto whitespace-pre-wrap break-words">
-                      <code>{solution.code}</code>
-                    </pre>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          )}
+          <SolutionList
+            solutions={solutionsList}
+            isLoading={solutionsLoading}
+            onUpdate={handleUpdateSolution}
+            onDelete={handleDeleteSolution}
+            onAdd={handleOpenAddForm}
+          />
         </div>
       </main>
 
       {/* Add Solution Dialog */}
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
-        <DialogContent className="max-w-3xl">
+        <DialogContent className="max-w-5xl">
           <DialogHeader>
             <DialogTitle>Add Solution</DialogTitle>
           </DialogHeader>
           <SolutionForm
+            currentTopic={problem.topic}
             onSubmit={handleSubmitSolution}
             onCancel={handleCloseForm}
             isLoading={isSubmitting}

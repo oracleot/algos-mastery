@@ -1,16 +1,31 @@
 // components/SolutionForm.tsx - Form for adding/editing solutions
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, lazy, Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import { SolutionEditor } from '@/components/SolutionEditor';
 import { LanguageSelector } from '@/components/LanguageSelector';
+import { TemplateSelector } from '@/components/TemplateSelector';
+import { EditorSkeleton } from '@/components/EditorSkeleton';
 import { validateSolution, isSolutionValid } from '@/lib/validation';
-import type { SupportedLanguage, SolutionFormData, SolutionValidationErrors, Solution } from '@/types';
+import type {
+  SupportedLanguage,
+  SolutionFormData,
+  SolutionValidationErrors,
+  Solution,
+  TopicSlug,
+  Template,
+} from '@/types';
+
+// Lazy load the CodeMirror editor to reduce initial bundle size
+const SolutionEditor = lazy(() =>
+  import('@/components/SolutionEditor').then((mod) => ({ default: mod.SolutionEditor }))
+);
 
 interface SolutionFormProps {
   /** Initial values for edit mode */
   initialData?: Solution;
+  /** Current topic for template filtering */
+  currentTopic?: TopicSlug;
   /** Called when form is submitted successfully */
   onSubmit: (data: SolutionFormData) => Promise<void>;
   /** Called when form is cancelled */
@@ -25,6 +40,7 @@ interface SolutionFormProps {
  */
 export function SolutionForm({
   initialData,
+  currentTopic,
   onSubmit,
   onCancel,
   isLoading = false,
@@ -76,6 +92,20 @@ export function SolutionForm({
     setErrors((prev) => ({ ...prev, language: undefined }));
   }, []);
 
+  const handleInsertTemplate = useCallback((template: Template) => {
+    // Append template code to existing code (with newline if there's existing code)
+    setCode((prev) => {
+      if (prev.trim()) {
+        return prev + '\n\n' + template.code;
+      }
+      return template.code;
+    });
+    // Optionally update language to match template
+    if (template.defaultLanguage) {
+      setLanguage(template.defaultLanguage);
+    }
+  }, []);
+
   const disabled = isLoading || isSubmitting;
 
   return (
@@ -92,17 +122,24 @@ export function SolutionForm({
             <p className="text-sm text-destructive">{errors.language}</p>
           )}
         </div>
+        <TemplateSelector
+          currentTopic={currentTopic}
+          onSelect={handleInsertTemplate}
+          disabled={disabled}
+        />
       </div>
 
       <div className="space-y-2">
         <Label htmlFor="code">Solution Code</Label>
-        <SolutionEditor
-          value={code}
-          language={language}
-          onChange={handleCodeChange}
-          readOnly={disabled}
-          placeholder="Write your solution here..."
-        />
+        <Suspense fallback={<EditorSkeleton height="300px" />}>
+          <SolutionEditor
+            value={code}
+            language={language}
+            onChange={handleCodeChange}
+            readOnly={disabled}
+            placeholder="Write your solution here..."
+          />
+        </Suspense>
         {errors.code && (
           <p className="text-sm text-destructive">{errors.code}</p>
         )}
