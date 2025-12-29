@@ -9,6 +9,11 @@ import {
   deleteProblem,
   clearAllProblems,
   getProblemCount,
+  addToReview,
+  addToTodayQueue,
+  recordReview,
+  getReview,
+  db,
 } from './db';
 import type { Problem } from '../types';
 
@@ -32,6 +37,9 @@ describe('Database Operations', () => {
   beforeEach(async () => {
     // Clear database before each test
     await clearAllProblems();
+    // Also clear reviews and reviewHistory tables
+    await db.reviews.clear();
+    await db.reviewHistory.clear();
   });
 
   describe('addProblem', () => {
@@ -230,6 +238,73 @@ describe('Database Operations', () => {
       await deleteProblem('perf-test-99');
       const deleteDuration = performance.now() - deleteStart;
       expect(deleteDuration).toBeLessThan(200); // Under 200ms for delete
+    });
+  });
+
+  // Edge Case T045: Problem reviewed multiple times in one day
+  describe('Multiple Reviews Same Day', () => {
+    it('should allow a problem to be reviewed multiple times in one day', async () => {
+      const problem = createTestProblem({ id: 'multi-review-test' });
+      await addProblem(problem);
+      await addToReview(problem.id);
+
+      // First review with "Hard" rating
+      await recordReview(problem.id, 3);
+      const afterFirst = await getReview(problem.id);
+      expect(afterFirst?.repetitions).toBe(1);
+
+      // Add back to today's queue
+      await addToTodayQueue(problem.id);
+
+      // Second review with "Easy" rating - should use latest rating
+      await recordReview(problem.id, 5);
+      const afterSecond = await getReview(problem.id);
+      expect(afterSecond?.repetitions).toBe(2); // Continues from previous
+      // Easy rating should have higher ease factor than Hard
+      expect(afterSecond?.easeFactor).toBeGreaterThan(afterFirst?.easeFactor ?? 0);
+    });
+
+    it('should create multiple history entries for same-day reviews', async () => {
+      const problem = createTestProblem({ id: 'history-test' });
+      await addProblem(problem);
+      await addToReview(problem.id);
+
+      // Multiple reviews in same day
+      await recordReview(problem.id, 0); // Again
+      await addToTodayQueue(problem.id);
+      await recordReview(problem.id, 4); // Good
+      await addToTodayQueue(problem.id);
+      await recordReview(problem.id, 5); // Easy
+
+      // Check history has all entries
+      const history = await db.reviewHistory
+        .where('problemId')
+        .equals(problem.id)
+        .toArray();
+      expect(history).toHaveLength(3);
+
+      // Verify all ratings are present (order may vary)
+      const ratings = history.map((h) => h.quality).sort();
+      expect(ratings).toEqual([0, 4, 5]);
+    });
+
+    it('should use latest SM-2 state for next interval calculation', async () => {
+      const problem = createTestProblem({ id: 'sm2-state-test' });
+      await addProblem(problem);
+      await addToReview(problem.id);
+
+      // First review - Again (resets)
+      await recordReview(problem.id, 0);
+      const afterAgain = await getReview(problem.id);
+      expect(afterAgain?.repetitions).toBe(0);
+      expect(afterAgain?.interval).toBe(1);
+
+      // Re-add and review with Good
+      await addToTodayQueue(problem.id);
+      await recordReview(problem.id, 4);
+      const afterGood = await getReview(problem.id);
+      expect(afterGood?.repetitions).toBe(1);
+      expect(afterGood?.interval).toBe(1); // First successful review = 1 day
     });
   });
 });
