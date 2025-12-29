@@ -8,12 +8,15 @@ import { Button } from '@/components/ui/button';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { ReviewSession } from '@/components/ReviewSession';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { OfflineIndicator } from '@/components/OfflineIndicator';
 import type { ReviewResult } from '@/components/ReviewSession';
 import { useReviewQueue } from '@/hooks/useReviewQueue';
+import { usePWA } from '@/hooks/usePWA';
 import type { Problem as ProblemType } from '@/types';
 
 function ReviewPage() {
   const navigate = useNavigate();
+  const { isOnline } = usePWA();
   const { dueToday, isLoading: queueLoading } = useReviewQueue();
 
   // State for dialog and session
@@ -109,6 +112,7 @@ function ReviewPage() {
 
             {/* End Session button */}
             <div className="flex items-center gap-2">
+              <OfflineIndicator isOnline={isOnline} />
               <ThemeToggle />
               <Button
                 variant="outline"

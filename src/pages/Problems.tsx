@@ -18,12 +18,15 @@ import { ProblemForm } from '@/components/ProblemForm';
 import { ProblemList } from '@/components/ProblemList';
 import { FilterBar } from '@/components/FilterBar';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { useProblems } from '@/hooks/useProblems';
+import { usePWA } from '@/hooks/usePWA';
 import { useFilters } from '@/hooks/useFilters';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import type { Problem, ProblemFormData, Status } from '@/types';
 
 function Problems() {
+  const { isOnline } = usePWA();
   const {
     filters,
     setTopic,
@@ -141,6 +144,7 @@ function Problems() {
               <h1 className="text-xl font-semibold text-foreground">Problems</h1>
             </div>
             <div className="flex items-center gap-2">
+              <OfflineIndicator isOnline={isOnline} />
               <ThemeToggle />
               <Button variant="outline" size="sm" asChild>
                 <Link to="/progress">

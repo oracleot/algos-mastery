@@ -14,20 +14,20 @@ interface TimerProps {
 
 const SIZE_CONFIG = {
   sm: {
-    container: 'w-32 h-32',
-    fontSize: 'text-2xl',
+    container: 'w-24 h-24 sm:w-32 sm:h-32',
+    fontSize: 'text-xl sm:text-2xl',
     strokeWidth: 4,
     radius: 56,
   },
   md: {
-    container: 'w-48 h-48',
-    fontSize: 'text-4xl',
+    container: 'w-36 h-36 sm:w-48 sm:h-48',
+    fontSize: 'text-3xl sm:text-4xl',
     strokeWidth: 6,
     radius: 84,
   },
   lg: {
-    container: 'w-64 h-64',
-    fontSize: 'text-5xl',
+    container: 'w-48 h-48 sm:w-64 sm:h-64',
+    fontSize: 'text-4xl sm:text-5xl',
     strokeWidth: 8,
     radius: 112,
   },

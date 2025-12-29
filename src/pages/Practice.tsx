@@ -12,8 +12,10 @@ import { PracticeSession, type PracticeSessionResult } from '@/components/Practi
 import { TopicBadge } from '@/components/TopicBadge';
 import { DifficultyBadge } from '@/components/DifficultyBadge';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { formatTotalTime } from '@/lib/timeLog';
 import { formatTime } from '@/lib/timer';
+import { usePWA } from '@/hooks/usePWA';
 import {
   getSavedSession,
   clearSavedSession,
@@ -50,6 +52,7 @@ export function Practice() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const problemIdFromUrl = searchParams.get('problemId');
+  const { isOnline } = usePWA();
 
   const [practiceState, setPracticeState] = useState<PracticeState>(
     problemIdFromUrl ? 'session' : 'selection'
@@ -203,26 +206,29 @@ export function Practice() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="max-w-4xl mx-auto px-4 py-6 sm:py-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" asChild>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <Button variant="ghost" size="icon" asChild className="h-9 w-9 sm:h-10 sm:w-10 touch-manipulation shrink-0">
               <Link to="/">
                 <ArrowLeft className="h-5 w-5" />
               </Link>
             </Button>
             <div>
-              <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
-                <Clock className="h-6 w-6" />
+              <h1 className="text-xl sm:text-2xl font-bold text-foreground flex items-center gap-2">
+                <Clock className="h-5 w-5 sm:h-6 sm:w-6" />
                 Timed Practice
               </h1>
-              <p className="text-muted-foreground">
+              <p className="text-sm text-muted-foreground hidden sm:block">
                 Practice problems under time pressure
               </p>
             </div>
           </div>
-          <ThemeToggle />
+          <div className="flex items-center gap-2 self-end sm:self-auto">
+            <OfflineIndicator isOnline={isOnline} />
+            <ThemeToggle />
+          </div>
         </div>
 
         {/* Problem Selection View */}

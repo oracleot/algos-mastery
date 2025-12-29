@@ -30,7 +30,7 @@ export function TimerPresets({
   className,
 }: TimerPresetsProps) {
   return (
-    <div className={cn('flex items-center gap-2', className)}>
+    <div className={cn('flex items-center gap-2 sm:gap-2', className)}>
       {PRESETS.map((preset) => {
         const isSelected = selectedMinutes === preset.minutes;
         return (
@@ -41,7 +41,7 @@ export function TimerPresets({
             onClick={() => onSelect(preset.minutes)}
             disabled={disabled}
             className={cn(
-              'min-w-[60px]',
+              'min-w-[60px] h-10 sm:h-9 text-sm sm:text-xs touch-manipulation',
               isSelected && 'ring-2 ring-primary ring-offset-2'
             )}
           >

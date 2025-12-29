@@ -4,12 +4,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Home } from 'lucide-react';
 import { ProgressLadder } from '@/components/ProgressLadder';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { useProgress } from '@/hooks/useProgress';
+import { usePWA } from '@/hooks/usePWA';
 import type { TopicSlug } from '@/types';
 
 function Progress() {
   const navigate = useNavigate();
   const { progress, isLoading, nextToUnlock } = useProgress();
+  const { isOnline } = usePWA();
 
   const handleTopicClick = (topic: TopicSlug) => {
     // Navigate to problems filtered by this topic
@@ -58,7 +61,10 @@ function Progress() {
                 </p>
               </div>
             </div>
-            <ThemeToggle />
+            <div className="flex items-center gap-2">
+              <OfflineIndicator isOnline={isOnline} />
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </header>

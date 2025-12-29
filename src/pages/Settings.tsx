@@ -18,7 +18,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { ExportDialog } from '@/components/ExportDialog';
 import { ImportDialog } from '@/components/ImportDialog';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { useTheme } from '@/hooks/useTheme';
+import { usePWA } from '@/hooks/usePWA';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import type { Theme } from '@/types';
@@ -33,6 +35,7 @@ function Settings() {
   const [showExportDialog, setShowExportDialog] = useState(false);
   const [showImportDialog, setShowImportDialog] = useState(false);
   const { theme, setTheme } = useTheme();
+  const { isOnline, isInstalled } = usePWA();
 
   const handleExportComplete = () => {
     toast.success('Data exported successfully!');
@@ -46,15 +49,16 @@ function Settings() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Top bar with theme toggle */}
-      <div className="absolute top-4 right-4">
+      {/* Top bar with theme toggle and offline indicator */}
+      <div className="fixed top-4 right-4 flex items-center gap-2 z-10">
+        <OfflineIndicator isOnline={isOnline} />
         <ThemeToggle />
       </div>
       
-      <div className="max-w-2xl mx-auto px-4 py-8">
+      <div className="max-w-2xl mx-auto px-4 py-6 sm:py-8 pt-16 sm:pt-8">
         {/* Header */}
-        <div className="mb-8">
-          <Button variant="ghost" size="sm" asChild className="mb-4">
+        <div className="mb-6 sm:mb-8">
+          <Button variant="ghost" size="sm" asChild className="mb-4 touch-manipulation">
             <Link to="/">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Home
@@ -62,12 +66,12 @@ function Settings() {
           </Button>
 
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-primary/10 rounded-lg">
-              <SettingsIcon className="h-6 w-6 text-primary" />
+            <div className="p-2 bg-primary/10 rounded-lg shrink-0">
+              <SettingsIcon className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-foreground">Settings</h1>
-              <p className="text-sm text-muted-foreground">
+              <h1 className="text-xl sm:text-2xl font-bold text-foreground">Settings</h1>
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 Manage your data and preferences
               </p>
             </div>
@@ -131,38 +135,38 @@ function Settings() {
           </CardHeader>
           <CardContent className="space-y-4">
             {/* Export */}
-            <div className="flex items-center justify-between p-4 rounded-lg border">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-lg border">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-500/10 rounded-lg">
+                <div className="p-2 bg-blue-500/10 rounded-lg shrink-0">
                   <Download className="h-5 w-5 text-blue-500" />
                 </div>
                 <div>
-                  <h3 className="font-medium">Export Data</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <h3 className="font-medium text-sm sm:text-base">Export Data</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     Download all your data as a JSON backup file.
                   </p>
                 </div>
               </div>
-              <Button variant="outline" onClick={() => setShowExportDialog(true)}>
+              <Button variant="outline" onClick={() => setShowExportDialog(true)} className="w-full sm:w-auto touch-manipulation shrink-0">
                 <Download className="h-4 w-4 mr-2" />
                 Export
               </Button>
             </div>
 
             {/* Import */}
-            <div className="flex items-center justify-between p-4 rounded-lg border">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-lg border">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-green-500/10 rounded-lg">
+                <div className="p-2 bg-green-500/10 rounded-lg shrink-0">
                   <Upload className="h-5 w-5 text-green-500" />
                 </div>
                 <div>
-                  <h3 className="font-medium">Import Data</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <h3 className="font-medium text-sm sm:text-base">Import Data</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     Restore your data from a backup file.
                   </p>
                 </div>
               </div>
-              <Button variant="outline" onClick={() => setShowImportDialog(true)}>
+              <Button variant="outline" onClick={() => setShowImportDialog(true)} className="w-full sm:w-auto touch-manipulation shrink-0">
                 <Upload className="h-4 w-4 mr-2" />
                 Import
               </Button>
@@ -190,6 +194,18 @@ function Settings() {
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Storage</span>
                 <span className="font-medium">IndexedDB (Local)</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">PWA Status</span>
+                <span className="font-medium">
+                  {isInstalled ? 'Installed' : 'Not installed'}
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Network</span>
+                <span className="font-medium">
+                  {isOnline ? 'Online' : 'Offline'}
+                </span>
               </div>
             </div>
           </CardContent>

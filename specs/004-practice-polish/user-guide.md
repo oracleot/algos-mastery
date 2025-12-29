@@ -1,7 +1,7 @@
 # User Guide: Timed Practice & Polish Features
 
 **Feature**: Timed Practice & Polish  
-**Version**: 1.2  
+**Version**: 1.3  
 **Last Updated**: 29 December 2025
 
 ---
@@ -14,6 +14,8 @@ This guide covers the enhanced practice and productivity features in Algorithms 
 - **Export/Import**: Back up and restore your data
 - **Dark Mode**: Comfortable viewing in any lighting
 - **Keyboard Shortcuts**: Navigate efficiently without the mouse
+- **PWA Support**: Install the app and use it offline
+- **Mobile Support**: Full functionality on any device
 
 ---
 
@@ -334,6 +336,112 @@ Your data is stored locally in your browser using IndexedDB. The Export/Import f
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 1.3 | 2025-12-29 | Added PWA Support and Mobile Responsiveness sections |
 | 1.2 | 2025-12-29 | Added Dark Mode and Keyboard Shortcuts |
 | 1.1 | 2025-12-29 | Added Export/Import data feature |
 | 1.0 | 2025-12-29 | Initial release with timer, presets, reveal template/solution |
+
+---
+
+## Part 4: PWA Support (Install & Offline)
+
+### What is PWA?
+
+PWA (Progressive Web App) allows you to install Algorithms Mastery Tracker on your device like a native app. Once installed, you can:
+
+- Launch from your home screen or dock
+- Use the app without an internet connection
+- Get automatic updates when available
+
+### Installing the App
+
+**On Desktop (Chrome, Edge):**
+1. Look for the **install icon** in the address bar (usually a ⊕ or 📥 symbol)
+2. Click "Install" in the prompt
+3. The app will open in its own window
+
+**On Mobile (iOS Safari):**
+1. Tap the **Share** button (box with arrow)
+2. Scroll down and tap **"Add to Home Screen"**
+3. Tap **"Add"** to confirm
+
+**On Mobile (Android Chrome):**
+1. Look for the install banner at the bottom of the screen
+2. Tap **"Install"** or **"Add to Home Screen"**
+3. Tap **"Add"** to confirm
+
+**Via Install Banner:**
+If you see a "Install App" banner at the bottom of the screen:
+1. Click **"Install"** to add to your device
+2. Or click **"Not now"** to dismiss
+
+### Using Offline
+
+The app works fully offline once installed:
+
+- All your problems, solutions, and reviews are stored locally
+- Timed practice works without internet
+- Dark mode and all features function normally
+
+**Note**: Some features that require external links (like "View Problem" links to LeetCode) won't work offline, but all local functionality remains available.
+
+### Checking App Status
+
+Visit the **Settings** page to see:
+- **PWA Status**: "Installed" or "Not installed"
+- **Network**: "Online" or "Offline"
+
+### App Updates
+
+When a new version is available:
+1. You'll see an "Update Available" banner at the top
+2. Click **"Reload"** to get the latest version
+3. The app will refresh with new features
+
+---
+
+## Part 5: Mobile Support
+
+### Designed for Mobile
+
+The app is fully responsive and works great on phones and tablets:
+
+- **Touch-friendly buttons**: All buttons are sized for easy tapping
+- **Readable text**: Font sizes adjust for smaller screens
+- **Optimized layouts**: Cards stack vertically on mobile
+
+### Mobile-Specific Features
+
+**Timer on Mobile:**
+- Large, easy-to-read countdown display
+- Preset buttons (25m, 45m, 60m) easy to tap
+- Play/pause controls sized for touch
+
+**Rating Buttons on Mobile:**
+- Full-width buttons in a 2x2 grid
+- Large tap targets for accurate selection
+- Keyboard shortcut hints hidden (since you're using touch)
+
+**Problem Cards on Mobile:**
+- Vertical layout on narrow screens
+- Action buttons (edit, delete) easy to tap
+- Notes and badges wrap properly
+
+### Recommended Usage
+
+**On Phone (320-428px):**
+- Use for quick reviews during commute
+- Timer works great in portrait mode
+- Rating buttons are easy to tap
+
+**On Tablet (768px+):**
+- Full desktop experience
+- Side-by-side layouts where applicable
+- Great for extended practice sessions
+
+### Tips for Mobile Use
+
+1. **Add to Home Screen**: Install as a PWA for the best experience
+2. **Use Landscape for Code**: When viewing solutions, rotate to landscape for more code visibility
+3. **Quick Reviews**: The review session is optimized for one-handed use
+4. **Offline Practice**: Download the PWA to practice anywhere without internet

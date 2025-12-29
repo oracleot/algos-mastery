@@ -150,13 +150,13 @@
 
 ### Implementation for User Story 5
 
-- [ ] T048 [US5] Create hooks/usePWA.ts with install prompt handling, isInstallable, isInstalled, isOnline states
-- [ ] T049 [P] [US5] Create components/InstallPrompt.tsx banner for PWA installation
-- [ ] T050 [P] [US5] Create components/OfflineIndicator.tsx showing offline/online status
-- [ ] T051 [US5] Add InstallPrompt to App.tsx layout (show when installable and not dismissed)
-- [ ] T052 [US5] Add OfflineIndicator to navigation/header component
-- [ ] T053 [US5] Implement service worker update notification with reload prompt
-- [ ] T054 [US5] Configure workbox runtime caching for fonts and static assets in vite.config.ts
+- [X] T048 [US5] Create hooks/usePWA.ts with install prompt handling, isInstallable, isInstalled, isOnline states
+- [X] T049 [P] [US5] Create components/InstallPrompt.tsx banner for PWA installation
+- [X] T050 [P] [US5] Create components/OfflineIndicator.tsx showing offline/online status
+- [X] T051 [US5] Add InstallPrompt to App.tsx layout (show when installable and not dismissed)
+- [X] T052 [US5] Add OfflineIndicator to navigation/header component
+- [X] T053 [US5] Implement service worker update notification with reload prompt
+- [X] T054 [US5] Configure workbox runtime caching for fonts and static assets in vite.config.ts
 
 **Checkpoint**: User Stories 1-5 should all work - PWA installation and offline mode functional
 
@@ -170,12 +170,12 @@
 
 ### Implementation for User Story 6
 
-- [ ] T055 [US6] Audit and update Timer component for mobile (large touch targets, responsive sizing)
-- [ ] T056 [P] [US6] Audit and update RatingButtons component for mobile (full-width on small screens)
-- [ ] T057 [P] [US6] Audit and update ProblemCard for mobile (vertical stack, touch-friendly)
-- [ ] T058 [P] [US6] Audit and update navigation for mobile (hamburger menu or bottom nav)
-- [ ] T059 [US6] Add viewport meta tags to index.html if not present
-- [ ] T060 [US6] Test and fix any overflow/scrolling issues on small viewports
+- [X] T055 [US6] Audit and update Timer component for mobile (large touch targets, responsive sizing)
+- [X] T056 [P] [US6] Audit and update RatingButtons component for mobile (full-width on small screens)
+- [X] T057 [P] [US6] Audit and update ProblemCard for mobile (vertical stack, touch-friendly)
+- [X] T058 [P] [US6] Audit and update navigation for mobile (hamburger menu or bottom nav)
+- [X] T059 [US6] Add viewport meta tags to index.html if not present
+- [X] T060 [US6] Test and fix any overflow/scrolling issues on small viewports
 
 **Checkpoint**: All user stories complete - app is production-ready
 
