@@ -168,13 +168,13 @@
 **Purpose**: Edge cases, performance, and refinements
 
 - [X] T044 [P] Handle edge case: empty queue state in DueToday component *(Completed in Phase 3: shows "All caught up!" message)*
-- [ ] T045 [P] Handle edge case: problem reviewed multiple times in one day in src/lib/db.ts
+- [X] T045 [P] Handle edge case: problem reviewed multiple times in one day in src/lib/db.ts *(Tested: addToTodayQueue allows re-review, recordReview updates SM-2 state correctly)*
 - [X] T046 [P] Handle edge case: problems with 0 solutions in review (show message instead of blank) *(Completed in Phase 3: shows "No solutions recorded" with link)*
-- [ ] T047 [P] Handle edge case: streak break logic (no review for a day)
-- [ ] T048 Add loading states to Dashboard and Review pages
+- [X] T047 [P] Handle edge case: streak break logic (no review for a day) *(Already implemented in calculateStreak - returns 0 if daysSinceLastReview > 1)*
+- [X] T048 Add loading states to Dashboard and Review pages *(Both components show skeleton loaders during data loading)*
 - [X] T049 Add keyboard navigation for rating buttons (1=Again, 2=Hard, 3=Good, 4=Easy) *(Completed in Phase 3: keyboard shortcuts work)*
-- [ ] T050 Ensure responsive layout for Dashboard (320px to 1920px)
-- [ ] T051 Run quickstart.md validation checklist
+- [X] T050 Ensure responsive layout for Dashboard (320px to 1920px) *(Grid uses sm/md breakpoints, flex-wrap, responsive spacing)*
+- [X] T051 Run quickstart.md validation checklist *(All items verified: SM-2 tests pass, DB schema v3, reviews work, streak/stats render)*
 
 ---
 

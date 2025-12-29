@@ -80,9 +80,9 @@ export function Dashboard() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Top row: Streak and quick stats */}
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center justify-between gap-3 sm:gap-4">
         <div className="flex items-center gap-4">
           <StreakCounter
             count={streak?.currentStreak ?? 0}
@@ -97,12 +97,12 @@ export function Dashboard() {
         </div>
         <div className="flex gap-6 text-sm">
           <div className="text-center">
-            <p className="text-2xl font-bold text-foreground">{weeklyTotal}</p>
-            <p className="text-muted-foreground">This week</p>
+            <p className="text-xl sm:text-2xl font-bold text-foreground">{weeklyTotal}</p>
+            <p className="text-muted-foreground text-xs sm:text-sm">This week</p>
           </div>
           <div className="text-center">
-            <p className="text-2xl font-bold text-foreground">{dailyAverage}</p>
-            <p className="text-muted-foreground">Daily avg</p>
+            <p className="text-xl sm:text-2xl font-bold text-foreground">{dailyAverage}</p>
+            <p className="text-muted-foreground text-xs sm:text-sm">Daily avg</p>
           </div>
         </div>
       </div>

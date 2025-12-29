@@ -1,6 +1,6 @@
 // pages/Review.tsx - Active review session page
 
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, X } from 'lucide-react';
 import { toast } from 'sonner';

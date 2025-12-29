@@ -35,8 +35,6 @@ interface ReviewSessionProps {
 export function ReviewSession({
   problems,
   onComplete,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  onCancel,
 }: ReviewSessionProps) {
   const { recordReview, previewIntervals } = useReview();
 
