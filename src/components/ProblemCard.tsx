@@ -1,6 +1,7 @@
 // components/ProblemCard.tsx - Card displaying problem details with badges
 
-import { ExternalLink, Pencil, Trash2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ExternalLink, Pencil, Trash2, Code } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { TopicBadge } from '@/components/TopicBadge';
@@ -66,6 +67,16 @@ function ProblemCard({ problem, onEdit, onDelete, onStatusChange }: ProblemCardP
             </CardTitle>
           </div>
           <div className="flex items-center gap-1 shrink-0">
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              asChild
+              aria-label="View solutions"
+            >
+              <Link to={`/problems/${problem.id}`}>
+                <Code className="h-4 w-4" />
+              </Link>
+            </Button>
             <Button
               variant="ghost"
               size="icon-sm"

@@ -54,17 +54,17 @@
 
 ### Tests for User Story 1 (Constitution II: Test-First for Data Layer)
 
-- [ ] T010a [US1] Write tests for useSolutions hook in src/hooks/useSolutions.test.ts (MUST fail before T013)
+- [X] T010a [US1] Write tests for useSolutions hook in src/hooks/useSolutions.test.ts (MUST fail before T013)
 
 ### Implementation for User Story 1
 
-- [ ] T011 [P] [US1] Create LanguageSelector component in src/components/LanguageSelector.tsx
-- [ ] T012 [P] [US1] Create SolutionEditor component with CodeMirror in src/components/SolutionEditor.tsx
-- [ ] T013 [US1] Create useSolutions hook (addSolution method) in src/hooks/useSolutions.ts
-- [ ] T014 [US1] Create SolutionForm component for add/edit workflow in src/components/SolutionForm.tsx
-- [ ] T015 [US1] Create Problem detail page with solution editor in src/pages/Problem.tsx
-- [ ] T016 [US1] Add route for problem detail page in src/App.tsx
-- [ ] T017 [US1] Add "Add Solution" button and integration in Problem.tsx
+- [X] T011 [P] [US1] Create LanguageSelector component in src/components/LanguageSelector.tsx
+- [X] T012 [P] [US1] Create SolutionEditor component with CodeMirror in src/components/SolutionEditor.tsx
+- [X] T013 [US1] Create useSolutions hook (addSolution method) in src/hooks/useSolutions.ts
+- [X] T014 [US1] Create SolutionForm component for add/edit workflow in src/components/SolutionForm.tsx
+- [X] T015 [US1] Create Problem detail page with solution editor in src/pages/Problem.tsx
+- [X] T016 [US1] Add route for problem detail page in src/App.tsx
+- [X] T017 [US1] Add "Add Solution" button and integration in Problem.tsx
 
 **Checkpoint**: User Story 1 complete - can add solutions to problems with syntax highlighting
 
