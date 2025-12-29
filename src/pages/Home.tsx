@@ -1,7 +1,7 @@
 // pages/Home.tsx - Home page with dashboard and navigation
 
 import { Link } from 'react-router-dom';
-import { BookOpen, ArrowRight, TrendingUp, Clock } from 'lucide-react';
+import { BookOpen, ArrowRight, TrendingUp, Clock, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Dashboard } from '@/components/Dashboard';
@@ -43,6 +43,16 @@ function Home() {
               <Link to="/progress">
                 <TrendingUp className="h-5 w-5" />
                 Progress Ladder
+              </Link>
+            </Button>
+          </div>
+
+          {/* Settings link */}
+          <div className="mt-4">
+            <Button variant="ghost" size="sm" asChild>
+              <Link to="/settings">
+                <Settings className="h-4 w-4 mr-2" />
+                Settings
               </Link>
             </Button>
           </div>

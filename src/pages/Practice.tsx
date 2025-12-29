@@ -306,10 +306,9 @@ export function Practice() {
                             {problem.title}
                           </div>
                           <div className="flex items-center gap-2 mt-1">
-                            <TopicBadge topic={problem.topic} size="sm" />
+                            <TopicBadge topic={problem.topic} />
                             <DifficultyBadge
                               difficulty={problem.difficulty}
-                              size="sm"
                             />
                           </div>
                         </div>

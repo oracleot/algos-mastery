@@ -82,20 +82,20 @@
 
 ### Tests for User Story 2 (Constitution Principle II: Test-First for Data Layer)
 
-- [ ] T025a [P] [US2] Write tests for lib/export.ts (checksum generation, all tables included, valid JSON output)
-- [ ] T026a [P] [US2] Write tests for lib/import.ts (validation, checksum verification, version handling, error cases)
+- [X] T025a [P] [US2] Write tests for lib/export.ts (checksum generation, all tables included, valid JSON output)
+- [X] T026a [P] [US2] Write tests for lib/import.ts (validation, checksum verification, version handling, error cases)
 
 ### Implementation for User Story 2
 
-- [ ] T025 [P] [US2] Create lib/export.ts with exportAllData function including checksum generation
-- [ ] T026 [P] [US2] Create lib/import.ts with importData, validateExport functions and checksum verification
-- [ ] T027 [US2] Create hooks/useExport.ts with exportData, isExporting state, getExportPreview
-- [ ] T028 [US2] Create hooks/useImport.ts with importData, validateFile, isImporting state
-- [ ] T029 [P] [US2] Create components/ExportDialog.tsx with export preview and download trigger
-- [ ] T030 [P] [US2] Create components/ImportDialog.tsx with file picker, validation results, and import trigger
-- [ ] T031 [US2] Add export/import buttons to settings page and integrate dialogs
-- [ ] T032 [US2] Implement import overwrite confirmation dialog using existing ConfirmDialog component
-- [ ] T032b [US2] Handle import version mismatch (show warning for newer/older export versions, attempt migration)
+- [X] T025 [P] [US2] Create lib/export.ts with exportAllData function including checksum generation
+- [X] T026 [P] [US2] Create lib/import.ts with importData, validateExport functions and checksum verification
+- [X] T027 [US2] Create hooks/useExport.ts with exportData, isExporting state, getExportPreview
+- [X] T028 [US2] Create hooks/useImport.ts with importData, validateFile, isImporting state
+- [X] T029 [P] [US2] Create components/ExportDialog.tsx with export preview and download trigger
+- [X] T030 [P] [US2] Create components/ImportDialog.tsx with file picker, validation results, and import trigger
+- [X] T031 [US2] Add export/import buttons to settings page and integrate dialogs
+- [X] T032 [US2] Implement import overwrite confirmation dialog using existing ConfirmDialog component
+- [X] T032b [US2] Handle import version mismatch (show warning for newer/older export versions, attempt migration)
 
 **Checkpoint**: User Stories 1 AND 2 should both work independently - practice sessions and data backup functional
 

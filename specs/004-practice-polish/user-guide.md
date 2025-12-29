@@ -1,18 +1,20 @@
-# User Guide: Timed Practice
+# User Guide: Timed Practice & Data Management
 
 **Feature**: Timed Practice & Polish  
-**Version**: 1.0  
+**Version**: 1.1  
 **Last Updated**: 29 December 2025
 
 ---
 
 ## Overview
 
-The Timed Practice feature lets you simulate interview conditions by practicing algorithm problems under time pressure. Set a timer, work through problems, and track your progress - all while having access to hints, templates, and your saved solutions.
+The Timed Practice feature lets you simulate interview conditions by practicing algorithm problems under time pressure. The Export/Import feature enables you to back up your data and restore it on any device.
 
 ---
 
 ## Features
+
+### Part 1: Timed Practice
 
 ### 1. Starting a Timed Practice Session
 
@@ -125,27 +127,132 @@ If you refresh the page or close your browser during an active timed practice se
 
 ## Troubleshooting
 
-### Timer Not Starting
+### Timed Practice Issues
+
+#### Timer Not Starting
 - Make sure you've selected a problem first
 - Check that JavaScript is enabled in your browser
 
-### Templates Not Showing
+#### Templates Not Showing
 - Some topics may not have templates yet
 - Ensure the problem has a topic assigned
 
-### Solutions Not Appearing
+#### Solutions Not Appearing
 - You need to have saved solutions for the problem first
 - Go to the problem page to add solutions
+
+### Export/Import Issues
+
+#### Export Not Downloading
+- Check your browser's download settings
+- Try a different browser
+- Ensure pop-ups are not blocked
+
+#### Import Failing
+- Verify the file is a valid backup from this app
+- Check the file wasn't corrupted during transfer
+- Try re-exporting from the source
+
+#### Data Not Appearing After Import
+- Refresh the page (Ctrl/Cmd + R)
+- Check browser console for errors
+- Ensure import completed successfully
 
 ---
 
 ## Best Practices
 
+### Timed Practice
 1. **Practice Regularly**: Even 25 minutes daily builds strong problem-solving skills
 2. **Review Templates First**: Before each session, review the pattern template for the topic
 3. **Track Your Time**: Use the time logging to identify which topics take you longer
 4. **Mix Difficulties**: Alternate between easy and medium problems to build confidence
 5. **Reflect on Sessions**: After each session, note what patterns you struggled with
+
+### Data Backup
+6. **Back Up Weekly**: Export your data regularly to prevent data loss
+7. **Multiple Copies**: Keep backups in cloud storage (Google Drive, Dropbox, etc.)
+8. **Before Major Changes**: Export before clearing browser data
+9. **Date Your Files**: Keep several backup versions by date
+
+---
+
+## Part 2: Export & Import Data
+
+### Overview
+
+Your data is stored locally in your browser using IndexedDB. The Export/Import feature allows you to:
+- **Back up your progress** to a JSON file
+- **Restore your data** on the same or different device
+- **Transfer data** between browsers or computers
+
+### Accessing Data Management
+
+1. Click **Settings** from the home page (or navigate to `/settings`)
+2. Find the **Data Management** section
+
+### Exporting Your Data
+
+1. Click the **Export** button
+2. Review the export summary showing:
+   - Number of problems
+   - Number of solutions
+   - Number of reviews
+   - Review history count
+   - Time logs count
+   - Estimated file size
+3. Click **Export** to download the backup file
+4. The file will be saved as `algomastery-backup-YYYY-MM-DD.json`
+
+**What's Included in Export:**
+| Data | Description |
+|------|-------------|
+| Problems | All problems you've added with notes, links, and status |
+| Solutions | Your saved code solutions for each problem |
+| Reviews | Spaced repetition review scheduling data |
+| Review History | Historical record of all reviews completed |
+| Time Logs | Time spent practicing each problem |
+
+**Export Features:**
+- ✅ Checksum verification for data integrity
+- ✅ Version metadata for compatibility
+- ✅ Human-readable JSON format
+- ✅ Includes all database tables
+
+### Importing Your Data
+
+⚠️ **Warning**: Importing will **replace all existing data** in your browser.
+
+1. Click the **Import** button
+2. Either:
+   - **Drag and drop** your backup file into the drop zone
+   - **Click** the drop zone to browse for your file
+3. The file will be validated automatically:
+   - ✅ Valid files show a green success message
+   - ❌ Invalid files show an error with details
+4. Click **Import** to restore your data
+5. The page will refresh to load the imported data
+
+**Validation Checks:**
+| Check | Description |
+|-------|-------------|
+| File format | Must be valid JSON |
+| Structure | Must have correct export format |
+| Checksum | Data integrity verification |
+| Version | Compatibility with current app version |
+
+**Common Import Errors:**
+| Error | Solution |
+|-------|----------|
+| "Invalid file format" | Ensure file is a valid JSON export |
+| "Checksum mismatch" | File may be corrupted; try a fresh export |
+| "Unsupported version" | Export from a newer app version |
+
+### Data Privacy
+
+- All data stays on your device - nothing is sent to any server
+- Export files are stored locally where you choose
+- You control all your data completely
 
 ---
 
@@ -153,4 +260,5 @@ If you refresh the page or close your browser during an active timed practice se
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 1.1 | 2025-12-29 | Added Export/Import data feature |
 | 1.0 | 2025-12-29 | Initial release with timer, presets, reveal template/solution |
