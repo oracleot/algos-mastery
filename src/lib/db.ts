@@ -1,7 +1,7 @@
 // lib/db.ts - Dexie database schema for IndexedDB
 
 import Dexie, { type Table } from 'dexie';
-import type { Problem, Solution, Review, ReviewHistory, ReviewQuality } from '../types';
+import type { Problem, Solution, Review, ReviewHistory, ReviewQuality, ProblemTimeLog } from '../types';
 import { calculateSM2, SM2_DEFAULTS } from './sm2';
 import { calculateStreak } from './streak';
 import { calculateWeeklyStats, type DailyStat } from './stats';
@@ -16,6 +16,7 @@ export class AlgoMasteryDB extends Dexie {
   solutions!: Table<Solution>;
   reviews!: Table<Review>;
   reviewHistory!: Table<ReviewHistory>;
+  timeLogs!: Table<ProblemTimeLog>;
 
   constructor() {
     super('AlgoMasteryDB');
@@ -38,6 +39,15 @@ export class AlgoMasteryDB extends Dexie {
       solutions: 'id, problemId, language, createdAt',
       reviews: 'problemId, nextReview',
       reviewHistory: 'id, problemId, reviewedAt',
+    });
+
+    // v4: Add timeLogs table for timed practice feature
+    this.version(4).stores({
+      problems: 'id, topic, difficulty, status, createdAt',
+      solutions: 'id, problemId, language, createdAt',
+      reviews: 'problemId, nextReview',
+      reviewHistory: 'id, problemId, reviewedAt',
+      timeLogs: 'problemId',
     });
   }
 }
@@ -90,11 +100,13 @@ export async function deleteProblem(id: string): Promise<void> {
 
 /**
  * Delete a problem and all its associated data (cascade delete)
- * Deletes: solutions, reviews, reviewHistory
+ * Deletes: solutions, reviews, reviewHistory, timeLogs
  * @param problemId - The ID of the problem to delete
  */
 export async function deleteProblemWithSolutions(problemId: string): Promise<void> {
-  await db.transaction('rw', [db.problems, db.solutions, db.reviews, db.reviewHistory], async () => {
+  await db.transaction('rw', [db.problems, db.solutions, db.reviews, db.reviewHistory, db.timeLogs], async () => {
+    // Delete time logs for this problem
+    await db.timeLogs.delete(problemId);
     // Delete all review history for this problem
     await db.reviewHistory.where('problemId').equals(problemId).delete();
     // Delete the review record

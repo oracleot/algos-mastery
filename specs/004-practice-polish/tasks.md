@@ -20,11 +20,11 @@
 
 **Purpose**: Project initialization and PWA configuration
 
-- [ ] T001 Install PWA dependencies: `vite-plugin-pwa` and `workbox-window` in package.json
-- [ ] T002 Configure vite-plugin-pwa in vite.config.ts with manifest and workbox settings
-- [ ] T003 [P] Create PWA icons (pwa-192x192.png, pwa-512x512.png, apple-touch-icon.png) in public/
-- [ ] T004 [P] Add theme initialization script to index.html (before </head>) to prevent flash
-- [ ] T005 Configure Tailwind dark mode with class strategy in tailwind.config.js
+- [X] T001 Install PWA dependencies: `vite-plugin-pwa` and `workbox-window` in package.json
+- [X] T002 Configure vite-plugin-pwa in vite.config.ts with manifest and workbox settings
+- [X] T003 [P] Create PWA icons (pwa-192x192.png, pwa-512x512.png, apple-touch-icon.png) in public/
+- [X] T004 [P] Add theme initialization script to index.html (before </head>) to prevent flash
+- [X] T005 Configure Tailwind dark mode with class strategy in tailwind.config.js
 
 ---
 
@@ -34,13 +34,13 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T006 Add v4 schema to lib/db.ts with timeLogs table for ProblemTimeLog entity
-- [ ] T007 [P] Create TypeScript interfaces for PracticeSession, TimeSession, ProblemTimeLog, UserPreferences, ExportData, ImportResult in src/types/index.ts
-- [ ] T008 [P] Create lib/preferences.ts with getPreferences, setPreferences, resetPreferences for localStorage
-- [ ] T009 [P] Create lib/timer.ts with pure timer utility functions (formatTime, parseTime, createTimerState)
-- [ ] T010 Create hooks/usePreferences.ts for user preferences management
-- [ ] T011 [P] Create context/ThemeContext.tsx with ThemeProvider and useThemeContext hook
-- [ ] T012 Update deleteProblemCascade in lib/db.ts to include timeLogs table cascade deletion
+- [X] T006 Add v4 schema to lib/db.ts with timeLogs table for ProblemTimeLog entity
+- [X] T007 [P] Create TypeScript interfaces for PracticeSession, TimeSession, ProblemTimeLog, UserPreferences, ExportData, ImportResult in src/types/index.ts
+- [X] T008 [P] Create lib/preferences.ts with getPreferences, setPreferences, resetPreferences for localStorage
+- [X] T009 [P] Create lib/timer.ts with pure timer utility functions (formatTime, parseTime, createTimerState)
+- [X] T010 Create hooks/usePreferences.ts for user preferences management
+- [X] T011 [P] Create context/ThemeContext.tsx with ThemeProvider and useThemeContext hook
+- [X] T012 Update deleteProblemCascade in lib/db.ts to include timeLogs table cascade deletion
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
