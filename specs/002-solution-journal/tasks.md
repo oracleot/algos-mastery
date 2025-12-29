@@ -34,13 +34,13 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T005 Extend Dexie schema to v2 with solutions table in src/lib/db.ts
-- [ ] T006 [P] Add solution validation rules in src/lib/validation.ts
-- [ ] T007 [P] Create pattern templates data in src/data/templates.ts
-- [ ] T008a [P] Write tests for mastery calculation in src/lib/mastery.test.ts (test-first per constitution)
-- [ ] T008b [P] Create mastery calculation logic in src/lib/mastery.ts
-- [ ] T009 [P] Create clipboard utility function in src/lib/clipboard.ts
-- [ ] T010 Add cascade delete for problem→solutions in src/lib/db.ts
+- [X] T005 Extend Dexie schema to v2 with solutions table in src/lib/db.ts
+- [X] T006 [P] Add solution validation rules in src/lib/validation.ts
+- [X] T007 [P] Create pattern templates data in src/data/templates.ts
+- [X] T008a [P] Write tests for mastery calculation in src/lib/mastery.test.ts (test-first per constitution)
+- [X] T008b [P] Create mastery calculation logic in src/lib/mastery.ts
+- [X] T009 [P] Create clipboard utility function in src/lib/clipboard.ts
+- [X] T010 Add cascade delete for problem→solutions in src/lib/db.ts
 
 **Checkpoint**: Foundation ready - user story implementation can now begin
 

@@ -1,7 +1,7 @@
 // lib/db.ts - Dexie database schema for IndexedDB
 
 import Dexie, { type Table } from 'dexie';
-import type { Problem } from '../types';
+import type { Problem, Solution } from '../types';
 
 /**
  * Database singleton for the Algorithms Mastery Tracker
@@ -9,6 +9,7 @@ import type { Problem } from '../types';
  */
 export class AlgoMasteryDB extends Dexie {
   problems!: Table<Problem>;
+  solutions!: Table<Solution>;
 
   constructor() {
     super('AlgoMasteryDB');
@@ -17,6 +18,12 @@ export class AlgoMasteryDB extends Dexie {
       // Primary key: id
       // Indexed fields: topic, difficulty, status, createdAt
       problems: 'id, topic, difficulty, status, createdAt',
+    });
+
+    // v2: Add solutions table for solution journal feature
+    this.version(2).stores({
+      problems: 'id, topic, difficulty, status, createdAt',
+      solutions: 'id, problemId, language, createdAt',
     });
   }
 }
@@ -68,6 +75,19 @@ export async function deleteProblem(id: string): Promise<void> {
 }
 
 /**
+ * Delete a problem and all its associated solutions (cascade delete)
+ * @param problemId - The ID of the problem to delete
+ */
+export async function deleteProblemWithSolutions(problemId: string): Promise<void> {
+  await db.transaction('rw', [db.problems, db.solutions], async () => {
+    // First delete all solutions for this problem
+    await db.solutions.where('problemId').equals(problemId).delete();
+    // Then delete the problem itself
+    await db.problems.delete(problemId);
+  });
+}
+
+/**
  * Clear all problems from the database
  */
 export async function clearAllProblems(): Promise<void> {
@@ -79,4 +99,72 @@ export async function clearAllProblems(): Promise<void> {
  */
 export async function getProblemCount(): Promise<number> {
   return await db.problems.count();
+}
+
+// Solution CRUD Operations
+
+/**
+ * Add a new solution to the database
+ */
+export async function addSolution(solution: Solution): Promise<string> {
+  return await db.solutions.add(solution);
+}
+
+/**
+ * Get a solution by ID
+ */
+export async function getSolution(id: string): Promise<Solution | undefined> {
+  return await db.solutions.get(id);
+}
+
+/**
+ * Get all solutions for a specific problem
+ */
+export async function getSolutionsForProblem(problemId: string): Promise<Solution[]> {
+  return await db.solutions
+    .where('problemId')
+    .equals(problemId)
+    .reverse()
+    .sortBy('createdAt');
+}
+
+/**
+ * Update an existing solution
+ */
+export async function updateSolution(
+  id: string,
+  updates: Partial<Omit<Solution, 'id' | 'problemId' | 'createdAt'>>
+): Promise<void> {
+  await db.solutions.update(id, {
+    ...updates,
+    updatedAt: new Date(),
+  });
+}
+
+/**
+ * Delete a solution by ID
+ */
+export async function deleteSolution(id: string): Promise<void> {
+  await db.solutions.delete(id);
+}
+
+/**
+ * Delete all solutions for a specific problem
+ */
+export async function deleteSolutionsForProblem(problemId: string): Promise<number> {
+  return await db.solutions.where('problemId').equals(problemId).delete();
+}
+
+/**
+ * Get solution count for a specific problem
+ */
+export async function getSolutionCount(problemId: string): Promise<number> {
+  return await db.solutions.where('problemId').equals(problemId).count();
+}
+
+/**
+ * Clear all solutions from the database
+ */
+export async function clearAllSolutions(): Promise<void> {
+  await db.solutions.clear();
 }
