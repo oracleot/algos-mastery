@@ -92,7 +92,7 @@ A user wants a visual representation of their learning journey showing all 15 to
 
 ### Edge Cases
 
-- What happens when inserting a template in a language different from the template's default?
+- ~~What happens when inserting a template in a language different from the template's default?~~ **RESOLVED**: T046 implemented language-agnostic templates that generate code in the user's selected language
 - How does mastery calculation handle problems with no topic assigned?
 - What happens if a user has 0 problems in a topic?
 - How are very long solutions handled in the editor (performance)?
@@ -107,7 +107,7 @@ A user wants a visual representation of their learning journey showing all 15 to
 - **FR-003**: System MUST allow multiple solutions per problem, each with its own language and timestamp
 - **FR-004**: System MUST provide copy-to-clipboard functionality for solutions
 - **FR-005**: System MUST allow editing and deleting existing solutions
-- **FR-006**: System MUST provide pre-populated code templates for each of the 10 pattern categories
+- **FR-006**: System MUST provide pre-populated code templates for each algorithm topic category (currently 17 templates across 14 topics)
 - **FR-007**: System MUST insert templates at cursor position without replacing existing code
 - **FR-008**: System MUST calculate mastery percentage as (solved problems / total problems) per topic
 - **FR-009**: System MUST unlock topics when previous topic reaches 70% mastery
@@ -125,7 +125,7 @@ A user wants a visual representation of their learning journey showing all 15 to
 
 ### Measurable Outcomes
 
-- **SC-001**: CodeMirror editor loads in under 500ms
+- **SC-001**: CodeMirror editor loads in under 500ms (measured from user action to editor interactive state)
 - **SC-002**: Syntax highlighting applies instantly on language change
 - **SC-003**: Solution save completes in under 200ms
 - **SC-004**: Template insertion completes in under 100ms

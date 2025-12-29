@@ -93,18 +93,23 @@ export function SolutionForm({
   }, []);
 
   const handleInsertTemplate = useCallback((template: Template) => {
+    // Get code for current language, or fall back to default language
+    // Note: 'plaintext' is not a template language, so we fall back to default
+    const templateLang = language === 'plaintext' ? template.defaultLanguage : language;
+    const templateCode =
+      template.codeByLanguage[templateLang] ??
+      template.codeByLanguage[template.defaultLanguage] ??
+      '';
+
     // Append template code to existing code (with newline if there's existing code)
     setCode((prev) => {
       if (prev.trim()) {
-        return prev + '\n\n' + template.code;
+        return prev + '\n\n' + templateCode;
       }
-      return template.code;
+      return templateCode;
     });
-    // Optionally update language to match template
-    if (template.defaultLanguage) {
-      setLanguage(template.defaultLanguage);
-    }
-  }, []);
+    // Don't change language - template adapts to user's selected language
+  }, [language]);
 
   const disabled = isLoading || isSubmitting;
 

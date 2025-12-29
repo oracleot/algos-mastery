@@ -113,14 +113,19 @@ export interface SolutionValidationErrors {
   language?: string;
 }
 
+// Languages supported for template code generation
+export type TemplateLanguage = Exclude<SupportedLanguage, 'plaintext'>;
+
 // Pattern template for algorithm categories (static, not persisted)
 export interface Template {
   id: string;
   topic: TopicSlug;
   name: string;
   description: string;
-  code: string;
-  defaultLanguage: SupportedLanguage;
+  /** Code snippets for each supported language */
+  codeByLanguage: Partial<Record<TemplateLanguage, string>>;
+  /** Fallback language when requested language is not available */
+  defaultLanguage: TemplateLanguage;
 }
 
 // Computed topic mastery and unlock status

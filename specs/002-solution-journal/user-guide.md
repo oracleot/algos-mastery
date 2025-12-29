@@ -107,7 +107,7 @@ Accelerate your coding with pre-built algorithm pattern templates.
 **Template Features:**
 - Includes explanatory comments
 - Shows usage examples
-- Matches your selected language (Python default)
+- **Language-Agnostic**: Templates automatically generate code in your selected language (JavaScript, TypeScript, Python, Java, C++, Go, Rust)
 
 ---
 

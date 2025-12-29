@@ -161,7 +161,7 @@
 
 **Purpose**: Planned improvements discovered during QA and user testing
 
-- [ ] T046 [US3] Make pattern templates language-agnostic: generate template code in the selected language (Python, JavaScript, TypeScript, Java, C++, Go, Rust) instead of always Python. Requires updating src/data/templates.ts to include multi-language variants or a code generation utility.
+- [X] T046 [US3] Make pattern templates language-agnostic: generate template code in the selected language (Python, JavaScript, TypeScript, Java, C++, Go, Rust) instead of always Python. Requires updating src/data/templates.ts to include multi-language variants or a code generation utility.
 
 ---
 
