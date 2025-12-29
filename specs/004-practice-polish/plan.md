@@ -100,8 +100,7 @@ src/
 │   └── preferences.ts          # localStorage wrapper
 ├── pages/
 │   └── Practice.tsx            # Timed practice page
-├── styles/
-│   └── themes.css              # CSS variables for theming
+├── index.css                   # Theme CSS variables (dark mode)
 ├── sw.ts                       # Service worker (generated)
 └── manifest.json               # PWA manifest
 ```

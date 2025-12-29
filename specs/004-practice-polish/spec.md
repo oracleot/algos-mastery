@@ -137,7 +137,7 @@ A user wants to review problems on their phone during commute. The UI works well
 
 ### Key Entities
 
-- **PracticeSession**: Active timed practice state (problemId, startTime, elapsed, isPaused)
+- **PracticeSession**: Active timed practice state (problemId, startedAt, elapsed, isPaused)
 - **ProblemTimeLog**: Time spent on each problem (problemId, totalSeconds, sessions[])
 - **UserPreferences**: Theme, shortcuts enabled, default timer (stored in localStorage)
 

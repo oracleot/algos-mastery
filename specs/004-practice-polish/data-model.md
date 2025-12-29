@@ -45,7 +45,8 @@
 │ version: string                                         │
 │ exportedAt: string (ISO)                                │
 │ checksum: string (SHA-256)                              │
-│ data: { problems, solutions, reviews, reviewHistory }   │
+│ data: { problems, solutions, reviews, reviewHistory,    │
+│         timeLogs }                                      │
 └─────────────────────────────────────────────────────────┘
 ```
 
