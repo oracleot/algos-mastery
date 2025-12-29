@@ -68,20 +68,20 @@
 
 ### Hooks for User Story 1
 
-- [ ] T017 [P] [US1] Create useReviewQueue hook with dueToday, dueCount, isLoading, addToReview, addToTodayQueue, isInReview, getReview in src/hooks/useReviewQueue.ts
-- [ ] T018 [P] [US1] Create useReview hook with recordReview and previewIntervals in src/hooks/useReview.ts
+- [X] T017 [P] [US1] Create useReviewQueue hook with dueToday, dueCount, isLoading, addToReview, addToTodayQueue, isInReview, getReview in src/hooks/useReviewQueue.ts
+- [X] T018 [P] [US1] Create useReview hook with recordReview and previewIntervals in src/hooks/useReview.ts
 
 ### Components for User Story 1
 
-- [ ] T019 [P] [US1] Create RatingButtons component (Again/Hard/Good/Easy with interval previews) in src/components/RatingButtons.tsx
-- [ ] T020 [P] [US1] Create ReviewCard component (problem display, reveal solution, rating) in src/components/ReviewCard.tsx
-- [ ] T021 [US1] Create DueToday component (queue list with Start Review button) in src/components/DueToday.tsx
+- [X] T019 [P] [US1] Create RatingButtons component (Again/Hard/Good/Easy with interval previews) in src/components/RatingButtons.tsx
+- [X] T020 [P] [US1] Create ReviewCard component (problem display, reveal solution, rating) in src/components/ReviewCard.tsx
+- [X] T021 [US1] Create DueToday component (queue list with Start Review button) in src/components/DueToday.tsx
 
 ### Integration for User Story 1
 
-- [ ] T022 [US1] Create Review page for active review session in src/pages/Review.tsx
-- [ ] T023 [US1] Add /review route to App routing in src/App.tsx
-- [ ] T024 [US1] Add DueToday section to Home page in src/pages/Home.tsx
+- [X] T022 [US1] Create Review page for active review session in src/pages/Review.tsx
+- [X] T023 [US1] Add /review route to App routing in src/App.tsx
+- [X] T024 [US1] Add DueToday section to Home page in src/pages/Home.tsx
 
 **Checkpoint**: User Story 1 complete - users can see due problems, start reviews, rate recall, and see calculated next review dates
 
@@ -113,6 +113,12 @@
 **Goal**: Users can view topic mastery, review statistics, streak counter, and suggested next problem
 
 **Independent Test**: Complete some reviews, verify dashboard shows updated stats, streak, and relevant suggestions
+
+### Hook Tests for User Story 3 (Constitution: Test-First)
+
+- [ ] T030a [P] [US3] Write tests for useStreak hook in src/hooks/useStreak.test.ts
+- [ ] T031a [P] [US3] Write tests for useStats hook in src/hooks/useStats.test.ts
+- [ ] T032a [P] [US3] Write tests for useSuggestedProblem hook in src/hooks/useSuggestedProblem.test.ts
 
 ### Hooks for User Story 3
 
@@ -161,12 +167,12 @@
 
 **Purpose**: Edge cases, performance, and refinements
 
-- [ ] T044 [P] Handle edge case: empty queue state in DueToday component
+- [X] T044 [P] Handle edge case: empty queue state in DueToday component *(Completed in Phase 3: shows "All caught up!" message)*
 - [ ] T045 [P] Handle edge case: problem reviewed multiple times in one day in src/lib/db.ts
-- [ ] T046 [P] Handle edge case: problems with 0 solutions in review (show message instead of blank)
+- [X] T046 [P] Handle edge case: problems with 0 solutions in review (show message instead of blank) *(Completed in Phase 3: shows "No solutions recorded" with link)*
 - [ ] T047 [P] Handle edge case: streak break logic (no review for a day)
 - [ ] T048 Add loading states to Dashboard and Review pages
-- [ ] T049 Add keyboard navigation for rating buttons (1=Again, 2=Hard, 3=Good, 4=Easy)
+- [X] T049 Add keyboard navigation for rating buttons (1=Again, 2=Hard, 3=Good, 4=Easy) *(Completed in Phase 3: keyboard shortcuts work)*
 - [ ] T050 Ensure responsive layout for Dashboard (320px to 1920px)
 - [ ] T051 Run quickstart.md validation checklist
 

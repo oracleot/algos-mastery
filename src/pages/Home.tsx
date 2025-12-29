@@ -1,11 +1,20 @@
 // pages/Home.tsx - Home page with navigation to Problems
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BookOpen, ArrowRight, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { DueToday } from '@/components/DueToday';
+import { useReviewQueue } from '@/hooks/useReviewQueue';
 
 function Home() {
+  const navigate = useNavigate();
+  const { dueToday, isLoading } = useReviewQueue();
+
+  const handleStartReview = () => {
+    navigate('/review');
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-4xl mx-auto px-4 py-16 sm:py-24">
@@ -40,6 +49,23 @@ function Home() {
               </Link>
             </Button>
           </div>
+        </div>
+
+        {/* Due Today Section */}
+        <div className="mt-12">
+          {isLoading ? (
+            <Card>
+              <CardContent className="py-8">
+                <div className="h-24 bg-muted animate-pulse rounded-lg" />
+              </CardContent>
+            </Card>
+          ) : (
+            <DueToday
+              items={dueToday ?? []}
+              onStartReview={handleStartReview}
+              compact={false}
+            />
+          )}
         </div>
 
         {/* Features Section */}

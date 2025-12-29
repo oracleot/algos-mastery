@@ -76,11 +76,20 @@ A user completes a review session with multiple problems, seeing progress throug
 
 ### Edge Cases
 
-- What happens when there are no problems due for review?
-- How does the system handle a problem reviewed multiple times in one day?
-- What if a problem is deleted while it has review data?
-- How are problems with 0 solutions handled in review (nothing to reveal)?
-- What happens if streak is broken (no review for a day)?
+#### EC-001: Empty Review Queue
+- **Given** no problems are due for review, **When** user views dashboard, **Then** "All caught up!" message is displayed with encouraging text
+
+#### EC-002: Same-Day Multiple Reviews
+- **Given** a problem was already reviewed today, **When** user manually adds it to today's queue, **Then** the problem can be reviewed again and the latest rating is used for SM-2 calculation
+
+#### EC-003: Problem Deleted with Review Data
+- **Given** a problem has review and history data, **When** the problem is deleted, **Then** all associated Review and ReviewHistory records are cascade deleted
+
+#### EC-004: Problem with No Solutions
+- **Given** a problem in review has 0 solutions, **When** user reveals solution, **Then** "No solutions recorded" message with link to add solution is shown
+
+#### EC-005: Streak Break
+- **Given** user has a streak, **When** a calendar day passes with no reviews, **Then** current streak resets to 0 but longest streak is preserved
 
 ## Requirements *(mandatory)*
 

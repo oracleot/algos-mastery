@@ -6,6 +6,7 @@ import { Home } from './pages/Home';
 import { Problems } from './pages/Problems';
 import { Problem } from './pages/Problem';
 import { Progress } from './pages/Progress';
+import { Review } from './pages/Review';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/problems" element={<Problems />} />
         <Route path="/problems/:id" element={<Problem />} />
         <Route path="/progress" element={<Progress />} />
+        <Route path="/review" element={<Review />} />
       </Routes>
       <Toaster position="bottom-right" />
     </>

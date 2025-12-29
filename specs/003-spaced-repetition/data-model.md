@@ -134,12 +134,6 @@ export interface StreakInfo {
   longestStreak: number;
   lastReviewDate: Date | null;
 }
-
-// For manual queue override
-export interface QueueOverride {
-  problemId: string;
-  addedAt: Date;
-}
 ```
 
 ---
