@@ -137,3 +137,60 @@ export interface TopicProgress {
   masteryPercent: number;
   unlocked: boolean;
 }
+
+// =========================================
+// Spaced Repetition Types (003-spaced-repetition)
+// =========================================
+
+// Review quality ratings for SM-2 algorithm
+export type ReviewQuality = 0 | 3 | 4 | 5;
+
+export const REVIEW_RATINGS = {
+  AGAIN: 0,
+  HARD: 3,
+  GOOD: 4,
+  EASY: 5,
+} as const;
+
+// Spaced repetition state for a problem
+export interface Review {
+  problemId: string;
+  easeFactor: number;
+  interval: number;
+  repetitions: number;
+  nextReview: Date;
+  lastReviewed: Date | null;
+}
+
+// Individual review event for history tracking
+export interface ReviewHistory {
+  id: string;
+  problemId: string;
+  quality: ReviewQuality;
+  reviewedAt: Date;
+  intervalBefore: number;
+  intervalAfter: number;
+}
+
+// Daily statistics for weekly chart
+export interface DailyStat {
+  date: string;
+  reviewed: number;
+  again: number;
+  hard: number;
+  good: number;
+  easy: number;
+}
+
+// Streak information computed from review history
+export interface StreakInfo {
+  currentStreak: number;
+  longestStreak: number;
+  lastReviewDate: Date | null;
+}
+
+// Manual queue override for adding problems to today's queue
+export interface QueueOverride {
+  problemId: string;
+  addedAt: Date;
+}

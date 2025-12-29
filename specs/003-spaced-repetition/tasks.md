@@ -21,11 +21,11 @@
 
 **Purpose**: Install dependencies and extend database schema for spaced repetition
 
-- [ ] T001 Install date-fns dependency via `pnpm add date-fns`
-- [ ] T002 Install recharts dependency via `pnpm add recharts`
-- [ ] T003 Add Review types and interfaces to src/types/index.ts (ReviewQuality, REVIEW_RATINGS, Review, ReviewHistory, DailyStat, StreakInfo, QueueOverride)
-- [ ] T004 Extend database schema to version 3 with reviews and reviewHistory tables in src/lib/db.ts
-- [ ] T005 Update deleteProblemCascade to delete associated reviews and reviewHistory in src/lib/db.ts
+- [X] T001 Install date-fns dependency via `pnpm add date-fns`
+- [X] T002 Install recharts dependency via `pnpm add recharts`
+- [X] T003 Add Review types and interfaces to src/types/index.ts (ReviewQuality, REVIEW_RATINGS, Review, ReviewHistory, DailyStat, StreakInfo, QueueOverride)
+- [X] T004 Extend database schema to version 3 with reviews and reviewHistory tables in src/lib/db.ts
+- [X] T005 Update deleteProblemCascade to delete associated reviews and reviewHistory in src/lib/db.ts
 
 ---
 
@@ -37,24 +37,24 @@
 
 ### SM-2 Algorithm (Test-First Required by Constitution)
 
-- [ ] T006 [P] Write SM-2 algorithm tests (MUST FAIL before implementation) in src/lib/sm2.test.ts
-- [ ] T007 Implement SM-2 algorithm calculateSM2 function and SM2_DEFAULTS in src/lib/sm2.ts
+- [X] T006 [P] Write SM-2 algorithm tests (MUST FAIL before implementation) in src/lib/sm2.test.ts
+- [X] T007 Implement SM-2 algorithm calculateSM2 function and SM2_DEFAULTS in src/lib/sm2.ts
 
 ### Streak & Stats Utilities
 
-- [ ] T008 [P] Write streak calculation tests in src/lib/streak.test.ts
-- [ ] T009 Implement calculateStreak function in src/lib/streak.ts
-- [ ] T010 [P] Write weekly stats calculation tests in src/lib/stats.test.ts
-- [ ] T011 Implement calculateWeeklyStats function in src/lib/stats.ts
+- [X] T008 [P] Write streak calculation tests in src/lib/streak.test.ts
+- [X] T009 Implement calculateStreak function in src/lib/streak.ts
+- [X] T010 [P] Write weekly stats calculation tests in src/lib/stats.test.ts
+- [X] T011 Implement calculateWeeklyStats function in src/lib/stats.ts
 
 ### Database Query Helpers
 
-- [ ] T012 Implement getDueToday query function in src/lib/db.ts
-- [ ] T013 Implement addToReview database function in src/lib/db.ts
-- [ ] T014 Implement recordReview database function with SM-2 integration in src/lib/db.ts
-- [ ] T015 Implement getStreak query function in src/lib/db.ts
-- [ ] T016 Implement getWeeklyStats query function in src/lib/db.ts
-- [ ] T016b Implement getSuggestedProblem query function (weakest unlocked topic) in src/lib/db.ts
+- [X] T012 Implement getDueToday query function in src/lib/db.ts
+- [X] T013 Implement addToReview database function in src/lib/db.ts
+- [X] T014 Implement recordReview database function with SM-2 integration in src/lib/db.ts
+- [X] T015 Implement getStreak query function in src/lib/db.ts
+- [X] T016 Implement getWeeklyStats query function in src/lib/db.ts
+- [X] T016b Implement getSuggestedProblem query function (weakest unlocked topic) in src/lib/db.ts
 
 **Checkpoint**: Foundation ready - SM-2 algorithm tested, database extended, utilities complete
 
