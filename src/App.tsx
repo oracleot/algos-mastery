@@ -4,6 +4,8 @@ import { Routes, Route } from 'react-router-dom';
 import { Toaster } from '@/components/ui/sonner';
 import { Home } from './pages/Home';
 import { Problems } from './pages/Problems';
+import { Problem } from './pages/Problem';
+import { Progress } from './pages/Progress';
 
 function App() {
   return (
@@ -11,6 +13,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/problems" element={<Problems />} />
+        <Route path="/problems/:id" element={<Problem />} />
+        <Route path="/progress" element={<Progress />} />
       </Routes>
       <Toaster position="bottom-right" />
     </>

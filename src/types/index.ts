@@ -73,3 +73,67 @@ export interface ValidationErrors {
   url?: string;
   notes?: string;
 }
+
+// =========================================
+// Solution Journal Types (002-solution-journal)
+// =========================================
+
+// Supported programming languages for solutions
+export const SUPPORTED_LANGUAGES = [
+  'javascript',
+  'typescript',
+  'python',
+  'java',
+  'cpp',
+  'rust',
+  'go',
+  'plaintext',
+] as const;
+export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];
+
+// Solution entity stored in IndexedDB
+export interface Solution {
+  id: string;
+  problemId: string;
+  code: string;
+  language: SupportedLanguage;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// Form data type for solution create/update operations
+export interface SolutionFormData {
+  code: string;
+  language: SupportedLanguage;
+}
+
+// Solution validation error messages
+export interface SolutionValidationErrors {
+  code?: string;
+  language?: string;
+}
+
+// Languages supported for template code generation
+export type TemplateLanguage = Exclude<SupportedLanguage, 'plaintext'>;
+
+// Pattern template for algorithm categories (static, not persisted)
+export interface Template {
+  id: string;
+  topic: TopicSlug;
+  name: string;
+  description: string;
+  /** Code snippets for each supported language */
+  codeByLanguage: Partial<Record<TemplateLanguage, string>>;
+  /** Fallback language when requested language is not available */
+  defaultLanguage: TemplateLanguage;
+}
+
+// Computed topic mastery and unlock status
+export interface TopicProgress {
+  topic: TopicSlug;
+  topicName: string;
+  totalProblems: number;
+  solvedProblems: number;
+  masteryPercent: number;
+  unlocked: boolean;
+}

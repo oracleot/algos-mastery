@@ -2,12 +2,13 @@
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Plus, SearchX } from 'lucide-react';
+import { ArrowLeft, Plus, SearchX, TrendingUp } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
@@ -124,10 +125,18 @@ function Problems() {
               </Button>
               <h1 className="text-xl font-semibold text-foreground">Problems</h1>
             </div>
-            <Button onClick={handleOpenAddForm}>
-              <Plus className="h-4 w-4" />
-              Add Problem
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button variant="outline" size="sm" asChild>
+                <Link to="/progress">
+                  <TrendingUp className="h-4 w-4" />
+                  Progress
+                </Link>
+              </Button>
+              <Button onClick={handleOpenAddForm}>
+                <Plus className="h-4 w-4" />
+                Add Problem
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -191,6 +200,9 @@ function Problems() {
             <DialogTitle>
               {editingProblem ? 'Edit Problem' : 'Add New Problem'}
             </DialogTitle>
+            <DialogDescription className="sr-only">
+              {editingProblem ? 'Edit the details of your problem' : 'Add a new algorithm problem to track'}
+            </DialogDescription>
           </DialogHeader>
           <ProblemForm
             initialData={editingProblem}

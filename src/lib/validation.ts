@@ -1,7 +1,39 @@
 // lib/validation.ts - Form validation utilities
 
-import type { ProblemFormData, ValidationErrors } from '../types';
-import { TOPIC_SLUGS, DIFFICULTIES } from '../types';
+import type { ProblemFormData, ValidationErrors, SolutionFormData, SolutionValidationErrors } from '../types';
+import { TOPIC_SLUGS, DIFFICULTIES, SUPPORTED_LANGUAGES } from '../types';
+
+/**
+ * Validate solution form data
+ * @param data - Form data to validate
+ * @returns Object containing validation errors (empty if valid)
+ */
+export function validateSolution(data: SolutionFormData): SolutionValidationErrors {
+  const errors: SolutionValidationErrors = {};
+
+  // Code validation
+  if (!data.code.trim()) {
+    errors.code = 'Solution code is required';
+  } else if (data.code.length > 50000) {
+    errors.code = 'Solution too long (max 50,000 chars)';
+  }
+
+  // Language validation
+  if (!SUPPORTED_LANGUAGES.includes(data.language)) {
+    errors.language = 'Please select a language';
+  }
+
+  return errors;
+}
+
+/**
+ * Check if solution validation result has no errors
+ * @param errors - Validation errors object
+ * @returns true if there are no errors
+ */
+export function isSolutionValid(errors: SolutionValidationErrors): boolean {
+  return Object.keys(errors).length === 0;
+}
 
 /**
  * Validate problem form data

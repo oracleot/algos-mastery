@@ -27,6 +27,7 @@ Act as a QA Engineer to comprehensively test a phase implementation. This agent 
 2. **Static Analysis**: Type checking and linting
 3. **End-to-End Testing**: Browser-based functional testing of user flows
 4. **Regression Validation**: Ensure existing functionality still works
+5. **User Documentation**: Generate user guide after successful validation
 
 ## Execution Steps
 
@@ -275,6 +276,10 @@ Produce a comprehensive Markdown report:
 ### Fixes Applied During QA
 - [List any fixes made during testing]
 
+### User Guide
+- Location: [path to generated user guide]
+- Status: Generated/Skipped (with reason)
+
 ### Recommendations
 - [Next steps based on findings]
 
@@ -282,13 +287,60 @@ Produce a comprehensive Markdown report:
 [Summary of whether phase meets completion criteria]
 ```
 
-### 8. Cleanup
+### 8. Generate User Guide
+
+After successful QA validation, create a user guide for the feature:
+
+**Location**: Save to `FEATURE_DIR/user-guide.md`
+
+**User Guide Structure:**
+
+```markdown
+# User Guide: [Feature Name]
+
+**Feature**: [Feature Name]
+**Version**: 1.0
+**Last Updated**: [Current Date]
+
+## Overview
+[Brief description of what the feature does and its value to users]
+
+## Features
+[For each user story/capability:]
+### [Feature Name]
+- What it does
+- How to use it (step-by-step)
+- Tips and best practices
+
+## Keyboard Shortcuts
+[If applicable - list any keyboard shortcuts]
+
+## Data Storage
+[Explain how data is stored, persistence, privacy considerations]
+
+## Troubleshooting
+[Common issues and solutions]
+
+## Best Practices
+[Recommendations for getting the most out of the feature]
+
+## Version History
+[Track changes across versions]
+```
+
+**Content Sources:**
+- Extract from tested user flows
+- Reference spec.md for feature descriptions
+- Include practical tips discovered during E2E testing
+- Document edge cases and workarounds
+
+### 9. Cleanup
 
 - Stop development server if started
 - Close browser if opened
 - Report final status
 
-### 9. Provide Next Actions
+### 10. Provide Next Actions
 
 Based on QA results:
 

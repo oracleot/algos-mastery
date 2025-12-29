@@ -1,7 +1,7 @@
 // pages/Home.tsx - Home page with navigation to Problems
 
 import { Link } from 'react-router-dom';
-import { BookOpen, ArrowRight } from 'lucide-react';
+import { BookOpen, ArrowRight, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -26,12 +26,20 @@ function Home() {
             and monitor your progress from unsolved to mastered.
           </p>
 
-          <Button size="lg" asChild>
-            <Link to="/problems">
-              View Problems
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" asChild>
+              <Link to="/problems">
+                View Problems
+                <ArrowRight className="h-5 w-5" />
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" asChild>
+              <Link to="/progress">
+                <TrendingUp className="h-5 w-5" />
+                Progress Ladder
+              </Link>
+            </Button>
+          </div>
         </div>
 
         {/* Features Section */}
