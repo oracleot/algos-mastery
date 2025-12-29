@@ -71,7 +71,7 @@ The following technology constraints are non-negotiable to maintain consistency:
 
 | Layer | Required Technology | Version Constraint |
 |-------|--------------------|--------------------|
-| Framework | React | ^18.0.0 |
+| Framework | React | ^19.0.0 |
 | Language | TypeScript | ^5.0.0 (strict mode) |
 | Build | Vite | ^5.0.0 |
 | Styling | Tailwind CSS | ^3.0.0 |
