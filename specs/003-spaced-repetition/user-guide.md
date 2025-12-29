@@ -1,14 +1,47 @@
 # User Guide: Spaced Repetition System
 
 **Feature**: Spaced Repetition for Algorithm Practice  
-**Version**: 1.1 (Phase 4 - Add to Review Queue)  
+**Version**: 1.2 (Phase 5 - Progress Dashboard)  
 **Last Updated**: December 29, 2025
 
 ## Overview
 
 The Spaced Repetition System helps you retain algorithm knowledge long-term by scheduling reviews at optimal intervals. Using the scientifically-proven SM-2 algorithm, problems you find easy are reviewed less frequently, while challenging ones are reviewed more often.
 
+The Progress Dashboard gives you visibility into your learning journey with streak tracking, weekly statistics, smart problem suggestions, and topic unlock progress.
+
 ## Features
+
+### Progress Dashboard
+
+The home page features a comprehensive dashboard showing your learning progress:
+
+#### Streak Counter
+- **Flame Icon** displays your current streak (consecutive days with reviews)
+- Active state (colored flame) indicates you've reviewed today
+- Inactive state (gray flame) reminds you to review to maintain your streak
+- Your longest streak is displayed when it exceeds your current streak
+
+#### Weekly Statistics
+- **This Week** - Total reviews completed in the last 7 days
+- **Daily Avg** - Average reviews per day this week
+- **Bar Chart** - Visual breakdown by day (Tue-Mon) with color-coded ratings:
+  - Red: Again (struggled to recall)
+  - Orange: Hard
+  - Green: Good
+  - Blue: Easy
+
+#### Suggested Next Problem
+- **Smart Recommendations** - Suggests problems from your weakest unlocked topic
+- **Reason Displayed** - Shows why this problem was suggested (e.g., "Strengthen your stack skills")
+- **Refresh Button** - Get a different suggestion if the current one doesn't fit
+- Click the problem card to navigate directly to it
+
+#### Next to Unlock
+- **Progress Indicator** - Shows the next topic you'll unlock
+- **Current Topic** - Displays which topic you're working on
+- **Problems Needed** - How many more problems to solve to reach 70% mastery
+- **Progress Bar** - Visual representation of progress toward unlocking
 
 ### Adding Problems to Review Queue
 
@@ -125,6 +158,14 @@ The SM-2 algorithm calculates when to next review each problem:
 
 ## Version History
 
+### v1.2 (Phase 5) - December 2025
+- **Progress Dashboard** on home page with all statistics
+- **Streak Counter** with flame icon and active/inactive states
+- **Weekly Stats Chart** using Recharts bar chart with rating breakdown
+- **Suggested Next** with smart recommendations and refresh
+- **Next to Unlock** showing topic progress and problems needed
+- Dashboard data updates in real-time after reviews
+
 ### v1.1 (Phase 4) - December 2025
 - Add problems to review queue from Problem page
 - "Add to Review" button for solved problems
@@ -141,5 +182,4 @@ The SM-2 algorithm calculates when to next review each problem:
 - Session exit confirmation
 
 ### Coming Soon
-- **Phase 5**: Progress dashboard with streak counter and weekly stats
-- **Phase 6**: Session summaries and progress tracking
+- **Phase 6**: Enhanced session flow with progress indicator and summary screen

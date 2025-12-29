@@ -116,27 +116,27 @@
 
 ### Hook Tests for User Story 3 (Constitution: Test-First)
 
-- [ ] T030a [P] [US3] Write tests for useStreak hook in src/hooks/useStreak.test.ts
-- [ ] T031a [P] [US3] Write tests for useStats hook in src/hooks/useStats.test.ts
-- [ ] T032a [P] [US3] Write tests for useSuggestedProblem hook in src/hooks/useSuggestedProblem.test.ts
+- [X] T030a [P] [US3] Write tests for useStreak hook in src/hooks/useStreak.test.ts
+- [X] T031a [P] [US3] Write tests for useStats hook in src/hooks/useStats.test.ts
+- [X] T032a [P] [US3] Write tests for useSuggestedProblem hook in src/hooks/useSuggestedProblem.test.ts
 
 ### Hooks for User Story 3
 
-- [ ] T030 [P] [US3] Create useStreak hook with streak info and hasReviewedToday in src/hooks/useStreak.ts
-- [ ] T031 [P] [US3] Create useStats hook with weeklyStats, weeklyTotal, dailyAverage in src/hooks/useStats.ts
-- [ ] T032 [P] [US3] Create useSuggestedProblem hook with suggestion, reason, topic, refresh in src/hooks/useSuggestedProblem.ts
+- [X] T030 [P] [US3] Create useStreak hook with streak info and hasReviewedToday in src/hooks/useStreak.ts
+- [X] T031 [P] [US3] Create useStats hook with weeklyStats, weeklyTotal, dailyAverage in src/hooks/useStats.ts
+- [X] T032 [P] [US3] Create useSuggestedProblem hook with suggestion, reason, topic, refresh in src/hooks/useSuggestedProblem.ts
 
 ### Components for User Story 3
 
-- [ ] T033 [P] [US3] Create StreakCounter component (flame icon with count, active state) in src/components/StreakCounter.tsx
-- [ ] T034 [P] [US3] Create WeeklyStatsChart component using Recharts BarChart in src/components/WeeklyStatsChart.tsx
-- [ ] T035 [P] [US3] Create SuggestedNext component (problem card with reason and refresh) in src/components/SuggestedNext.tsx
-- [ ] T036 [P] [US3] Create NextToUnlock component (progress bar to next topic) in src/components/NextToUnlock.tsx
+- [X] T033 [P] [US3] Create StreakCounter component (flame icon with count, active state) in src/components/StreakCounter.tsx
+- [X] T034 [P] [US3] Create WeeklyStatsChart component using Recharts BarChart in src/components/WeeklyStatsChart.tsx
+- [X] T035 [P] [US3] Create SuggestedNext component (problem card with reason and refresh) in src/components/SuggestedNext.tsx
+- [X] T036 [P] [US3] Create NextToUnlock component (progress bar to next topic) in src/components/NextToUnlock.tsx
 
 ### Dashboard Integration for User Story 3
 
-- [ ] T037 [US3] Create Dashboard component combining all progress elements in src/components/Dashboard.tsx
-- [ ] T038 [US3] Update Home page to use Dashboard layout in src/pages/Home.tsx
+- [X] T037 [US3] Create Dashboard component combining all progress elements in src/components/Dashboard.tsx
+- [X] T038 [US3] Update Home page to use Dashboard layout in src/pages/Home.tsx
 
 **Checkpoint**: User Story 3 complete - users can view comprehensive progress dashboard
 

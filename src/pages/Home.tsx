@@ -1,41 +1,32 @@
-// pages/Home.tsx - Home page with navigation to Problems
+// pages/Home.tsx - Home page with dashboard and navigation
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { BookOpen, ArrowRight, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { DueToday } from '@/components/DueToday';
-import { useReviewQueue } from '@/hooks/useReviewQueue';
+import { Dashboard } from '@/components/Dashboard';
 
 function Home() {
-  const navigate = useNavigate();
-  const { dueToday, isLoading } = useReviewQueue();
-
-  const handleStartReview = () => {
-    navigate('/review');
-  };
-
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-4xl mx-auto px-4 py-16 sm:py-24">
-        {/* Hero Section */}
-        <div className="text-center">
-          <div className="flex justify-center mb-6">
-            <div className="p-4 bg-primary/10 rounded-2xl">
-              <BookOpen className="h-12 w-12 text-primary" />
+      <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12">
+        {/* Header Section */}
+        <div className="text-center mb-8">
+          <div className="flex justify-center mb-4">
+            <div className="p-3 bg-primary/10 rounded-xl">
+              <BookOpen className="h-8 w-8 text-primary" />
             </div>
           </div>
           
-          <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
+          <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
             Algorithms Mastery Tracker
           </h1>
           
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-            Track your algorithm problem-solving journey. Add problems, organize by topic,
-            and monitor your progress from unsolved to mastered.
+          <p className="text-base text-muted-foreground max-w-xl mx-auto mb-6">
+            Track your algorithm problem-solving journey with spaced repetition.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button size="lg" asChild>
               <Link to="/problems">
                 View Problems
@@ -51,25 +42,11 @@ function Home() {
           </div>
         </div>
 
-        {/* Due Today Section */}
-        <div className="mt-12">
-          {isLoading ? (
-            <Card>
-              <CardContent className="py-8">
-                <div className="h-24 bg-muted animate-pulse rounded-lg" />
-              </CardContent>
-            </Card>
-          ) : (
-            <DueToday
-              items={dueToday ?? []}
-              onStartReview={handleStartReview}
-              compact={false}
-            />
-          )}
-        </div>
+        {/* Dashboard Section */}
+        <Dashboard />
 
         {/* Features Section */}
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
           <Card>
             <CardContent className="pt-6">
               <div className="text-2xl mb-2">📝</div>
