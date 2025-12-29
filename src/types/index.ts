@@ -235,6 +235,8 @@ export interface UserPreferences {
   defaultTimerMinutes: number;
   keyboardShortcutsEnabled: boolean;
   showInstallPrompt: boolean;
+  /** Whether user has completed or skipped the onboarding tour */
+  onboardingCompleted: boolean;
 }
 
 // Export data structure
@@ -285,3 +287,14 @@ export const SHORTCUTS: ShortcutDefinition[] = [
   { key: '4', description: 'Rate: Easy', context: 'review' },
   { key: 'Space', description: 'Pause/Resume timer', context: 'practice' },
 ];
+
+// =========================================
+// Onboarding Types (005-onboarding)
+// =========================================
+
+import type { Step } from 'react-joyride';
+
+/** Extended Joyride step with ID for tracking */
+export interface OnboardingStep extends Step {
+  id: string;
+}

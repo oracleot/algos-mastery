@@ -9,6 +9,7 @@ export const DEFAULT_PREFERENCES: UserPreferences = {
   defaultTimerMinutes: 45,
   keyboardShortcutsEnabled: true,
   showInstallPrompt: true,
+  onboardingCompleted: false,
 };
 
 /**

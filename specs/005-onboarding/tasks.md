@@ -25,10 +25,10 @@
 
 **Purpose**: Install dependencies and prepare type definitions
 
-- [ ] T001 Install react-joyride dependency via `pnpm add react-joyride`
-- [ ] T002 [P] Add OnboardingStep type extending Joyride Step in src/types/index.ts
-- [ ] T003 [P] Add onboardingCompleted field to UserPreferences interface in src/types/index.ts
-- [ ] T004 Add onboardingCompleted default value (false) to DEFAULT_PREFERENCES in src/lib/preferences.ts
+- [X] T001 Install react-joyride dependency via `pnpm add react-joyride`
+- [X] T002 [P] Add OnboardingStep type extending Joyride Step in src/types/index.ts
+- [X] T003 [P] Add onboardingCompleted field to UserPreferences interface in src/types/index.ts
+- [X] T004 Add onboardingCompleted default value (false) to DEFAULT_PREFERENCES in src/lib/preferences.ts
 
 ---
 
@@ -38,11 +38,11 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T005 Create ONBOARDING_STEPS array with 6 tour step definitions in src/lib/onboarding-steps.ts
-- [ ] T006 Create useOnboarding hook with state management and Joyride callback handling in src/hooks/useOnboarding.ts
-- [ ] T007 Create OnboardingTour component wrapping Joyride with configured styles in src/components/OnboardingTour.tsx
-- [ ] T007a [P] Create useOnboarding hook tests verifying state management and callbacks in src/hooks/useOnboarding.test.ts
-- [ ] T007b [P] Create OnboardingTour component tests verifying rendering and Joyride integration in src/components/OnboardingTour.test.tsx
+- [X] T005 Create ONBOARDING_STEPS array with 6 tour step definitions in src/lib/onboarding-steps.ts
+- [X] T006 Create useOnboarding hook with state management and Joyride callback handling in src/hooks/useOnboarding.ts
+- [X] T007 Create OnboardingTour component wrapping Joyride with configured styles in src/components/OnboardingTour.tsx
+- [X] T007a [P] Create useOnboarding hook tests verifying state management and callbacks in src/hooks/useOnboarding.test.ts
+- [X] T007b [P] Create OnboardingTour component tests verifying rendering and Joyride integration in src/components/OnboardingTour.test.tsx
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
