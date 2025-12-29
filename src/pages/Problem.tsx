@@ -19,7 +19,10 @@ import { TopicBadge } from '@/components/TopicBadge';
 import { DifficultyBadge } from '@/components/DifficultyBadge';
 import { AddToReviewButton } from '@/components/AddToReviewButton';
 import { NextReviewDate } from '@/components/NextReviewDate';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { useProblems } from '@/hooks/useProblems';
+import { usePWA } from '@/hooks/usePWA';
 import { useSolutions } from '@/hooks/useSolutions';
 import { useReviewQueue } from '@/hooks/useReviewQueue';
 import { getTopicName } from '@/data/topics';
@@ -28,6 +31,7 @@ import type { Problem as ProblemType, SolutionFormData, SupportedLanguage } from
 function Problem() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { isOnline } = usePWA();
   const { getProblem } = useProblems();
   const {
     solutions,
@@ -180,10 +184,14 @@ function Problem() {
                 </div>
               </div>
             </div>
-            <Button onClick={handleOpenAddForm}>
-              <Plus className="h-4 w-4" />
-              Add Solution
-            </Button>
+            <div className="flex items-center gap-2">
+              <OfflineIndicator isOnline={isOnline} />
+              <ThemeToggle />
+              <Button onClick={handleOpenAddForm}>
+                <Plus className="h-4 w-4" />
+                Add Solution
+              </Button>
+            </div>
           </div>
         </div>
       </header>

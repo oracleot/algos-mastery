@@ -35,21 +35,21 @@ export function MasteryBadge({
   size = 'md',
   showLockIcon = true,
 }: MasteryBadgeProps) {
-  // Color based on progress
+  // Color based on progress (with dark mode support)
   const getColorClass = () => {
     if (!unlocked) {
-      return 'bg-gray-100 text-gray-400 border-gray-200';
+      return 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 border-gray-200 dark:border-gray-700';
     }
     if (percent >= 70) {
-      return 'bg-green-100 text-green-700 border-green-300';
+      return 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 border-green-300 dark:border-green-800';
     }
     if (percent >= 40) {
-      return 'bg-yellow-100 text-yellow-700 border-yellow-300';
+      return 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 border-yellow-300 dark:border-yellow-800';
     }
     if (percent > 0) {
-      return 'bg-orange-100 text-orange-700 border-orange-300';
+      return 'bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 border-orange-300 dark:border-orange-800';
     }
-    return 'bg-gray-50 text-gray-500 border-gray-200';
+    return 'bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-700';
   };
 
   if (!unlocked && showLockIcon) {
@@ -57,7 +57,7 @@ export function MasteryBadge({
       <div
         className={cn(
           'flex items-center justify-center rounded-full border',
-          'bg-gray-100 text-gray-400 border-gray-200',
+          'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 border-gray-200 dark:border-gray-700',
           sizeClasses[size]
         )}
         title="Locked - Complete 70% of previous topic to unlock"

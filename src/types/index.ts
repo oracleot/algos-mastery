@@ -194,3 +194,94 @@ export interface QueueOverride {
   problemId: string;
   addedAt: Date;
 }
+
+// =========================================
+// Timed Practice Types (004-practice-polish)
+// =========================================
+
+// Individual time session for a problem
+export interface TimeSession {
+  startedAt: Date;
+  endedAt: Date;
+  durationSeconds: number;
+}
+
+// Time log for a problem (persisted in IndexedDB)
+export interface ProblemTimeLog {
+  problemId: string;
+  totalSeconds: number;
+  sessions: TimeSession[];
+}
+
+// Timed practice session state (in-memory)
+export interface PracticeSessionState {
+  id: string;
+  problemId: string | null;
+  startedAt: Date;
+  duration: number;
+  elapsed: number;
+  remaining: number;
+  isRunning: boolean;
+  isPaused: boolean;
+  problemsCompleted: string[];
+}
+
+// Theme preference
+export type Theme = 'light' | 'dark' | 'system';
+
+// User preferences (stored in localStorage)
+export interface UserPreferences {
+  theme: Theme;
+  defaultTimerMinutes: number;
+  keyboardShortcutsEnabled: boolean;
+  showInstallPrompt: boolean;
+}
+
+// Export data structure
+export interface ExportData {
+  version: string;
+  exportedAt: string;
+  appVersion: string;
+  checksum: string;
+  data: {
+    problems: Problem[];
+    solutions: Solution[];
+    reviews: Review[];
+    reviewHistory: ReviewHistory[];
+    timeLogs: ProblemTimeLog[];
+  };
+}
+
+// Import result
+export interface ImportResult {
+  success: boolean;
+  error?: string;
+  stats?: {
+    problems: number;
+    solutions: number;
+    reviews: number;
+    reviewHistory: number;
+    timeLogs: number;
+  };
+}
+
+// Keyboard shortcut definition
+export interface ShortcutDefinition {
+  key: string;
+  description: string;
+  context: 'global' | 'review' | 'practice' | 'problems';
+}
+
+// Predefined shortcuts
+export const SHORTCUTS: ShortcutDefinition[] = [
+  { key: '?', description: 'Show keyboard shortcuts', context: 'global' },
+  { key: '/', description: 'Focus search', context: 'global' },
+  { key: 'Escape', description: 'Close modal / Cancel', context: 'global' },
+  { key: 'n', description: 'New problem', context: 'problems' },
+  { key: 'r', description: 'Reveal solution', context: 'review' },
+  { key: '1', description: 'Rate: Again', context: 'review' },
+  { key: '2', description: 'Rate: Hard', context: 'review' },
+  { key: '3', description: 'Rate: Good', context: 'review' },
+  { key: '4', description: 'Rate: Easy', context: 'review' },
+  { key: 'Space', description: 'Pause/Resume timer', context: 'practice' },
+];

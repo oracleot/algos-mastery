@@ -1,5 +1,6 @@
 // components/FilterBar.tsx - Filter bar with topic, difficulty, status dropdowns and search
 
+import { forwardRef } from 'react';
 import { Search, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -45,7 +46,7 @@ const statusLabels: Record<Status, string> = {
   solved: 'Solved',
 };
 
-function FilterBar({
+const FilterBar = forwardRef<HTMLInputElement, FilterBarProps>(function FilterBar({
   filters,
   onTopicChange,
   onDifficultyChange,
@@ -53,7 +54,7 @@ function FilterBar({
   onSearchChange,
   onClearAll,
   hasActiveFilters,
-}: FilterBarProps) {
+}, ref) {
   return (
     <div className="space-y-4">
       {/* Search and Clear Row */}
@@ -61,8 +62,9 @@ function FilterBar({
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
+            ref={ref}
             type="text"
-            placeholder="Search problems..."
+            placeholder="Search problems... (press / to focus)"
             value={filters.search}
             onChange={(e) => onSearchChange(e.target.value)}
             className="pl-10"
@@ -140,6 +142,6 @@ function FilterBar({
       </div>
     </div>
   );
-}
+});
 
 export { FilterBar };

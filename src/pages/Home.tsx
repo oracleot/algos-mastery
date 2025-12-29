@@ -1,15 +1,26 @@
 // pages/Home.tsx - Home page with dashboard and navigation
 
 import { Link } from 'react-router-dom';
-import { BookOpen, ArrowRight, TrendingUp } from 'lucide-react';
+import { BookOpen, ArrowRight, TrendingUp, Clock, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Dashboard } from '@/components/Dashboard';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { OfflineIndicator } from '@/components/OfflineIndicator';
+import { usePWA } from '@/hooks/usePWA';
 
 function Home() {
+  const { isOnline } = usePWA();
+
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12">
+      {/* Top bar with theme toggle and offline indicator */}
+      <div className="fixed top-4 right-4 flex items-center gap-2 z-10">
+        <OfflineIndicator isOnline={isOnline} />
+        <ThemeToggle />
+      </div>
+      
+      <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12 pt-16 sm:pt-12">
         {/* Header Section */}
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
@@ -18,25 +29,41 @@ function Home() {
             </div>
           </div>
           
-          <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2">
             Algorithms Mastery Tracker
           </h1>
           
-          <p className="text-base text-muted-foreground max-w-xl mx-auto mb-6">
+          <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto mb-6">
             Track your algorithm problem-solving journey with spaced repetition.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button size="lg" asChild>
+          <div className="flex flex-col gap-3 justify-center max-w-sm mx-auto sm:max-w-none sm:flex-row">
+            <Button size="lg" asChild className="w-full sm:w-auto touch-manipulation">
               <Link to="/problems">
                 View Problems
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild>
+            <Button size="lg" variant="outline" asChild className="w-full sm:w-auto touch-manipulation">
+              <Link to="/practice">
+                <Clock className="h-5 w-5" />
+                Timed Practice
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" asChild className="w-full sm:w-auto touch-manipulation">
               <Link to="/progress">
                 <TrendingUp className="h-5 w-5" />
                 Progress Ladder
+              </Link>
+            </Button>
+          </div>
+
+          {/* Settings link */}
+          <div className="mt-4">
+            <Button variant="ghost" size="sm" asChild className="touch-manipulation">
+              <Link to="/settings">
+                <Settings className="h-4 w-4 mr-2" />
+                Settings
               </Link>
             </Button>
           </div>
