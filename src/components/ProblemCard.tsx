@@ -1,7 +1,7 @@
 // components/ProblemCard.tsx - Card displaying problem details with badges
 
 import { Link } from 'react-router-dom';
-import { ExternalLink, Pencil, Trash2, Code } from 'lucide-react';
+import { ExternalLink, Pencil, Trash2, Code, Check, ChevronDown } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
@@ -9,6 +9,12 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { TopicBadge } from '@/components/TopicBadge';
 import { DifficultyBadge } from '@/components/DifficultyBadge';
 import { cn } from '@/lib/utils';
@@ -25,30 +31,25 @@ interface ProblemCardProps {
   onStatusChange: (status: Status) => void;
 }
 
-const statusConfig: Record<Status, { label: string; className: string; next: Status }> = {
+const statusConfig: Record<Status, { label: string; badgeClassName: string }> = {
   unsolved: {
     label: 'Unsolved',
-    className: 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-gray-200',
-    next: 'attempted',
+    badgeClassName: 'bg-gray-100 text-gray-700 border-gray-200',
   },
   attempted: {
     label: 'Attempted',
-    className: 'bg-yellow-100 text-yellow-800 hover:bg-yellow-200 border-yellow-200',
-    next: 'solved',
+    badgeClassName: 'bg-yellow-100 text-yellow-800 border-yellow-200',
   },
   solved: {
     label: 'Solved',
-    className: 'bg-green-100 text-green-800 hover:bg-green-200 border-green-200',
-    next: 'unsolved',
+    badgeClassName: 'bg-green-100 text-green-800 border-green-200',
   },
 };
 
-function ProblemCard({ problem, onEdit, onDelete, onStatusChange }: ProblemCardProps) {
-  const { label, className, next } = statusConfig[problem.status];
+const allStatuses: Status[] = ['unsolved', 'attempted', 'solved'];
 
-  const handleStatusClick = () => {
-    onStatusChange(next);
-  };
+function ProblemCard({ problem, onEdit, onDelete, onStatusChange }: ProblemCardProps) {
+  const { label, badgeClassName } = statusConfig[problem.status];
 
   return (
     <Card className="transition-shadow hover:shadow-md">
@@ -87,6 +88,49 @@ function ProblemCard({ problem, onEdit, onDelete, onStatusChange }: ProblemCardP
               </TooltipTrigger>
               <TooltipContent>View solutions</TooltipContent>
             </Tooltip>
+            <DropdownMenu>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-7 px-2 text-xs gap-1"
+                      aria-label="Change status"
+                    >
+                      <Check className="h-3.5 w-3.5" />
+                      <ChevronDown className="h-3 w-3" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                </TooltipTrigger>
+                <TooltipContent>Change status</TooltipContent>
+              </Tooltip>
+              <DropdownMenuContent align="end">
+                {allStatuses.map((status) => (
+                  <DropdownMenuItem
+                    key={status}
+                    onClick={() => onStatusChange(status)}
+                    className={cn(
+                      'cursor-pointer',
+                      problem.status === status && 'bg-accent'
+                    )}
+                  >
+                    <span
+                      className={cn(
+                        'inline-block w-2 h-2 rounded-full mr-2',
+                        status === 'unsolved' && 'bg-gray-400',
+                        status === 'attempted' && 'bg-yellow-500',
+                        status === 'solved' && 'bg-green-500'
+                      )}
+                    />
+                    {statusConfig[status].label}
+                    {problem.status === status && (
+                      <Check className="h-4 w-4 ml-auto" />
+                    )}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
@@ -121,17 +165,14 @@ function ProblemCard({ problem, onEdit, onDelete, onStatusChange }: ProblemCardP
         <div className="flex flex-wrap items-center gap-2">
           <TopicBadge topic={problem.topic} />
           <DifficultyBadge difficulty={problem.difficulty} />
-          <button
-            onClick={handleStatusClick}
+          <span
             className={cn(
               'inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold',
-              'transition-colors cursor-pointer',
-              className
+              badgeClassName
             )}
-            aria-label={`Status: ${label}. Click to change to ${statusConfig[next].label}`}
           >
             {label}
-          </button>
+          </span>
         </div>
 
         {/* Notes */}

@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
@@ -199,6 +200,9 @@ function Problems() {
             <DialogTitle>
               {editingProblem ? 'Edit Problem' : 'Add New Problem'}
             </DialogTitle>
+            <DialogDescription className="sr-only">
+              {editingProblem ? 'Edit the details of your problem' : 'Add a new algorithm problem to track'}
+            </DialogDescription>
           </DialogHeader>
           <ProblemForm
             initialData={editingProblem}

@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
@@ -224,6 +225,9 @@ function Problem() {
         <DialogContent className="max-w-5xl">
           <DialogHeader>
             <DialogTitle>Add Solution</DialogTitle>
+            <DialogDescription className="sr-only">
+              Write your code solution for this problem
+            </DialogDescription>
           </DialogHeader>
           <SolutionForm
             currentTopic={problem.topic}
