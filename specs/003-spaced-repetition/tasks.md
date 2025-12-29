@@ -150,14 +150,14 @@
 
 ### Components for User Story 4
 
-- [ ] T039 [P] [US4] Create ReviewSession container component with session state management in src/components/ReviewSession.tsx
-- [ ] T040 [P] [US4] Create ReviewSessionProgress component (e.g., "2/5") in src/components/ReviewSessionProgress.tsx
-- [ ] T041 [P] [US4] Create ReviewSessionSummary component (ratings breakdown, duration) in src/components/ReviewSessionSummary.tsx
+- [X] T039 [P] [US4] Create ReviewSession container component with session state management in src/components/ReviewSession.tsx
+- [X] T040 [P] [US4] Create ReviewSessionProgress component (e.g., "2/5") in src/components/ReviewSessionProgress.tsx
+- [X] T041 [P] [US4] Create ReviewSessionSummary component (ratings breakdown, duration) in src/components/ReviewSessionSummary.tsx
 
 ### Integration for User Story 4
 
-- [ ] T042 [US4] Update Review page to use ReviewSession with progress and summary in src/pages/Review.tsx
-- [ ] T043 [US4] Add "End Session" button with partial summary support in src/pages/Review.tsx
+- [X] T042 [US4] Update Review page to use ReviewSession with progress and summary in src/pages/Review.tsx
+- [X] T043 [US4] Add "End Session" button with partial summary support in src/pages/Review.tsx
 
 **Checkpoint**: User Story 4 complete - users experience full review session flow with progress and summary
 
