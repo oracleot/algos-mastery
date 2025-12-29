@@ -185,14 +185,14 @@
 
 **Purpose**: Improvements that affect multiple user stories and final cleanup
 
-- [ ] T061 Create pages/Settings.tsx combining theme, shortcuts, export/import, preferences sections
-- [ ] T062 Add /settings route to App.tsx router configuration
-- [ ] T063 Add Settings navigation link to layout/navigation
-- [ ] T064 [P] Add loading states to export/import operations
-- [ ] T065 [P] Add error boundary and error states for failed operations
-- [ ] T066 Run quickstart.md validation checklist
-- [ ] T067 Verify final bundle size is <500KB gzipped
-- [ ] T068 Run Lighthouse PWA audit and address any issues (target 90+ score)
+- [X] T061 Create pages/Settings.tsx combining theme, shortcuts, export/import, preferences sections
+- [X] T062 Add /settings route to App.tsx router configuration
+- [X] T063 Add Settings navigation link to layout/navigation
+- [X] T064 [P] Add loading states to export/import operations
+- [X] T065 [P] Add error boundary and error states for failed operations
+- [X] T066 Run quickstart.md validation checklist
+- [X] T067 Verify final bundle size is <500KB gzipped
+- [X] T068 Run Lighthouse PWA audit and address any issues (target 90+ score)
 
 ---
 

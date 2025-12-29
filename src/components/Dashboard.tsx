@@ -1,8 +1,8 @@
 // components/Dashboard.tsx - Main progress dashboard combining all elements
 
+import { lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StreakCounter } from './StreakCounter';
-import { WeeklyStatsChart } from './WeeklyStatsChart';
 import { SuggestedNext } from './SuggestedNext';
 import { NextToUnlock } from './NextToUnlock';
 import { DueToday } from './DueToday';
@@ -13,6 +13,22 @@ import { useSuggestedProblem } from '@/hooks/useSuggestedProblem';
 import { useProgress } from '@/hooks/useProgress';
 import { useReviewQueue } from '@/hooks/useReviewQueue';
 import type { Problem } from '@/types';
+
+// Lazy load WeeklyStatsChart to reduce initial bundle size (Recharts is ~100KB gzipped)
+const WeeklyStatsChart = lazy(() => 
+  import('./WeeklyStatsChart').then(module => ({ default: module.WeeklyStatsChart }))
+);
+
+// Loading placeholder for chart
+function ChartSkeleton() {
+  return (
+    <Card>
+      <CardContent className="py-6">
+        <div className="h-[180px] bg-muted animate-pulse rounded-lg" />
+      </CardContent>
+    </Card>
+  );
+}
 
 /**
  * Dashboard component combining all progress elements
@@ -114,13 +130,15 @@ export function Dashboard() {
         compact={false}
       />
 
-      {/* Weekly chart */}
+      {/* Weekly chart - lazy loaded to reduce initial bundle size */}
       {weeklyStats && (
-        <WeeklyStatsChart
-          data={weeklyStats}
-          height={180}
-          showBreakdown={weeklyTotal > 0}
-        />
+        <Suspense fallback={<ChartSkeleton />}>
+          <WeeklyStatsChart
+            data={weeklyStats}
+            height={180}
+            showBreakdown={weeklyTotal > 0}
+          />
+        </Suspense>
       )}
 
       {/* Bottom row: Suggestions and Unlock progress */}

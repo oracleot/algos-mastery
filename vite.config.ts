@@ -97,6 +97,7 @@ export default defineConfig({
           // Split CodeMirror into its own chunk for lazy loading
           'codemirror': [
             '@codemirror/state',
+            '@codemirror/view',
             '@codemirror/lang-javascript',
             '@codemirror/lang-python',
             '@codemirror/lang-java',
@@ -109,7 +110,26 @@ export default defineConfig({
           // Split React vendor code
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           // Split UI libraries
-          'ui-vendor': ['@radix-ui/react-dialog', '@radix-ui/react-select', '@radix-ui/react-alert-dialog', '@radix-ui/react-label', '@radix-ui/react-slot'],
+          'ui-vendor': [
+            '@radix-ui/react-dialog',
+            '@radix-ui/react-select',
+            '@radix-ui/react-alert-dialog',
+            '@radix-ui/react-label',
+            '@radix-ui/react-slot',
+            '@radix-ui/react-tooltip',
+            '@radix-ui/react-dropdown-menu',
+            'class-variance-authority',
+            'clsx',
+            'tailwind-merge',
+            'lucide-react',
+            'sonner',
+          ],
+          // Split chart library
+          'charts': ['recharts'],
+          // Split date utilities  
+          'date-utils': ['date-fns'],
+          // Split database
+          'database': ['dexie', 'dexie-react-hooks'],
         },
       },
     },
