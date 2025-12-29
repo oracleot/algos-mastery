@@ -1,14 +1,19 @@
-# User Guide: Timed Practice & Data Management
+# User Guide: Timed Practice & Polish Features
 
 **Feature**: Timed Practice & Polish  
-**Version**: 1.1  
+**Version**: 1.2  
 **Last Updated**: 29 December 2025
 
 ---
 
 ## Overview
 
-The Timed Practice feature lets you simulate interview conditions by practicing algorithm problems under time pressure. The Export/Import feature enables you to back up your data and restore it on any device.
+This guide covers the enhanced practice and productivity features in Algorithms Mastery Tracker:
+
+- **Timed Practice**: Simulate interview conditions with countdown timer
+- **Export/Import**: Back up and restore your data
+- **Dark Mode**: Comfortable viewing in any lighting
+- **Keyboard Shortcuts**: Navigate efficiently without the mouse
 
 ---
 
@@ -101,12 +106,80 @@ After ending a session, you'll see:
 
 ---
 
-## Keyboard Shortcuts (Coming Soon)
+## Keyboard Shortcuts
+
+Power users can navigate the app efficiently with keyboard shortcuts:
+
+### Global Shortcuts (work on any page)
 
 | Shortcut | Action |
 |----------|--------|
-| Space | Pause/Resume timer |
-| ? | Show keyboard shortcuts help |
+| `?` | Show keyboard shortcuts help |
+| `Esc` | Close dialog or cancel action |
+
+### Problems List Page
+
+| Shortcut | Action |
+|----------|--------|
+| `/` | Focus search input |
+| `n` | Open new problem dialog |
+
+### Review Session
+
+| Shortcut | Action |
+|----------|--------|
+| `r` | Reveal solution |
+| `1` | Rate "Again" (forgot) |
+| `2` | Rate "Hard" |
+| `3` | Rate "Good" |
+| `4` | Rate "Easy" |
+
+### Timed Practice
+
+| Shortcut | Action |
+|----------|--------|
+| `Space` | Pause/resume timer |
+
+### Viewing Shortcuts Help
+
+Press `?` from any page to see the complete shortcuts reference dialog. The dialog shows shortcuts organized by context.
+
+---
+
+## Part 3: Dark Mode
+
+### Theme Options
+
+The app supports three theme settings:
+
+| Theme | Description |
+|-------|-------------|
+| **Light** | Bright theme for daytime use |
+| **Dark** | Dark theme for low-light environments |
+| **System** | Follows your operating system preference |
+
+### Changing the Theme
+
+1. Look for the **sun/moon icon** button in the header (visible on all pages)
+2. Click the theme toggle button
+3. Select your preferred theme from the dropdown:
+   - ☀️ Light
+   - 🌙 Dark
+   - 💻 System
+
+### Theme Features
+
+- **Instant Switching**: Theme changes immediately without page reload
+- **Persistence**: Your preference is saved and restored on next visit
+- **System Detection**: "System" mode automatically matches your OS setting
+- **Smooth Transitions**: Theme changes with a smooth visual transition
+- **Full Coverage**: All components including code editors respect the theme
+
+### Code Editor Theme
+
+The solution code editor (CodeMirror) automatically switches between:
+- **Light mode**: GitHub Light theme
+- **Dark mode**: GitHub Dark theme
 
 ---
 
@@ -115,6 +188,7 @@ After ending a session, you'll see:
 - **Time Tracking**: Time spent on each problem is automatically logged
 - **Session Recovery**: If you accidentally close the tab or refresh during a session, a recovery banner will appear offering to resume your session
 - **Problem Progress**: Your problem status (unsolved/attempted/solved) persists across sessions
+- **Theme Preference**: Your selected theme persists across sessions
 
 ### Session Recovery
 
@@ -260,5 +334,6 @@ Your data is stored locally in your browser using IndexedDB. The Export/Import f
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 1.2 | 2025-12-29 | Added Dark Mode and Keyboard Shortcuts |
 | 1.1 | 2025-12-29 | Added Export/Import data feature |
 | 1.0 | 2025-12-29 | Initial release with timer, presets, reveal template/solution |

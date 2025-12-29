@@ -34,15 +34,15 @@ interface ProblemCardProps {
 const statusConfig: Record<Status, { label: string; badgeClassName: string }> = {
   unsolved: {
     label: 'Unsolved',
-    badgeClassName: 'bg-gray-100 text-gray-700 border-gray-200',
+    badgeClassName: 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700',
   },
   attempted: {
     label: 'Attempted',
-    badgeClassName: 'bg-yellow-100 text-yellow-800 border-yellow-200',
+    badgeClassName: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-400 border-yellow-200 dark:border-yellow-800',
   },
   solved: {
     label: 'Solved',
-    badgeClassName: 'bg-green-100 text-green-800 border-green-200',
+    badgeClassName: 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400 border-green-200 dark:border-green-800',
   },
 };
 

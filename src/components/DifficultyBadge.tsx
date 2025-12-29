@@ -13,15 +13,15 @@ interface DifficultyBadgeProps {
 
 const difficultyStyles: Record<Difficulty, { className: string; label: string }> = {
   easy: {
-    className: 'bg-green-100 text-green-800 border-green-200 hover:bg-green-100',
+    className: 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400 border-green-200 dark:border-green-800 hover:bg-green-100 dark:hover:bg-green-900/40',
     label: 'Easy',
   },
   medium: {
-    className: 'bg-yellow-100 text-yellow-800 border-yellow-200 hover:bg-yellow-100',
+    className: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-400 border-yellow-200 dark:border-yellow-800 hover:bg-yellow-100 dark:hover:bg-yellow-900/40',
     label: 'Medium',
   },
   hard: {
-    className: 'bg-red-100 text-red-800 border-red-200 hover:bg-red-100',
+    className: 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400 border-red-200 dark:border-red-800 hover:bg-red-100 dark:hover:bg-red-900/40',
     label: 'Hard',
   },
 };

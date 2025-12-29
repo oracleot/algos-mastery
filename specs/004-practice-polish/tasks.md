@@ -109,12 +109,12 @@
 
 ### Implementation for User Story 3
 
-- [ ] T033 [US3] Create hooks/useTheme.ts implementing theme toggle with localStorage persistence and system detection
-- [ ] T034 [US3] Create components/ThemeToggle.tsx with light/dark/system dropdown or toggle button
-- [ ] T035 [US3] Add dark: variants to all existing components (audit and update Tailwind classes)
-- [ ] T036 [US3] Configure CodeMirror theme switching in SolutionEditor.tsx (githubLight/githubDark based on theme)
-- [ ] T037 [US3] Add theme transitions CSS in src/index.css for smooth theme changes
-- [ ] T038 [US3] Add ThemeToggle to navigation/header component
+- [X] T033 [US3] Create hooks/useTheme.ts implementing theme toggle with localStorage persistence and system detection
+- [X] T034 [US3] Create components/ThemeToggle.tsx with light/dark/system dropdown or toggle button
+- [X] T035 [US3] Add dark: variants to all existing components (audit and update Tailwind classes)
+- [X] T036 [US3] Configure CodeMirror theme switching in SolutionEditor.tsx (githubLight/githubDark based on theme)
+- [X] T037 [US3] Add theme transitions CSS in src/index.css for smooth theme changes
+- [X] T038 [US3] Add ThemeToggle to navigation/header component
 
 **Checkpoint**: User Stories 1, 2, AND 3 should all work independently - dark mode functional across app
 
@@ -128,15 +128,15 @@
 
 ### Implementation for User Story 4
 
-- [ ] T039 [P] [US4] Define SHORTCUTS constant with all shortcut definitions in src/types/index.ts or lib/shortcuts.ts
-- [ ] T040 [US4] Create hooks/useKeyboardShortcuts.ts with global keyboard event handler and condition support
-- [ ] T041 [US4] Create context/ShortcutsContext.tsx with ShortcutsProvider for global shortcut registration
-- [ ] T042 [US4] Create components/ShortcutHelp.tsx modal showing grouped shortcuts by context
-- [ ] T043 [US4] Register global shortcuts in App.tsx (`?` for help, `/` for search, `Escape` for close)
-- [ ] T044 [US4] Add rating shortcuts (1/2/3/4) to ReviewSession.tsx for Again/Hard/Good/Easy
-- [ ] T045 [US4] Add Space shortcut to Practice.tsx for timer pause/resume
-- [ ] T046 [US4] Add `n` shortcut to Problems.tsx for new problem creation
-- [ ] T047 [US4] Add `r` shortcut to ReviewSession.tsx for reveal solution
+- [X] T039 [P] [US4] Define SHORTCUTS constant with all shortcut definitions in src/types/index.ts or lib/shortcuts.ts
+- [X] T040 [US4] Create hooks/useKeyboardShortcuts.ts with global keyboard event handler and condition support
+- [X] T041 [US4] Create context/ShortcutsContext.tsx with ShortcutsProvider for global shortcut registration
+- [X] T042 [US4] Create components/ShortcutHelp.tsx modal showing grouped shortcuts by context
+- [X] T043 [US4] Register global shortcuts in App.tsx (`?` for help, `/` for search, `Escape` for close)
+- [X] T044 [US4] Add rating shortcuts (1/2/3/4) to ReviewSession.tsx for Again/Hard/Good/Easy
+- [X] T045 [US4] Add Space shortcut to Practice.tsx for timer pause/resume
+- [X] T046 [US4] Add `n` shortcut to Problems.tsx for new problem creation
+- [X] T047 [US4] Add `r` shortcut to ReviewSession.tsx for reveal solution
 
 **Checkpoint**: User Stories 1-4 should all work independently - keyboard shortcuts enhance all features
 

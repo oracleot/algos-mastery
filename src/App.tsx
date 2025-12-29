@@ -2,6 +2,9 @@
 
 import { Routes, Route } from 'react-router-dom';
 import { Toaster } from '@/components/ui/sonner';
+import { ShortcutHelp } from '@/components/ShortcutHelp';
+import { useShortcuts } from '@/context/ShortcutsContext';
+import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { Home } from './pages/Home';
 import { Problems } from './pages/Problems';
 import { Problem } from './pages/Problem';
@@ -11,6 +14,14 @@ import { Practice } from './pages/Practice';
 import { Settings } from './pages/Settings';
 
 function App() {
+  const { toggleHelp, closeHelp, isHelpOpen } = useShortcuts();
+
+  // Global keyboard shortcuts
+  useKeyboardShortcuts([
+    { key: '?', handler: toggleHelp },
+    { key: 'Escape', handler: closeHelp, enabled: isHelpOpen, allowInInput: true },
+  ]);
+
   return (
     <>
       <Routes>
@@ -22,6 +33,7 @@ function App() {
         <Route path="/practice" element={<Practice />} />
         <Route path="/settings" element={<Settings />} />
       </Routes>
+      <ShortcutHelp />
       <Toaster position="bottom-right" />
     </>
   );

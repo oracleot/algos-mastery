@@ -9,6 +9,7 @@ import {
   getEditorTheme,
   DEFAULT_EDITOR_CONFIG,
 } from '@/lib/editor';
+import { useTheme } from '@/hooks/useTheme';
 
 interface SolutionEditorProps {
   /** Current code value */
@@ -37,16 +38,17 @@ export function SolutionEditor({
   placeholder = DEFAULT_EDITOR_CONFIG.placeholder,
   height = DEFAULT_EDITOR_CONFIG.height,
 }: SolutionEditorProps) {
+  const { resolvedTheme } = useTheme();
+  
   // Memoize extensions to prevent unnecessary re-renders
   const extensions = useMemo(() => {
     return [...getLanguageExtension(language), EditorView.lineWrapping];
   }, [language]);
 
   const theme = useMemo(() => {
-    // Check for dark mode preference
-    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return getEditorTheme(isDark);
-  }, []);
+    // Use resolved theme from context (handles system preference)
+    return getEditorTheme(resolvedTheme === 'dark');
+  }, [resolvedTheme]);
 
   return (
     <div className="rounded-md border overflow-hidden">

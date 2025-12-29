@@ -1,8 +1,8 @@
-# QA Testing Report - Phases 1-4: Setup, Foundational, Timed Practice & Export/Import
+# QA Testing Report - Phases 1-6: Setup through Keyboard Shortcuts
 
 **Feature**: 004-practice-polish (Timed Practice & Polish)
 **Last Tested**: 29 December 2025
-**Status**: ✅ PASS (All 4 phases complete)
+**Status**: ✅ PASS (All 6 phases complete)
 
 ---
 
@@ -13,7 +13,7 @@
 | Type Check | ✅ PASS | 0 errors |
 | Linting | ✅ PASS | 0 errors, 0 warnings |
 | Unit Tests | ✅ PASS | 146/146 tests passing |
-| E2E Tests | ✅ PASS | All pages, timed practice, and export/import verified |
+| E2E Tests | ✅ PASS | All pages, timed practice, export/import, dark mode, shortcuts verified |
 
 ---
 
@@ -343,24 +343,155 @@ All Phase 4 tasks are complete:
 
 ---
 
+## Phase 5: User Story 3 (Dark Mode) - Task Verification
+
+| Task | Description | Status | Evidence |
+|------|-------------|--------|----------|
+| T033 | Create hooks/useTheme.ts | ✅ | Theme toggle with localStorage and system detection |
+| T034 | Create components/ThemeToggle.tsx | ✅ | Dropdown with Light/Dark/System options |
+| T035 | Add dark: variants to components | ✅ | All components styled with Tailwind dark mode |
+| T036 | Configure CodeMirror theme | ✅ | githubLight/githubDark based on theme in SolutionEditor.tsx |
+| T037 | Add theme transition CSS | ✅ | Smooth transitions in src/index.css |
+| T038 | Add ThemeToggle to navigation | ✅ | Toggle button in header on all pages |
+
+### Phase 5 E2E Test Results
+
+| Flow | Status | Notes |
+|------|--------|-------|
+| Theme toggle button visible | ✅ | Present in header across all pages |
+| Click toggle shows dropdown | ✅ | Shows Light/Dark/System options |
+| Select Light theme | ✅ | Switches to light mode instantly |
+| Select Dark theme | ✅ | Switches to dark mode with proper styling |
+| Select System theme | ✅ | Respects OS preference |
+| Theme persists on refresh | ✅ | localStorage persistence working |
+| Dark mode on Problems page | ✅ | All components render correctly |
+| Dark mode on Practice page | ✅ | Timer and controls properly styled |
+| Dark mode on Settings page | ✅ | Cards and buttons properly styled |
+| Theme transition smooth | ✅ | No flash of unstyled content |
+
+### Acceptance Scenarios Verified
+
+| Scenario | Status |
+|----------|--------|
+| User clicks theme toggle → switches modes | ✅ |
+| Dark mode active → refreshes page → dark mode persists | ✅ |
+| First visit with system dark preference → defaults to dark | ✅ |
+
+---
+
+## Phase 5 Checkpoint: ✅ PASS
+
+All Phase 5 tasks are complete:
+
+- ✅ Theme toggle with Light/Dark/System options - Working
+- ✅ Theme persistence via localStorage - Working
+- ✅ System preference detection - Working
+- ✅ All components styled for dark mode - Working
+- ✅ CodeMirror theme switching - Working
+- ✅ Smooth theme transitions - Working
+
+**User Story 3 is COMPLETE and fully functional**
+
+---
+
+## Phase 6: User Story 4 (Keyboard Shortcuts) - Task Verification
+
+| Task | Description | Status | Evidence |
+|------|-------------|--------|----------|
+| T039 | Define SHORTCUTS constant | ✅ | Shortcut definitions in src/types/index.ts |
+| T040 | Create hooks/useKeyboardShortcuts.ts | ✅ | Global keyboard handler with condition support |
+| T041 | Create context/ShortcutsContext.tsx | ✅ | ShortcutsProvider for global registration |
+| T042 | Create components/ShortcutHelp.tsx | ✅ | Modal with grouped shortcuts by context |
+| T043 | Register global shortcuts (?, /, Esc) | ✅ | Registered in App.tsx |
+| T044 | Add rating shortcuts (1/2/3/4) | ✅ | Working in ReviewSession.tsx |
+| T045 | Add Space shortcut | ✅ | Pause/resume timer in Practice.tsx |
+| T046 | Add n shortcut | ✅ | New problem in Problems.tsx |
+| T047 | Add r shortcut | ✅ | Reveal solution in ReviewSession.tsx |
+
+### Phase 6 E2E Test Results
+
+| Shortcut | Context | Status | Notes |
+|----------|---------|--------|-------|
+| `?` | Global | ✅ | Opens keyboard shortcuts help modal |
+| `Esc` | Global | ✅ | Closes dialogs and modals |
+| `/` | Problems | ✅ | Focuses search input |
+| `n` | Problems | ✅ | Opens "Add New Problem" dialog |
+| `Space` | Practice | ✅ | Pauses/resumes timer |
+| `r` | Review | ✅ | Reveals solution |
+| `1` | Review | ✅ | Rates "Again" (1 day interval) |
+| `2` | Review | ✅ | Rates "Hard" |
+| `3` | Review | ✅ | Rates "Good" |
+| `4` | Review | ✅ | Rates "Easy" |
+
+### Shortcuts Help Modal Contents
+
+| Section | Shortcuts |
+|---------|-----------|
+| Global | `?` (show shortcuts), `Esc` (close) |
+| Problems List | `/` (focus search), `n` (new problem) |
+| Review Session | `1/2/3/4` (ratings), `r` (reveal) |
+| Timed Practice | `Space` (pause/resume) |
+
+### Acceptance Scenarios Verified
+
+| Scenario | Status |
+|----------|--------|
+| Any page, press `?` → shortcut help appears | ✅ |
+| Review session, press 1/2/3/4 → rates problem | ✅ |
+| Timer running, press Space → timer pauses/resumes | ✅ |
+| Any page, press `/` → search field focused | ✅ |
+
+---
+
+## Phase 6 Checkpoint: ✅ PASS
+
+All Phase 6 tasks are complete:
+
+- ✅ Shortcut definitions centralized - Working
+- ✅ Global keyboard handler - Working
+- ✅ Shortcuts context provider - Working
+- ✅ Shortcut help modal with grouped shortcuts - Working
+- ✅ Global shortcuts (?, /, Esc) - Working
+- ✅ Review shortcuts (1/2/3/4, r) - Working
+- ✅ Practice shortcut (Space) - Working
+- ✅ Problems shortcut (n) - Working
+
+**User Story 4 is COMPLETE and fully functional**
+
+---
+
 ## Recommendations
 
-1. **Proceed to Phase 5**: User Story 3 (Dark Mode) can now be implemented
-2. **Consider**: Adding E2E tests with Playwright for export/import flows
+1. **Proceed to Phase 7**: User Story 5 (PWA Support) can now be implemented
+2. **All P1 and P2 features complete**: Core functionality and power user features done
+3. **Consider**: Running Lighthouse PWA audit after Phase 7 implementation
 
 ---
 
 ## Next Steps
 
 ```
-✅ Phases 1-4 QA Complete - Ready for Phase 5
+✅ Phases 1-6 QA Complete - Ready for Phase 7
 
 Completed:
 - Phase 1: PWA configuration ready
 - Phase 2: Foundation infrastructure in place
 - Phase 3: Timed Practice feature fully functional
 - Phase 4: Export/Import feature fully functional
+- Phase 5: Dark Mode feature fully functional
+- Phase 6: Keyboard Shortcuts feature fully functional
+
+All P1 (Critical) and P2 (Important) user stories are complete:
+- ✅ US1: Timed Practice Session (P1)
+- ✅ US2: Export/Import Data (P1)
+- ✅ US3: Dark Mode (P2)
+- ✅ US4: Keyboard Shortcuts (P2)
+
+Remaining P3 (Nice-to-have) features:
+- US5: PWA Support (Phase 7)
+- US6: Mobile Responsiveness Polish (Phase 8)
 
 Recommended next action:
-- Run `/speckit.implement Phase 5` to start Dark Mode feature
+- Run `/speckit.implement Phase 7` to start PWA Support feature
+- Or deploy current version as a fully functional product
 ```

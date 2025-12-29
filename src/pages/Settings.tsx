@@ -1,4 +1,4 @@
-// pages/Settings.tsx - Settings page with data export/import
+// pages/Settings.tsx - Settings page with data export/import and theme
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -8,16 +8,31 @@ import {
   Upload,
   HardDrive,
   Settings as SettingsIcon,
+  Palette,
+  Sun,
+  Moon,
+  Monitor,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ExportDialog } from '@/components/ExportDialog';
 import { ImportDialog } from '@/components/ImportDialog';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { useTheme } from '@/hooks/useTheme';
 import { toast } from 'sonner';
+import { cn } from '@/lib/utils';
+import type { Theme } from '@/types';
+
+const themeOptions: { value: Theme; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
+  { value: 'light', label: 'Light', icon: Sun },
+  { value: 'dark', label: 'Dark', icon: Moon },
+  { value: 'system', label: 'System', icon: Monitor },
+];
 
 function Settings() {
   const [showExportDialog, setShowExportDialog] = useState(false);
   const [showImportDialog, setShowImportDialog] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   const handleExportComplete = () => {
     toast.success('Data exported successfully!');
@@ -31,6 +46,11 @@ function Settings() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Top bar with theme toggle */}
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
+      
       <div className="max-w-2xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -53,6 +73,50 @@ function Settings() {
             </div>
           </div>
         </div>
+
+        {/* Appearance Section */}
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Palette className="h-5 w-5" />
+              Appearance
+            </CardTitle>
+            <CardDescription>
+              Customize how the app looks on your device.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-3 gap-3">
+              {themeOptions.map((option) => {
+                const Icon = option.icon;
+                const isSelected = theme === option.value;
+                return (
+                  <button
+                    key={option.value}
+                    onClick={() => setTheme(option.value)}
+                    className={cn(
+                      'flex flex-col items-center gap-2 p-4 rounded-lg border-2 transition-all',
+                      isSelected
+                        ? 'border-primary bg-primary/5'
+                        : 'border-transparent bg-muted/50 hover:bg-muted'
+                    )}
+                  >
+                    <Icon className={cn(
+                      'h-6 w-6',
+                      isSelected ? 'text-primary' : 'text-muted-foreground'
+                    )} />
+                    <span className={cn(
+                      'text-sm font-medium',
+                      isSelected ? 'text-primary' : 'text-muted-foreground'
+                    )}>
+                      {option.label}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Data Management Section */}
         <Card>

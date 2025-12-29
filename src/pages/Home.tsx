@@ -5,10 +5,16 @@ import { BookOpen, ArrowRight, TrendingUp, Clock, Settings } from 'lucide-react'
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Dashboard } from '@/components/Dashboard';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 function Home() {
   return (
     <div className="min-h-screen bg-background">
+      {/* Top bar with theme toggle */}
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
+      
       <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12">
         {/* Header Section */}
         <div className="text-center mb-8">

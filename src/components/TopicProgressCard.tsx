@@ -48,7 +48,7 @@ export function TopicProgressCard({
       <div
         className={cn(
           'absolute inset-0 transition-all',
-          isComplete ? 'bg-green-100' : hasProgress ? 'bg-primary/10' : 'bg-transparent'
+          isComplete ? 'bg-green-100 dark:bg-green-900/30' : hasProgress ? 'bg-primary/10' : 'bg-transparent'
         )}
         style={{ width: progressWidth }}
       />
@@ -59,7 +59,7 @@ export function TopicProgressCard({
           <div
             className={cn(
               'flex items-center justify-center w-10 h-10 rounded-full text-sm font-bold',
-              !unlocked && 'bg-gray-200 text-gray-500',
+              !unlocked && 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400',
               unlocked && !isComplete && 'bg-primary/20 text-primary',
               isComplete && 'bg-green-500 text-white'
             )}

@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PracticeSession, type PracticeSessionResult } from '@/components/PracticeSession';
 import { TopicBadge } from '@/components/TopicBadge';
 import { DifficultyBadge } from '@/components/DifficultyBadge';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { formatTotalTime } from '@/lib/timeLog';
 import { formatTime } from '@/lib/timer';
 import {
@@ -204,21 +205,24 @@ export function Practice() {
     <div className="min-h-screen bg-background">
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <Button variant="ghost" size="icon" asChild>
-            <Link to="/">
-              <ArrowLeft className="h-5 w-5" />
-            </Link>
-          </Button>
-          <div>
-            <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
-              <Clock className="h-6 w-6" />
-              Timed Practice
-            </h1>
-            <p className="text-muted-foreground">
-              Practice problems under time pressure
-            </p>
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-4">
+            <Button variant="ghost" size="icon" asChild>
+              <Link to="/">
+                <ArrowLeft className="h-5 w-5" />
+              </Link>
+            </Button>
+            <div>
+              <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
+                <Clock className="h-6 w-6" />
+                Timed Practice
+              </h1>
+              <p className="text-muted-foreground">
+                Practice problems under time pressure
+              </p>
+            </div>
           </div>
+          <ThemeToggle />
         </div>
 
         {/* Problem Selection View */}

@@ -16,6 +16,7 @@ import { EditorSkeleton } from '@/components/EditorSkeleton';
 import { useTimer } from '@/hooks/useTimer';
 import { useTimeLog } from '@/hooks/useTimeLog';
 import { useTemplates } from '@/hooks/useTemplates';
+import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { getPreferences } from '@/lib/preferences';
 import { LANGUAGE_DISPLAY_NAMES } from '@/lib/editor';
 import {
@@ -214,6 +215,24 @@ export function PracticeSession({
   const handleContinue = useCallback(() => {
     setTimerExpired(false);
   }, []);
+
+  // Toggle timer pause/resume via keyboard
+  const handleTogglePauseResume = useCallback(() => {
+    if (timerState.isRunning && !timerState.isPaused) {
+      handlePause();
+    } else if (timerState.isPaused) {
+      handleResume();
+    }
+  }, [timerState.isRunning, timerState.isPaused, handlePause, handleResume]);
+
+  // Keyboard shortcut: Space to pause/resume timer
+  useKeyboardShortcuts([
+    { 
+      key: ' ', 
+      handler: handleTogglePauseResume, 
+      enabled: hasSessionStarted && !timerExpired 
+    },
+  ]);
 
   // Toggle solution visibility
   const handleToggleSolution = useCallback(() => {

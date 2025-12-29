@@ -1,6 +1,6 @@
 // pages/Problems.tsx - Problems list page with full CRUD functionality
 
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Plus, SearchX, TrendingUp } from 'lucide-react';
 import { toast } from 'sonner';
@@ -17,8 +17,10 @@ import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { ProblemForm } from '@/components/ProblemForm';
 import { ProblemList } from '@/components/ProblemList';
 import { FilterBar } from '@/components/FilterBar';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { useProblems } from '@/hooks/useProblems';
 import { useFilters } from '@/hooks/useFilters';
+import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import type { Problem, ProblemFormData, Status } from '@/types';
 
 function Problems() {
@@ -109,6 +111,19 @@ function Problems() {
     }
   };
 
+  // Keyboard shortcuts
+  // Reference to search input for focus shortcut
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  
+  const focusSearch = useCallback(() => {
+    searchInputRef.current?.focus();
+  }, []);
+
+  useKeyboardShortcuts([
+    { key: 'n', handler: handleOpenAddForm, enabled: !isFormOpen },
+    { key: '/', handler: focusSearch, enabled: !isFormOpen },
+  ]);
+
   const problemsList = problems ?? [];
 
   return (
@@ -126,6 +141,7 @@ function Problems() {
               <h1 className="text-xl font-semibold text-foreground">Problems</h1>
             </div>
             <div className="flex items-center gap-2">
+              <ThemeToggle />
               <Button variant="outline" size="sm" asChild>
                 <Link to="/progress">
                   <TrendingUp className="h-4 w-4" />
@@ -145,6 +161,7 @@ function Problems() {
       <main className="max-w-6xl mx-auto px-4 py-8 space-y-6">
         {/* Filter Bar */}
         <FilterBar
+          ref={searchInputRef}
           filters={filters}
           onTopicChange={setTopic}
           onDifficultyChange={setDifficulty}

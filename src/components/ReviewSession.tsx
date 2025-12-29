@@ -1,12 +1,13 @@
 // components/ReviewSession.tsx - Review session container with state management
 
-import { useState, useCallback, useRef, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '@/lib/db';
 import { ReviewCard } from '@/components/ReviewCard';
 import { ReviewSessionProgress } from '@/components/ReviewSessionProgress';
 import { ReviewSessionSummary } from '@/components/ReviewSessionSummary';
 import { useReview } from '@/hooks/useReview';
+import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { REVIEW_RATINGS } from '@/types';
 import type { Problem, ReviewQuality, Solution } from '@/types';
 
@@ -99,30 +100,17 @@ export function ReviewSession({
     [currentProblem, currentIndex, problems.length, recordReview, results, isRating]
   );
 
-  // Use ref for keyboard handler
-  const handleRateRef = useRef(handleRate);
-  handleRateRef.current = handleRate;
+  // Keyboard shortcuts for review session
+  const canRate = isRevealed && !isRating && currentProblem && !isComplete;
+  const canReveal = !isRevealed && currentProblem && !isComplete;
 
-  // Keyboard shortcuts for ratings
-  useEffect(() => {
-    if (!isRevealed || isRating || !currentProblem || isComplete) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      const key = e.key;
-      if (key === '1') {
-        handleRateRef.current(REVIEW_RATINGS.AGAIN);
-      } else if (key === '2') {
-        handleRateRef.current(REVIEW_RATINGS.HARD);
-      } else if (key === '3') {
-        handleRateRef.current(REVIEW_RATINGS.GOOD);
-      } else if (key === '4') {
-        handleRateRef.current(REVIEW_RATINGS.EASY);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isRevealed, isRating, currentProblem, isComplete]);
+  useKeyboardShortcuts([
+    { key: 'r', handler: handleReveal, enabled: canReveal },
+    { key: '1', handler: () => handleRate(REVIEW_RATINGS.AGAIN), enabled: canRate },
+    { key: '2', handler: () => handleRate(REVIEW_RATINGS.HARD), enabled: canRate },
+    { key: '3', handler: () => handleRate(REVIEW_RATINGS.GOOD), enabled: canRate },
+    { key: '4', handler: () => handleRate(REVIEW_RATINGS.EASY), enabled: canRate },
+  ]);
 
   // Handle session complete
   const handleDone = useCallback(() => {

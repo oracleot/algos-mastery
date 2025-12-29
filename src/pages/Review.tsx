@@ -7,6 +7,7 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { ReviewSession } from '@/components/ReviewSession';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import type { ReviewResult } from '@/components/ReviewSession';
 import { useReviewQueue } from '@/hooks/useReviewQueue';
 import type { Problem as ProblemType } from '@/types';
@@ -107,13 +108,16 @@ function ReviewPage() {
             </div>
 
             {/* End Session button */}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleExit}
-            >
-              End Session
-            </Button>
+            <div className="flex items-center gap-2">
+              <ThemeToggle />
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleExit}
+              >
+                End Session
+              </Button>
+            </div>
           </div>
         </div>
       </header>

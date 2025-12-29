@@ -19,6 +19,7 @@ import { TopicBadge } from '@/components/TopicBadge';
 import { DifficultyBadge } from '@/components/DifficultyBadge';
 import { AddToReviewButton } from '@/components/AddToReviewButton';
 import { NextReviewDate } from '@/components/NextReviewDate';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { useProblems } from '@/hooks/useProblems';
 import { useSolutions } from '@/hooks/useSolutions';
 import { useReviewQueue } from '@/hooks/useReviewQueue';
@@ -180,10 +181,13 @@ function Problem() {
                 </div>
               </div>
             </div>
-            <Button onClick={handleOpenAddForm}>
-              <Plus className="h-4 w-4" />
-              Add Solution
-            </Button>
+            <div className="flex items-center gap-2">
+              <ThemeToggle />
+              <Button onClick={handleOpenAddForm}>
+                <Plus className="h-4 w-4" />
+                Add Solution
+              </Button>
+            </div>
           </div>
         </div>
       </header>
