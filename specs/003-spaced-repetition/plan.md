@@ -96,8 +96,9 @@ src/
 │   ├── stats.ts                # Stats aggregation
 │   └── db.ts                   # Extended with reviews table
 └── pages/
-    ├── Dashboard.tsx           # Home/Dashboard page
     └── Review.tsx              # Active review session page
+
+# Note: Dashboard is a component (src/components/Dashboard.tsx) integrated into existing Home.tsx
 ```
 
 ## Complexity Tracking

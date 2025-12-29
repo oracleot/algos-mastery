@@ -100,8 +100,8 @@ A user completes a review session with multiple problems, seeing progress throug
 
 ### Key Entities
 
-- **Review**: Spaced repetition data for a problem. Attributes: problemId, ease, interval, nextReview, reviewCount, lastReviewed
-- **ReviewSession**: Temporary state for an active review session
+- **Review**: Spaced repetition data for a problem. Attributes: problemId, easeFactor, interval, repetitions, nextReview, lastReviewed
+- **ReviewSession**: Temporary state for an active review session (component-local, not persisted)
 - **Streak**: Calculated from review history (consecutive days)
 
 ## Success Criteria *(mandatory)*
