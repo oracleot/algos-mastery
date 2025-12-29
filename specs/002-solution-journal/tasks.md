@@ -21,10 +21,10 @@
 
 **Purpose**: Install CodeMirror dependencies and extend existing project structure
 
-- [ ] T001 Install CodeMirror dependencies: `@uiw/react-codemirror @codemirror/lang-javascript @codemirror/lang-python @codemirror/lang-java @codemirror/lang-cpp @codemirror/lang-rust @codemirror/lang-go @uiw/codemirror-theme-github`
-- [ ] T002 [P] Add Solution types and SupportedLanguage to src/types/index.ts
-- [ ] T003 [P] Add Template and TopicProgress interfaces to src/types/index.ts
-- [ ] T004 [P] Create editor configuration utilities and theme setup in src/lib/editor.ts
+- [X] T001 Install CodeMirror dependencies: `@uiw/react-codemirror @codemirror/lang-javascript @codemirror/lang-python @codemirror/lang-java @codemirror/lang-cpp @codemirror/lang-rust @codemirror/lang-go @uiw/codemirror-theme-github`
+- [X] T002 [P] Add Solution types and SupportedLanguage to src/types/index.ts
+- [X] T003 [P] Add Template and TopicProgress interfaces to src/types/index.ts
+- [X] T004 [P] Create editor configuration utilities and theme setup in src/lib/editor.ts
 
 ---
 
