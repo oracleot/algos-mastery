@@ -7,6 +7,7 @@ import { Problems } from './pages/Problems';
 import { Problem } from './pages/Problem';
 import { Progress } from './pages/Progress';
 import { Review } from './pages/Review';
+import { Practice } from './pages/Practice';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/problems/:id" element={<Problem />} />
         <Route path="/progress" element={<Progress />} />
         <Route path="/review" element={<Review />} />
+        <Route path="/practice" element={<Practice />} />
       </Routes>
       <Toaster position="bottom-right" />
     </>

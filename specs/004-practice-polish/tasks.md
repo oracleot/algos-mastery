@@ -54,21 +54,21 @@
 
 ### Implementation for User Story 1
 
-- [ ] T013 [P] [US1] Create lib/timeLog.ts with logTime and getTimeForProblem functions
-- [ ] T014 [US1] Create hooks/useTimer.ts with requestAnimationFrame-based timer (start, pause, resume, reset, elapsed, remaining)
-- [ ] T015 [US1] Create hooks/useTimeLog.ts for tracking time spent on problems (startTracking, stopTracking, getTimeForProblem)
-- [ ] T016 [P] [US1] Create components/Timer.tsx with circular progress display and MM:SS format
-- [ ] T017 [P] [US1] Create components/TimerControls.tsx with play/pause/reset buttons
-- [ ] T018 [P] [US1] Create components/TimerPresets.tsx with 25/45/60 minute preset buttons
-- [ ] T019 [US1] Create components/PracticeSession.tsx combining Timer, TimerControls, TimerPresets with problem display
-- [ ] T020 [US1] Create pages/Practice.tsx with timed practice flow including problem selection and session summary
-- [ ] T021 [US1] Add /practice route to App.tsx router configuration
-- [ ] T022 [US1] Add "Timed Practice" navigation link to layout/navigation components
-- [ ] T023 [US1] Implement "Reveal Template" functionality in PracticeSession.tsx using existing TemplateSelector
-- [ ] T023b [US1] Implement "Reveal Solution" functionality in PracticeSession.tsx using existing solution display components
-- [ ] T024 [US1] Implement timer expiration notification with option to continue or end session
-- [ ] T024b [US1] Handle browser tab close during timed session (save state to sessionStorage for recovery)
-- [ ] T024c [US1] Implement session recovery on page reload (restore timer state from sessionStorage)
+- [X] T013 [P] [US1] Create lib/timeLog.ts with logTime and getTimeForProblem functions
+- [X] T014 [US1] Create hooks/useTimer.ts with requestAnimationFrame-based timer (start, pause, resume, reset, elapsed, remaining)
+- [X] T015 [US1] Create hooks/useTimeLog.ts for tracking time spent on problems (startTracking, stopTracking, getTimeForProblem)
+- [X] T016 [P] [US1] Create components/Timer.tsx with circular progress display and MM:SS format
+- [X] T017 [P] [US1] Create components/TimerControls.tsx with play/pause/reset buttons
+- [X] T018 [P] [US1] Create components/TimerPresets.tsx with 25/45/60 minute preset buttons
+- [X] T019 [US1] Create components/PracticeSession.tsx combining Timer, TimerControls, TimerPresets with problem display
+- [X] T020 [US1] Create pages/Practice.tsx with timed practice flow including problem selection and session summary
+- [X] T021 [US1] Add /practice route to App.tsx router configuration
+- [X] T022 [US1] Add "Timed Practice" navigation link to layout/navigation components
+- [X] T023 [US1] Implement "Reveal Template" functionality in PracticeSession.tsx using existing TemplateSelector
+- [X] T023b [US1] Implement "Reveal Solution" functionality in PracticeSession.tsx using existing solution display components
+- [X] T024 [US1] Implement timer expiration notification with option to continue or end session
+- [X] T024b [US1] Handle browser tab close during timed session (save state to sessionStorage for recovery)
+- [X] T024c [US1] Implement session recovery on page reload (restore timer state from sessionStorage)
 
 **Checkpoint**: User Story 1 should be fully functional - timed practice sessions work with time tracking
 

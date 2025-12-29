@@ -1,8 +1,8 @@
-# QA Testing Report - Phase 1 & 2: Setup & Foundational
+# QA Testing Report - Phases 1, 2 & 3: Setup, Foundational & Timed Practice
 
 **Feature**: 004-practice-polish (Timed Practice & Polish)
-**Tested**: 29 December 2025
-**Status**: ✅ PASS
+**Last Tested**: 29 December 2025
+**Status**: ✅ PASS (All 3 phases complete)
 
 ---
 
@@ -13,7 +13,7 @@
 | Type Check | ✅ PASS | 0 errors |
 | Linting | ✅ PASS | 0 errors, 0 warnings |
 | Unit Tests | ✅ PASS | 114/114 tests passing |
-| E2E Tests | ✅ PASS | All pages load and function correctly |
+| E2E Tests | ✅ PASS | All pages and timed practice flows verified |
 
 ---
 
@@ -206,26 +206,90 @@ All 7 tasks complete:
 
 ---
 
+## Phase 3: User Story 1 (Timed Practice Session) - Task Verification
+
+| Task | Description | Status | Evidence |
+|------|-------------|--------|----------|
+| T013 | Create lib/timeLog.ts | ✅ | logTime, getTimeForProblem, formatTotalTime implemented |
+| T014 | Create hooks/useTimer.ts | ✅ | requestAnimationFrame-based timer with start/pause/resume/reset |
+| T015 | Create hooks/useTimeLog.ts | ✅ | startTracking, stopTracking, getTimeForProblem |
+| T016 | Create components/Timer.tsx | ✅ | Circular progress display with MM:SS format |
+| T017 | Create components/TimerControls.tsx | ✅ | Play/pause/reset buttons |
+| T018 | Create components/TimerPresets.tsx | ✅ | 25/45/60 minute preset buttons |
+| T019 | Create components/PracticeSession.tsx | ✅ | Full session component with timer and problem display |
+| T020 | Create pages/Practice.tsx | ✅ | Problem selection, session flow, summary view |
+| T021 | Add /practice route | ✅ | Route configured in App.tsx |
+| T022 | Add navigation link | ✅ | "Timed Practice" link on home page |
+| T023 | Reveal Template functionality | ✅ | Shows topic-specific templates with code |
+| T023b | Reveal Solution functionality | ✅ | Shows saved solutions by language |
+| T024 | Timer expiration notification | ✅ | "Time's Up!" dialog with continue/end options |
+| T024b | Session state save to sessionStorage | ✅ | saveSessionState in lib/practiceSession.ts, auto-saves every 5s while running |
+| T024c | Session recovery on reload | ✅ | Recovery banner shows on page load with Resume/Discard options |
+
+### Phase 3 E2E Test Results
+
+| Flow | Status | Notes |
+|------|--------|-------|
+| Navigate to /practice | ✅ | "Timed Practice" link works from home page |
+| Problem selection | ✅ | Shows all problems with topic/difficulty badges |
+| Random problem | ✅ | "Random Unsolved Problem" button functional |
+| Timer display | ✅ | MM:SS format with Ready/Running/Paused status |
+| 25m preset | ✅ | Sets timer to 25:00, button shows active state |
+| 45m preset | ✅ | Default preset, works correctly |
+| Start timer | ✅ | Countdown begins, shows running status |
+| Pause timer | ✅ | Shows "Paused" status, timer stops |
+| Resume timer | ✅ | Continues from paused state |
+| Reset timer | ✅ | Resets to preset, shows "Ready" |
+| Reveal Template | ✅ | Shows pattern template with CodeMirror editor |
+| Hide Template | ✅ | Toggle button hides template section |
+| Reveal Solution | ✅ | Shows saved solutions list by language |
+| Expand solution | ✅ | Accordion expands to show code |
+| Next Problem | ✅ | Navigates to next problem in queue |
+| Exit Practice | ✅ | Returns to problem selection |
+| View Problem link | ✅ | External link opens in new tab |
+| Session recovery banner | ✅ | Shows after page reload with active session |
+| Resume session | ✅ | Clicking Resume returns to practice with correct problem |
+| Discard session | ✅ | Clicking Discard clears saved session |
+
+### Issues Found in Phase 3
+
+None - all issues resolved.
+
+---
+
+## Phase 3 Checkpoint: ✅ PASS
+
+All Phase 3 tasks are complete:
+
+- ✅ Timer with presets (25/45/60 min) - Working
+- ✅ Pause/resume timer - Working  
+- ✅ Time tracking per problem - useTimeLog hook implemented
+- ✅ "Reveal Template" during practice - Working
+- ✅ "Reveal Solution" during practice - Working
+- ✅ Timer expiration notification - "Time's Up!" dialog implemented
+- ✅ Session recovery - Full page-level recovery with Resume/Discard banner
+
+**User Story 1 is COMPLETE and fully functional**
+
+---
+
 ## Recommendations
 
-1. **Proceed to Phase 3**: User Story 1 (Timed Practice) can now be implemented
-2. **Parallel opportunity**: T013, T016, T017, T018 can be implemented in parallel
-3. **Consider**: Adding unit tests for timer.ts utilities (currently untested but pure functions)
+1. **Proceed to Phase 4**: User Story 2 (Export/Import Data) can now be implemented
+2. **Consider**: Adding unit tests for useTimer hook
 
 ---
 
 ## Next Steps
 
 ```
-✅ Phase 1 & 2 QA Complete - Ready for Phase 3
+✅ Phases 1, 2 & 3 QA Complete - Ready for Phase 4
 
-All foundational infrastructure is in place:
-- PWA configuration ready
-- Theme system implemented
-- Preferences persistence working
-- Timer utilities available
-- Database schema updated
+Completed:
+- Phase 1: PWA configuration ready
+- Phase 2: Foundation infrastructure in place
+- Phase 3: Timed Practice feature fully functional
 
 Recommended next action:
-- Run `/speckit.implement Phase 3` to start Timed Practice feature
+- Run `/speckit.implement Phase 4` to start Export/Import Data feature
 ```
