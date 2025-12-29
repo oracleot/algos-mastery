@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, Plus, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Plus, ExternalLink, CalendarPlus } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -17,8 +17,11 @@ import { SolutionForm } from '@/components/SolutionForm';
 import { SolutionList } from '@/components/SolutionList';
 import { TopicBadge } from '@/components/TopicBadge';
 import { DifficultyBadge } from '@/components/DifficultyBadge';
+import { AddToReviewButton } from '@/components/AddToReviewButton';
+import { NextReviewDate } from '@/components/NextReviewDate';
 import { useProblems } from '@/hooks/useProblems';
 import { useSolutions } from '@/hooks/useSolutions';
+import { useReviewQueue } from '@/hooks/useReviewQueue';
 import { getTopicName } from '@/data/topics';
 import type { Problem as ProblemType, SolutionFormData, SupportedLanguage } from '@/types';
 
@@ -33,11 +36,17 @@ function Problem() {
     updateSolution,
     deleteSolution,
   } = useSolutions(id ?? '');
+  const { addToReview, addToTodayQueue, isInReview, getReview } = useReviewQueue();
 
   const [problem, setProblem] = useState<ProblemType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isAddingToQueue, setIsAddingToQueue] = useState(false);
+
+  // Check if problem is in review system
+  const problemInReview = id ? isInReview(id) : false;
+  const reviewData = id ? getReview(id) : undefined;
 
   // Load problem on mount
   useEffect(() => {
@@ -96,6 +105,24 @@ function Problem() {
 
   const handleDeleteSolution = async (solutionId: string) => {
     await deleteSolution(solutionId);
+  };
+
+  const handleAddToReview = async () => {
+    if (!id) return;
+    await addToReview(id);
+  };
+
+  const handleAddToTodayQueue = async () => {
+    if (!id || isAddingToQueue) return;
+    setIsAddingToQueue(true);
+    try {
+      await addToTodayQueue(id);
+      toast.success('Added to today\'s queue');
+    } catch {
+      toast.error('Failed to add to queue');
+    } finally {
+      setIsAddingToQueue(false);
+    }
   };
 
   // Loading state
@@ -197,6 +224,35 @@ function Problem() {
               <div>
                 <h4 className="text-sm font-medium text-muted-foreground mb-1">Notes</h4>
                 <p className="text-sm whitespace-pre-wrap">{problem.notes}</p>
+              </div>
+            )}
+
+            {/* Spaced Repetition Section */}
+            {problem.status === 'solved' && (
+              <div className="pt-4 border-t border-border">
+                <h4 className="text-sm font-medium text-muted-foreground mb-3">Spaced Repetition</h4>
+                <div className="flex flex-wrap items-center gap-3">
+                  <AddToReviewButton
+                    onAdd={handleAddToReview}
+                    isInReview={problemInReview}
+                    size="sm"
+                  />
+                  {problemInReview && reviewData && (
+                    <>
+                      <NextReviewDate date={reviewData.nextReview} />
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={handleAddToTodayQueue}
+                        disabled={isAddingToQueue}
+                        className="text-muted-foreground hover:text-foreground"
+                      >
+                        <CalendarPlus className="h-4 w-4" />
+                        Add to Today
+                      </Button>
+                    </>
+                  )}
+                </div>
               </div>
             )}
           </CardContent>

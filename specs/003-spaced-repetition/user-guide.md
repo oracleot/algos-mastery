@@ -1,7 +1,7 @@
 # User Guide: Spaced Repetition System
 
 **Feature**: Spaced Repetition for Algorithm Practice  
-**Version**: 1.0 (Phase 3 - Core Review Flow)  
+**Version**: 1.1 (Phase 4 - Add to Review Queue)  
 **Last Updated**: December 29, 2025
 
 ## Overview
@@ -9,6 +9,30 @@
 The Spaced Repetition System helps you retain algorithm knowledge long-term by scheduling reviews at optimal intervals. Using the scientifically-proven SM-2 algorithm, problems you find easy are reviewed less frequently, while challenging ones are reviewed more often.
 
 ## Features
+
+### Adding Problems to Review Queue
+
+Once you've solved a problem, you can enroll it in the spaced repetition system:
+
+1. **Navigate to a Solved Problem** - Go to any problem you've marked as "solved"
+2. **Find the "Spaced Repetition" Section** - Located in the Problem Details area
+3. **Click "Add to Review"** - Enrolls the problem with default SM-2 values
+4. **See Next Review Date** - The scheduled review date is displayed immediately
+
+**Note**: Only solved problems can be added to the review system. Complete a problem first!
+
+### Adding to Today's Queue (Manual Override)
+
+Want extra practice? You can add any enrolled problem to today's queue:
+
+1. **View a Problem in Review** - Navigate to a problem already in the system
+2. **Click "Add to Today"** - The problem is added to today's review queue
+3. **Next Review Updates** - Shows "Due today" after adding
+
+This is useful when:
+- You want to practice a specific problem again
+- You have extra study time
+- You want to reinforce a challenging concept
 
 ### Due Today Queue
 
@@ -76,8 +100,13 @@ The SM-2 algorithm calculates when to next review each problem:
 ## Troubleshooting
 
 ### Problems not showing in Due Today
-- Check that problems have been added to the review system (Phase 4 feature)
+- Check that problems have been added to the review system first
+- Navigate to a solved problem and click "Add to Review"
 - Verify the problem's next review date is today or earlier
+
+### "Add to Review" button not visible
+- Ensure the problem status is "solved"
+- Unsolved or attempted problems cannot be added to review
 
 ### Review not recording
 - Ensure you have a stable browser session
@@ -96,6 +125,13 @@ The SM-2 algorithm calculates when to next review each problem:
 
 ## Version History
 
+### v1.1 (Phase 4) - December 2025
+- Add problems to review queue from Problem page
+- "Add to Review" button for solved problems
+- Next review date display with calendar icon
+- "Add to Today" manual queue override
+- Toast notifications for queue actions
+
 ### v1.0 (Phase 3) - December 2025
 - Initial release with core review flow
 - Due Today queue on home page
@@ -105,6 +141,5 @@ The SM-2 algorithm calculates when to next review each problem:
 - Session exit confirmation
 
 ### Coming Soon
-- **Phase 4**: Add problems to review queue
-- **Phase 5**: Progress dashboard with streak counter
+- **Phase 5**: Progress dashboard with streak counter and weekly stats
 - **Phase 6**: Session summaries and progress tracking

@@ -95,14 +95,14 @@
 
 ### Components for User Story 2
 
-- [ ] T025 [P] [US2] Create AddToReviewButton component for adding problem to review system in src/components/AddToReviewButton.tsx
-- [ ] T026 [P] [US2] Create NextReviewDate component to display scheduled review date in src/components/NextReviewDate.tsx
+- [X] T025 [P] [US2] Create AddToReviewButton component for adding problem to review system in src/components/AddToReviewButton.tsx
+- [X] T026 [P] [US2] Create NextReviewDate component to display scheduled review date in src/components/NextReviewDate.tsx
 
 ### Integration for User Story 2
 
-- [ ] T027 [US2] Add AddToReviewButton to Problem page for solved problems in src/pages/Problem.tsx
-- [ ] T028 [US2] Add NextReviewDate display when problem is in review system in src/pages/Problem.tsx
-- [ ] T029 [US2] Add "Add to Today's Queue" option in Problem page for manual override in src/pages/Problem.tsx
+- [X] T027 [US2] Add AddToReviewButton to Problem page for solved problems in src/pages/Problem.tsx
+- [X] T028 [US2] Add NextReviewDate display when problem is in review system in src/pages/Problem.tsx
+- [X] T029 [US2] Add "Add to Today's Queue" option in Problem page for manual override in src/pages/Problem.tsx
 
 **Checkpoint**: User Story 2 complete - users can add problems to review and see scheduled dates
 
