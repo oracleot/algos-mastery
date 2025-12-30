@@ -15,6 +15,7 @@ import { Progress } from './pages/Progress';
 import { Review } from './pages/Review';
 import { Practice } from './pages/Practice';
 import { Settings } from './pages/Settings';
+import { Catalog } from './pages/Catalog';
 
 function App() {
   const { toggleHelp, closeHelp, isHelpOpen } = useShortcuts();
@@ -36,6 +37,7 @@ function App() {
         <Route path="/review" element={<Review />} />
         <Route path="/practice" element={<Practice />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/catalog" element={<Catalog />} />
       </Routes>
       <ShortcutHelp />
       

@@ -24,10 +24,10 @@
 
 **Purpose**: Add types and static catalog data
 
-- [ ] T001 Add CatalogProblem, CatalogSource types and CATALOG_SOURCES constant to src/types/index.ts
-- [ ] T002 Add CatalogFilters interface to src/types/index.ts
-- [ ] T003 Create static catalog data with 150 problems and helper functions in src/data/catalog.ts
-- [ ] T004 Create URL normalization utility function in src/lib/utils.ts
+- [X] T001 Add CatalogProblem, CatalogSource types and CATALOG_SOURCES constant to src/types/index.ts
+- [X] T002 Add CatalogFilters interface to src/types/index.ts
+- [X] T003 Create static catalog data with 150 problems and helper functions in src/data/catalog.ts
+- [X] T004 Create URL normalization utility function in src/lib/utils.ts
 
 ---
 
@@ -37,9 +37,9 @@
 
 **⚠️ CRITICAL**: User story implementation requires these to be complete
 
-- [ ] T005 Create SourceBadge component in src/components/SourceBadge.tsx
-- [ ] T006 Create useCatalogRecommendations hook with priority algorithm (focus topic first, then difficulty easy→hard, then order) in src/hooks/useCatalogRecommendations.ts
-- [ ] T007 Add /catalog route to src/App.tsx
+- [X] T005 Create SourceBadge component in src/components/SourceBadge.tsx
+- [X] T006 Create useCatalogRecommendations hook with priority algorithm (focus topic first, then difficulty easy→hard, then order) in src/hooks/useCatalogRecommendations.ts
+- [X] T007 Add /catalog route to src/App.tsx
 
 **Checkpoint**: Foundation ready - user story implementation can now begin
 

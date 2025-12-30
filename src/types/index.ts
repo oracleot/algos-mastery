@@ -298,3 +298,64 @@ import type { Step } from 'react-joyride';
 export interface OnboardingStep extends Step {
   id: string;
 }
+
+// =========================================
+// Problem Catalog Types (006-problem-catalog)
+// =========================================
+
+/**
+ * Valid sources for catalog problems
+ */
+export const CATALOG_SOURCES = ['blind-75', 'neetcode-150', 'grind-75', 'curated'] as const;
+
+/**
+ * Type for catalog problem source attribution
+ */
+export type CatalogSource = (typeof CATALOG_SOURCES)[number];
+
+/**
+ * Represents a curated problem in the static catalog.
+ * This is read-only data bundled with the application.
+ */
+export interface CatalogProblem {
+  /** Unique slug identifier (e.g., "two-sum", "valid-parentheses") */
+  id: string;
+
+  /** Problem title as shown on LeetCode */
+  title: string;
+
+  /** Direct LeetCode problem URL */
+  url: string;
+
+  /** Algorithm topic category */
+  topic: TopicSlug;
+
+  /** Difficulty level */
+  difficulty: Difficulty;
+
+  /** Source attribution for the problem */
+  source: CatalogSource;
+
+  /** Suggested order within topic (1 = do first) */
+  order: number;
+
+  /** Optional: LeetCode problem number for reference */
+  leetcodeNumber?: number;
+}
+
+/**
+ * Filter state for the catalog page
+ */
+export interface CatalogFilters {
+  /** Filter by algorithm topic */
+  topic: TopicSlug | null;
+
+  /** Filter by difficulty level */
+  difficulty: Difficulty | null;
+
+  /** Filter by problem source */
+  source: CatalogSource | null;
+
+  /** Text search on problem title */
+  search: string;
+}
