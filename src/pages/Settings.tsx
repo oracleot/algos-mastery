@@ -1,7 +1,7 @@
 // pages/Settings.tsx - Settings page with data export/import and theme
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   ArrowLeft,
   Download,
@@ -12,6 +12,8 @@ import {
   Sun,
   Moon,
   Monitor,
+  RotateCcw,
+  Compass,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -21,6 +23,7 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { useTheme } from '@/hooks/useTheme';
 import { usePWA } from '@/hooks/usePWA';
+import { usePreferences } from '@/hooks/usePreferences';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import type { Theme } from '@/types';
@@ -36,6 +39,8 @@ function Settings() {
   const [showImportDialog, setShowImportDialog] = useState(false);
   const { theme, setTheme } = useTheme();
   const { isOnline, isInstalled } = usePWA();
+  const { updatePreference } = usePreferences();
+  const navigate = useNavigate();
 
   const handleExportComplete = () => {
     toast.success('Data exported successfully!');
@@ -45,6 +50,12 @@ function Settings() {
     toast.success('Data imported successfully!', {
       description: 'Refresh the page to see your imported data.',
     });
+  };
+
+  const handleRestartTour = () => {
+    updatePreference('onboardingCompleted', false);
+    toast.success('Restarting onboarding tour...');
+    navigate('/');
   };
 
   return (
@@ -118,6 +129,38 @@ function Settings() {
                   </button>
                 );
               })}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Onboarding Section */}
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Compass className="h-5 w-5" />
+              Onboarding
+            </CardTitle>
+            <CardDescription>
+              Take a guided tour of the app's main features.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-lg border">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-purple-500/10 rounded-lg shrink-0">
+                  <RotateCcw className="h-5 w-5 text-purple-500" />
+                </div>
+                <div>
+                  <h3 className="font-medium text-sm sm:text-base">Restart Tour</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
+                    View the guided tour again to learn about app features.
+                  </p>
+                </div>
+              </div>
+              <Button variant="outline" onClick={handleRestartTour} className="w-full sm:w-auto touch-manipulation shrink-0">
+                <RotateCcw className="h-4 w-4 mr-2" />
+                Restart Tour
+              </Button>
             </div>
           </CardContent>
         </Card>

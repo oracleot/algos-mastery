@@ -56,13 +56,13 @@
 
 ### Implementation for User Story 1
 
-- [ ] T008 [P] [US1] Add data-tour="view-problems" attribute to View Problems button in src/pages/Home.tsx
-- [ ] T009 [P] [US1] Add data-tour="timed-practice" attribute to Timed Practice button in src/pages/Home.tsx
-- [ ] T010 [P] [US1] Add data-tour="progress-ladder" attribute to Progress Ladder button in src/pages/Home.tsx
-- [ ] T011 [P] [US1] Add data-tour="dashboard-stats" attribute to stats section wrapper in src/components/Dashboard.tsx
-- [ ] T012 [P] [US1] Add data-tour="due-today" attribute to DueToday wrapper in src/components/Dashboard.tsx
-- [ ] T013 [US1] Integrate OnboardingTour component into Home page in src/pages/Home.tsx
-- [ ] T014 [US1] Verify tour auto-starts for first-time users and persists completion state in localStorage
+- [X] T008 [P] [US1] Add data-tour="view-problems" attribute to View Problems button in src/pages/Home.tsx
+- [X] T009 [P] [US1] Add data-tour="timed-practice" attribute to Timed Practice button in src/pages/Home.tsx
+- [X] T010 [P] [US1] Add data-tour="progress-ladder" attribute to Progress Ladder button in src/pages/Home.tsx
+- [X] T011 [P] [US1] Add data-tour="dashboard-stats" attribute to stats section wrapper in src/components/Dashboard.tsx
+- [X] T012 [P] [US1] Add data-tour="due-today" attribute to DueToday wrapper in src/components/Dashboard.tsx
+- [X] T013 [US1] Integrate OnboardingTour component into Home page in src/pages/Home.tsx
+- [X] T014 [US1] Verify tour auto-starts for first-time users and persists completion state in localStorage
 
 **Checkpoint**: At this point, User Story 1 should be fully functional - first-time users see the guided tour
 
@@ -76,10 +76,10 @@
 
 ### Implementation for User Story 2
 
-- [ ] T015 [US2] Configure Joyride spotlight padding and overlay styling in OnboardingTour component in src/components/OnboardingTour.tsx
-- [ ] T016 [US2] Configure scrollToFirstStep and scrollOffset for auto-scroll behavior in src/components/OnboardingTour.tsx
-- [ ] T017 [US2] Verify all 6 steps (welcome, view-problems, timed-practice, progress-ladder, dashboard-stats, due-today) highlight correctly
-- [ ] T018 [US2] Test Finish button on final step saves completion state and closes tour
+- [X] T015 [US2] Configure Joyride spotlight padding and overlay styling in OnboardingTour component in src/components/OnboardingTour.tsx
+- [X] T016 [US2] Configure scrollToFirstStep and scrollOffset for auto-scroll behavior in src/components/OnboardingTour.tsx
+- [X] T017 [US2] Verify all 6 steps (welcome, view-problems, timed-practice, progress-ladder, dashboard-stats, due-today) highlight correctly
+- [X] T018 [US2] Test Finish button on final step saves completion state and closes tour
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work - tour navigation and highlighting complete
 
@@ -93,10 +93,10 @@
 
 ### Implementation for User Story 3
 
-- [ ] T019 [US3] Add Onboarding section card with RotateCcw icon to Settings page in src/pages/Settings.tsx
-- [ ] T020 [US3] Implement handleRestartTour function that resets onboardingCompleted and navigates to home in src/pages/Settings.tsx
-- [ ] T021 [US3] Add "Restart Tour" button that calls handleRestartTour in src/pages/Settings.tsx
-- [ ] T022 [US3] Verify tour restarts from step 1 after clicking Restart Tour
+- [X] T019 [US3] Add Onboarding section card with RotateCcw icon to Settings page in src/pages/Settings.tsx
+- [X] T020 [US3] Implement handleRestartTour function that resets onboardingCompleted and navigates to home in src/pages/Settings.tsx
+- [X] T021 [US3] Add "Restart Tour" button that calls handleRestartTour in src/pages/Settings.tsx
+- [X] T022 [US3] Verify tour restarts from step 1 after clicking Restart Tour
 
 **Checkpoint**: At this point, User Stories 1, 2, AND 3 work - full tour lifecycle with restart capability
 

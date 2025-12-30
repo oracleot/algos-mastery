@@ -8,11 +8,14 @@ import {
   TriangleAlertIcon,
 } from "lucide-react"
 import { Toaster as Sonner, type ToasterProps } from "sonner"
+import { useTheme } from "@/hooks/useTheme"
 
 const Toaster = ({ ...props }: ToasterProps) => {
+  const { resolvedTheme } = useTheme()
+
   return (
     <Sonner
-      theme="light"
+      theme={resolvedTheme === 'dark' ? 'dark' : 'light'}
       className="toaster group"
       icons={{
         success: <CircleCheckIcon className="size-4" />,
@@ -22,13 +25,13 @@ const Toaster = ({ ...props }: ToasterProps) => {
         loading: <Loader2Icon className="size-4 animate-spin" />,
       }}
       toastOptions={{
-        className: "bg-white border-border shadow-lg",
+        className: "bg-background text-foreground border-border shadow-lg",
       }}
       style={
         {
-          "--normal-bg": "#ffffff",
-          "--normal-text": "var(--popover-foreground)",
-          "--normal-border": "var(--border)",
+          "--normal-bg": "hsl(var(--background))",
+          "--normal-text": "hsl(var(--foreground))",
+          "--normal-border": "hsl(var(--border))",
           "--border-radius": "var(--radius)",
         } as React.CSSProperties
       }
