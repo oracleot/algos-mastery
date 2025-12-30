@@ -110,9 +110,9 @@
 
 ### Implementation for User Story 4
 
-- [ ] T023 [US4] Configure tooltip maxWidth styling for mobile viewport in src/components/OnboardingTour.tsx
-- [ ] T024 [US4] Test tour on mobile viewport (320px width) ensuring tooltips remain visible
-- [ ] T025 [US4] Test touch interactions (tap Next/Previous/Skip) work correctly on mobile
+- [X] T023 [US4] Configure tooltip maxWidth styling for mobile viewport in src/components/OnboardingTour.tsx
+- [X] T024 [US4] Test tour on mobile viewport (320px width) ensuring tooltips remain visible
+- [X] T025 [US4] Test touch interactions (tap Next/Previous/Skip) work correctly on mobile
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -122,11 +122,11 @@
 
 **Purpose**: Edge cases, validation, and final quality checks
 
-- [ ] T026 Handle TARGET_NOT_FOUND event gracefully (skip to next step) in src/hooks/useOnboarding.ts
-- [ ] T027 Verify tour closes gracefully if user navigates away from Home page
-- [ ] T028 [P] Test keyboard navigation (Tab, Enter, Escape) through tour steps
-- [ ] T029 Run quickstart.md manual testing checklist to validate all scenarios
-- [ ] T030 Run pnpm typecheck && pnpm lint && pnpm build to ensure no errors
+- [X] T026 Handle TARGET_NOT_FOUND event gracefully (skip to next step) in src/hooks/useOnboarding.ts
+- [X] T027 Verify tour closes gracefully if user navigates away from Home page
+- [X] T028 [P] Test keyboard navigation (Tab, Enter, Escape) through tour steps
+- [X] T029 Run quickstart.md manual testing checklist to validate all scenarios
+- [X] T030 Run pnpm typecheck && pnpm lint && pnpm build to ensure no errors
 
 ---
 

@@ -49,7 +49,9 @@ export function OnboardingTour({ autoStart }: OnboardingTourProps) {
         },
         tooltip: {
           borderRadius: '8px',
-          maxWidth: '90vw',
+          // Mobile-first: constrain width for small screens, max 400px for desktop
+          maxWidth: 'min(90vw, 400px)',
+          padding: '16px',
         },
         tooltipTitle: {
           fontSize: '16px',
@@ -58,19 +60,28 @@ export function OnboardingTour({ autoStart }: OnboardingTourProps) {
         tooltipContent: {
           fontSize: '14px',
           padding: '8px 0',
+          lineHeight: 1.5,
         },
         buttonNext: {
           backgroundColor: 'hsl(221.2 83.2% 53.3%)',
           borderRadius: '6px',
           fontSize: '14px',
-          padding: '8px 16px',
+          // Touch-friendly button sizing (min 44px touch target)
+          padding: '10px 20px',
+          minHeight: '44px',
         },
         buttonBack: {
           color: 'hsl(215.4 16.3% 46.9%)',
           marginRight: '8px',
+          // Touch-friendly button sizing
+          padding: '10px 16px',
+          minHeight: '44px',
         },
         buttonSkip: {
           color: 'hsl(215.4 16.3% 46.9%)',
+          // Touch-friendly button sizing
+          padding: '10px 16px',
+          minHeight: '44px',
         },
       }}
       locale={{

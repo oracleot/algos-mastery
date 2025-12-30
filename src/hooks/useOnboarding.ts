@@ -55,7 +55,14 @@ export function useOnboarding(): UseOnboardingReturn {
         type === EVENTS.TARGET_NOT_FOUND
       ) {
         const nextIndex = index + (action === ACTIONS.PREV ? -1 : 1);
-        setStepIndex(nextIndex);
+        
+        // Ensure we stay within bounds
+        if (nextIndex >= 0 && nextIndex < ONBOARDING_STEPS.length) {
+          setStepIndex(nextIndex);
+        } else if (nextIndex >= ONBOARDING_STEPS.length) {
+          // Reached the end, complete the tour
+          completeTour();
+        }
       }
 
       // Handle tour completion (finished or skipped)
