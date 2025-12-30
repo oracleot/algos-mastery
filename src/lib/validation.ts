@@ -1,7 +1,7 @@
 // lib/validation.ts - Form validation utilities
 
-import type { ProblemFormData, ValidationErrors, SolutionFormData, SolutionValidationErrors } from '../types';
-import { TOPIC_SLUGS, DIFFICULTIES, SUPPORTED_LANGUAGES } from '../types';
+import type { ProblemFormData, ValidationErrors, SolutionFormData, SolutionValidationErrors, LearningResource, ResourceValidationErrors } from '../types';
+import { TOPIC_SLUGS, DIFFICULTIES, SUPPORTED_LANGUAGES, RESOURCE_TYPES } from '../types';
 
 /**
  * Validate solution form data
@@ -87,5 +87,48 @@ export function validateProblem(data: ProblemFormData): ValidationErrors {
  * @returns true if there are no errors
  */
 export function isValid(errors: ValidationErrors): boolean {
+  return Object.keys(errors).length === 0;
+}
+
+/**
+ * Validate resource form data
+ * @param resource - Partial resource data to validate
+ * @returns Object containing validation errors (empty if valid)
+ */
+export function validateResource(resource: Partial<LearningResource>): ResourceValidationErrors {
+  const errors: ResourceValidationErrors = {};
+
+  // Title validation
+  if (!resource.title?.trim()) {
+    errors.title = 'Title is required';
+  } else if (resource.title.length > 200) {
+    errors.title = 'Title must be 200 characters or less';
+  }
+
+  // URL validation
+  if (!resource.url?.trim()) {
+    errors.url = 'URL is required';
+  } else {
+    try {
+      new URL(resource.url);
+    } catch {
+      errors.url = 'Please enter a valid URL';
+    }
+  }
+
+  // Type validation
+  if (!resource.type || !RESOURCE_TYPES.includes(resource.type)) {
+    errors.type = 'Please select a resource type';
+  }
+
+  return errors;
+}
+
+/**
+ * Check if resource validation result has no errors
+ * @param errors - Resource validation errors object
+ * @returns true if there are no errors
+ */
+export function isResourceValid(errors: ResourceValidationErrors): boolean {
   return Object.keys(errors).length === 0;
 }

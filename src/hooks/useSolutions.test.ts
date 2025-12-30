@@ -19,6 +19,7 @@ async function createTestProblem(): Promise<string> {
     difficulty: 'easy',
     status: 'unsolved',
     notes: '',
+    resources: [],
     createdAt: now,
     updatedAt: now,
   };

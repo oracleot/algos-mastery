@@ -1,9 +1,10 @@
 // components/ProblemCard.tsx - Card displaying problem details with badges
 
 import { Link } from 'react-router-dom';
-import { ExternalLink, Pencil, Trash2, Code, Check, ChevronDown } from 'lucide-react';
+import { ExternalLink, Pencil, Trash2, Code, Check, ChevronDown, BookOpen } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import {
   Tooltip,
   TooltipContent,
@@ -176,6 +177,12 @@ function ProblemCard({ problem, onEdit, onDelete, onStatusChange }: ProblemCardP
           >
             {label}
           </span>
+          {problem.resources && problem.resources.length > 0 && (
+            <Badge variant="outline" className="gap-1">
+              <BookOpen className="h-3 w-3" />
+              {problem.resources.length}
+            </Badge>
+          )}
         </div>
 
         {/* Notes */}

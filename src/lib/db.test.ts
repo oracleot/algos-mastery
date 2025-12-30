@@ -15,7 +15,7 @@ import {
   getReview,
   db,
 } from './db';
-import type { Problem } from '../types';
+import type { Problem, LearningResource } from '../types';
 
 // Helper to create a test problem
 function createTestProblem(overrides: Partial<Problem> = {}): Problem {
@@ -29,6 +29,19 @@ function createTestProblem(overrides: Partial<Problem> = {}): Problem {
     notes: 'Use a hash map',
     createdAt: new Date(),
     updatedAt: new Date(),
+    resources: [],
+    ...overrides,
+  };
+}
+
+// Helper to create a test resource
+function createTestResource(overrides: Partial<LearningResource> = {}): LearningResource {
+  return {
+    id: crypto.randomUUID(),
+    title: 'Test Resource',
+    url: 'https://www.youtube.com/watch?v=abc123',
+    type: 'video',
+    source: 'YouTube',
     ...overrides,
   };
 }
@@ -305,6 +318,61 @@ describe('Database Operations', () => {
       const afterGood = await getReview(problem.id);
       expect(afterGood?.repetitions).toBe(1);
       expect(afterGood?.interval).toBe(1); // First successful review = 1 day
+    });
+  });
+
+  // Database Migration v5: Resources field initialization
+  describe('Database Migration v5 - Resources Field', () => {
+    it('should have resources field as empty array for new problems', async () => {
+      const problem = createTestProblem();
+      await addProblem(problem);
+
+      const stored = await getProblem(problem.id);
+      expect(stored?.resources).toEqual([]);
+    });
+
+    it('should persist resources when added to a problem', async () => {
+      const resource = createTestResource();
+      const problem = createTestProblem({
+        resources: [resource],
+      });
+      await addProblem(problem);
+
+      const stored = await getProblem(problem.id);
+      expect(stored?.resources).toHaveLength(1);
+      expect(stored?.resources[0]?.title).toBe('Test Resource');
+      expect(stored?.resources[0]?.type).toBe('video');
+      expect(stored?.resources[0]?.source).toBe('YouTube');
+    });
+
+    it('should update problem with multiple resources', async () => {
+      const problem = createTestProblem();
+      await addProblem(problem);
+
+      const resources = [
+        createTestResource({ id: 'r1', title: 'Video 1', type: 'video' }),
+        createTestResource({ id: 'r2', title: 'Article 1', type: 'article' }),
+        createTestResource({ id: 'r3', title: 'Docs 1', type: 'documentation' }),
+      ];
+
+      await updateProblem(problem.id, { resources } as Partial<Problem>);
+
+      const stored = await getProblem(problem.id);
+      expect(stored?.resources).toHaveLength(3);
+    });
+
+    it('should cascade delete resources when problem is deleted', async () => {
+      const resource = createTestResource();
+      const problem = createTestProblem({
+        resources: [resource],
+      });
+      await addProblem(problem);
+
+      await deleteProblem(problem.id);
+
+      const stored = await getProblem(problem.id);
+      expect(stored).toBeUndefined();
+      // Resources are embedded, so no separate cleanup needed
     });
   });
 });

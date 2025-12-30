@@ -4,6 +4,45 @@
 export const DIFFICULTIES = ['easy', 'medium', 'hard'] as const;
 export type Difficulty = (typeof DIFFICULTIES)[number];
 
+// =========================================
+// Learning Resources Types (007-learning-resources)
+// =========================================
+
+/**
+ * Resource type categories
+ */
+export const RESOURCE_TYPES = ['video', 'article', 'documentation'] as const;
+export type ResourceType = (typeof RESOURCE_TYPES)[number];
+
+/**
+ * Learning resource attached to a problem
+ */
+export interface LearningResource {
+  /** Unique identifier (UUID) */
+  id: string;
+
+  /** Resource type category */
+  type: ResourceType;
+
+  /** Descriptive title (required, max 200 chars) */
+  title: string;
+
+  /** Direct URL to the resource */
+  url: string;
+
+  /** Source name (auto-detected or manual, e.g., "YouTube", "Medium"). Defaults to empty string if not detected. */
+  source: string;
+}
+
+/**
+ * Validation error messages for resource form
+ */
+export interface ResourceValidationErrors {
+  title?: string;
+  url?: string;
+  type?: string;
+}
+
 // Problem progress statuses
 export const STATUSES = ['unsolved', 'attempted', 'solved'] as const;
 export type Status = (typeof STATUSES)[number];
@@ -46,6 +85,8 @@ export interface Problem {
   notes: string;
   createdAt: Date;
   updatedAt: Date;
+  /** Learning resources attached to this problem */
+  resources: LearningResource[];
 }
 
 // Form data type for create/update operations
@@ -55,6 +96,8 @@ export interface ProblemFormData {
   topic: TopicSlug | '';
   difficulty: Difficulty | '';
   notes: string;
+  /** Learning resources to save with this problem */
+  resources: LearningResource[];
 }
 
 // Filter state for problem list

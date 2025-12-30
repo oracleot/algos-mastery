@@ -79,7 +79,9 @@ describe('cn', () => {
   });
 
   it('handles conditional classes', () => {
-    expect(cn('base', true && 'active', false && 'disabled')).toBe('base active');
+    const isActive = true;
+    const isDisabled = false;
+    expect(cn('base', isActive && 'active', isDisabled && 'disabled')).toBe('base active');
   });
 
   it('deduplicates Tailwind classes', () => {
