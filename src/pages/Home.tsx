@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Dashboard } from '@/components/Dashboard';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { OfflineIndicator } from '@/components/OfflineIndicator';
+import { OnboardingTour } from '@/components/OnboardingTour';
 import { usePWA } from '@/hooks/usePWA';
 
 function Home() {
@@ -14,6 +15,9 @@ function Home() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Onboarding Tour */}
+      <OnboardingTour />
+      
       {/* Top bar with theme toggle and offline indicator */}
       <div className="fixed top-4 right-4 flex items-center gap-2 z-10">
         <OfflineIndicator isOnline={isOnline} />
@@ -38,19 +42,19 @@ function Home() {
           </p>
 
           <div className="flex flex-col gap-3 justify-center max-w-sm mx-auto sm:max-w-none sm:flex-row">
-            <Button size="lg" asChild className="w-full sm:w-auto touch-manipulation">
+            <Button size="lg" asChild className="w-full sm:w-auto touch-manipulation" data-tour="view-problems">
               <Link to="/problems">
                 View Problems
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild className="w-full sm:w-auto touch-manipulation">
+            <Button size="lg" variant="outline" asChild className="w-full sm:w-auto touch-manipulation" data-tour="timed-practice">
               <Link to="/practice">
                 <Clock className="h-5 w-5" />
                 Timed Practice
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild className="w-full sm:w-auto touch-manipulation">
+            <Button size="lg" variant="outline" asChild className="w-full sm:w-auto touch-manipulation" data-tour="progress-ladder">
               <Link to="/progress">
                 <TrendingUp className="h-5 w-5" />
                 Progress Ladder

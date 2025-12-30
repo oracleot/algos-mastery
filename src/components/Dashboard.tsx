@@ -98,7 +98,7 @@ export function Dashboard() {
   return (
     <div className="space-y-4 sm:space-y-6">
       {/* Top row: Streak and quick stats */}
-      <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center justify-between gap-3 sm:gap-4">
+      <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center justify-between gap-3 sm:gap-4" data-tour="dashboard-stats">
         <div className="flex items-center gap-4">
           <StreakCounter
             count={streak?.currentStreak ?? 0}
@@ -124,11 +124,13 @@ export function Dashboard() {
       </div>
 
       {/* Due Today section */}
-      <DueToday
-        items={dueToday ?? []}
-        onStartReview={handleStartReview}
-        compact={false}
-      />
+      <div data-tour="due-today">
+        <DueToday
+          items={dueToday ?? []}
+          onStartReview={handleStartReview}
+          compact={false}
+        />
+      </div>
 
       {/* Weekly chart - lazy loaded to reduce initial bundle size */}
       {weeklyStats && (
