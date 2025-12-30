@@ -2,7 +2,7 @@
 
 import { useState, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Plus, SearchX, TrendingUp } from 'lucide-react';
+import { ArrowLeft, Plus, SearchX, TrendingUp, Library } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import {
@@ -146,6 +146,12 @@ function Problems() {
             <div className="flex items-center gap-2">
               <OfflineIndicator isOnline={isOnline} />
               <ThemeToggle />
+              <Button variant="outline" size="sm" asChild>
+                <Link to="/catalog">
+                  <Library className="h-4 w-4" />
+                  Catalog
+                </Link>
+              </Button>
               <Button variant="outline" size="sm" asChild>
                 <Link to="/progress">
                   <TrendingUp className="h-4 w-4" />

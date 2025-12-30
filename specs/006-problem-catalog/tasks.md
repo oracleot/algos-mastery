@@ -53,10 +53,10 @@
 
 ### Implementation for User Story 1
 
-- [ ] T008 [P] [US1] Create CatalogCard component with add button and external link in src/components/CatalogCard.tsx
-- [ ] T009 [US1] Create Catalog page with grid layout in src/pages/Catalog.tsx
-- [ ] T010 [US1] Add duplicate detection logic using URL normalization in src/pages/Catalog.tsx
-- [ ] T011 [US1] Add toast notifications for add success/failure using sonner in src/pages/Catalog.tsx
+- [X] T008 [P] [US1] Create CatalogCard component with add button and external link in src/components/CatalogCard.tsx
+- [X] T009 [US1] Create Catalog page with grid layout in src/pages/Catalog.tsx
+- [X] T010 [US1] Add duplicate detection logic using URL normalization in src/pages/Catalog.tsx
+- [X] T011 [US1] Add toast notifications for add success/failure using sonner in src/pages/Catalog.tsx
 
 **Checkpoint**: User Story 1 complete - users can browse catalog and add problems
 
@@ -70,10 +70,10 @@
 
 ### Implementation for User Story 2
 
-- [ ] T012 [P] [US2] Create CatalogFilters component with topic, difficulty, source selects and search input in src/components/CatalogFilters.tsx
-- [ ] T013 [US2] Integrate CatalogFilters into Catalog page in src/pages/Catalog.tsx
-- [ ] T014 [US2] Add filter state management and filtering logic in src/pages/Catalog.tsx
-- [ ] T015 [US2] Add stats bar showing "Showing X of 150 problems • Y already added" in src/pages/Catalog.tsx
+- [X] T012 [P] [US2] Create CatalogFilters component with topic, difficulty, source selects and search input in src/components/CatalogFilters.tsx
+- [X] T013 [US2] Integrate CatalogFilters into Catalog page in src/pages/Catalog.tsx
+- [X] T014 [US2] Add filter state management and filtering logic in src/pages/Catalog.tsx
+- [X] T015 [US2] Add stats bar showing "Showing X of 150 problems • Y already added" in src/pages/Catalog.tsx
 
 **Checkpoint**: User Stories 1 AND 2 complete - full catalog browsing with filtering
 
