@@ -32,8 +32,8 @@ Add a static catalog of 150 curated algorithm problems (Blind 75 + 75 extras fro
 | I.4 Explicit Types | Explicit annotations | ✅ Pass | CatalogProblem, CatalogSource types defined |
 | I.5 Max File Length | <200 lines (300 max) | ✅ Pass | Components designed to be concise |
 | I.6 No Dead Code | No unused exports | ✅ Pass | All exports have consumers |
-| II.1 Test-First Data | Tests before implementation for data ops | ⚠️ Partial | Static data (no IndexedDB changes); duplicate detection tested |
-| II.2 Component Tests | Interactive components tested | ⚠️ Partial | Tests not explicitly requested in spec; recommend adding CatalogCard.test.tsx |
+| II.1 Test-First Data | Tests before implementation for data ops | ✅ Pass | Static data (no IndexedDB changes); URL normalization tested |
+| II.2 Component Tests | Interactive components tested | ✅ Pass | CatalogCard.test.tsx added for primary component |
 | II.3 Edge Cases | Boundary conditions tested | ✅ Pass | Empty states, all-added state, URL normalization |
 | II.4 Test Collocation | Tests with source files | ✅ Pass | Following existing patterns |
 | III.1 Design System | Tailwind CSS utility classes | ✅ Pass | Using existing UI components |

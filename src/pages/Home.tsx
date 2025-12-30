@@ -1,7 +1,7 @@
 // pages/Home.tsx - Home page with dashboard and navigation
 
 import { Link } from 'react-router-dom';
-import { BookOpen, ArrowRight, TrendingUp, Clock, Settings } from 'lucide-react';
+import { BookOpen, ArrowRight, TrendingUp, Clock, Settings, Library } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Dashboard } from '@/components/Dashboard';
@@ -41,11 +41,17 @@ function Home() {
             Track your algorithm problem-solving journey with spaced repetition.
           </p>
 
-          <div className="flex flex-col gap-3 justify-center max-w-sm mx-auto sm:max-w-none sm:flex-row">
+          <div className="flex flex-col gap-3 justify-center max-w-sm mx-auto sm:max-w-none sm:flex-row sm:flex-wrap">
             <Button size="lg" asChild className="w-full sm:w-auto touch-manipulation" data-tour="view-problems">
               <Link to="/problems">
                 View Problems
                 <ArrowRight className="h-5 w-5" />
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" asChild className="w-full sm:w-auto touch-manipulation" data-tour="browse-catalog">
+              <Link to="/catalog">
+                <Library className="h-5 w-5" />
+                Browse Catalog
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild className="w-full sm:w-auto touch-manipulation" data-tour="timed-practice">

@@ -95,7 +95,7 @@ As a user on the home page, I want a clear navigation option to browse the catal
 
 ### Functional Requirements
 
-- **FR-001**: System MUST provide a static catalog of 150 curated algorithm problems (75 from Blind 75, 75 from NeetCode 150/Grind 75)
+- **FR-001**: System MUST provide a static catalog of 150 curated algorithm problems (Blind 75 core list plus additional problems from NeetCode 150 and Grind 75 to reach 150 total; some problems appear in multiple source lists)
 - **FR-002**: System MUST display each catalog problem with title, difficulty badge, topic badge, source badge, and external LeetCode link
 - **FR-003**: System MUST allow users to add a catalog problem to their practice list with a single click
 - **FR-004**: System MUST detect and indicate if a catalog problem is already in the user's practice list (using URL-based duplicate detection)
@@ -114,6 +114,7 @@ As a user on the home page, I want a clear navigation option to browse the catal
 - **CatalogProblem**: A pre-defined algorithm problem in the catalog with id, title, url, topic, difficulty, source, order, and optional leetcodeNumber
 - **CatalogSource**: The source attribution for a problem (blind-75, neetcode-150, grind-75, curated)
 - **TopicSlug**: The algorithm topic category (arrays-hashing, two-pointers, sliding-window, stack, etc.)
+- **Focus Topic**: The user's current priority topic for study, defined as the lowest-mastery unlocked topic (mastery < 100%). Used to prioritize catalog recommendations.
 
 ---
 
@@ -122,7 +123,7 @@ As a user on the home page, I want a clear navigation option to browse the catal
 ### Measurable Outcomes
 
 - **SC-001**: Users can browse and add a problem from the catalog in under 30 seconds
-- **SC-002**: Catalog page displays all 150 problems correctly across all supported device sizes (mobile, tablet, desktop)
+- **SC-002**: Catalog page displays all 150 problems correctly across all supported device sizes (320px mobile, 768px tablet, 1920px desktop)
 - **SC-003**: All filter combinations work correctly and update displayed results immediately
 - **SC-004**: 100% of duplicate problems are detected and shown as "Already Added"
 - **SC-005**: Dashboard recommendations update within 1 second of adding a problem

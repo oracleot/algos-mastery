@@ -2,7 +2,7 @@
 
 **Feature**: Problem Catalog
 **Version**: 1.0
-**Last Updated**: June 2025
+**Last Updated**: December 2025
 
 ---
 
@@ -116,6 +116,30 @@ The catalog automatically detects problems you've already added:
 
 ---
 
+## Dashboard Recommendations
+
+The catalog also powers a "Recommended to Add" section on your Dashboard:
+
+### How It Works
+1. **Personalized Suggestions** - The Dashboard shows up to 3 recommended problems based on your current focus topic
+2. **Smart Prioritization** - Recommendations prioritize:
+   - Problems from your focus topic (lowest mastery unlocked topic)
+   - Easier problems first (Easy → Medium → Hard)
+   - Problems earlier in the curriculum order
+3. **One-Click Add** - Click the "Add" button on any recommendation to add it to your practice list
+4. **Instant Updates** - Recommendations refresh immediately after adding a problem
+
+### Using Recommendations
+1. View your Dashboard (home page)
+2. Scroll to the "Recommended to Add" section
+3. Click "Add" on any problem you want to practice
+4. Click "View full catalog" to browse all 150 problems
+
+### When Recommendations Are Hidden
+- If you've added all 150 catalog problems, the recommendations section will be hidden
+
+---
+
 ## Keyboard Shortcuts
 
 Currently, the catalog uses mouse/touch interactions. Future updates may include:
@@ -155,6 +179,12 @@ All catalog interactions are stored locally in IndexedDB:
 ---
 
 ## Version History
+
+### v1.1 (December 2025)
+- Added "Recommended to Add" section on Dashboard
+- Smart prioritization based on focus topic and difficulty
+- One-click add from Dashboard recommendations
+- "View full catalog" link from Dashboard
 
 ### v1.0 (June 2025)
 - Initial release with 150 curated problems

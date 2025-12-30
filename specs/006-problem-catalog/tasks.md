@@ -28,6 +28,7 @@
 - [X] T002 Add CatalogFilters interface to src/types/index.ts
 - [X] T003 Create static catalog data with 150 problems and helper functions in src/data/catalog.ts
 - [X] T004 Create URL normalization utility function in src/lib/utils.ts
+- [X] T004a [P] Add unit tests for normalizeUrl utility in src/lib/utils.test.ts (Constitution II.1 compliance)
 
 ---
 
@@ -54,6 +55,7 @@
 ### Implementation for User Story 1
 
 - [X] T008 [P] [US1] Create CatalogCard component with add button and external link in src/components/CatalogCard.tsx
+- [X] T008a [P] [US1] Add component tests for CatalogCard in src/components/CatalogCard.test.tsx (Constitution II.2 compliance)
 - [X] T009 [US1] Create Catalog page with grid layout in src/pages/Catalog.tsx
 - [X] T010 [US1] Add duplicate detection logic using URL normalization in src/pages/Catalog.tsx
 - [X] T011 [US1] Add toast notifications for add success/failure using sonner in src/pages/Catalog.tsx
@@ -87,10 +89,10 @@
 
 ### Implementation for User Story 3
 
-- [ ] T016 [P] [US3] Create CatalogRecommendationRow component in src/components/CatalogRecommendationRow.tsx
-- [ ] T017 [US3] Add "Recommended to Add" section to Dashboard in src/components/Dashboard.tsx
-- [ ] T018 [US3] Add "View full catalog" link in recommendations section in src/components/Dashboard.tsx
-- [ ] T019 [US3] Handle edge case when all 150 problems are added (hide or show message) in src/components/Dashboard.tsx
+- [X] T016 [P] [US3] Create CatalogRecommendationRow component in src/components/CatalogRecommendationRow.tsx
+- [X] T017 [US3] Add "Recommended to Add" section to Dashboard in src/components/Dashboard.tsx
+- [X] T018 [US3] Add "View full catalog" link in recommendations section in src/components/Dashboard.tsx
+- [X] T019 [US3] Handle edge case when all 150 problems are added (hide or show message) in src/components/Dashboard.tsx
 
 **Checkpoint**: User Stories 1, 2, AND 3 complete - full catalog with Dashboard recommendations
 
@@ -104,7 +106,7 @@
 
 ### Implementation for User Story 4
 
-- [ ] T020 [US4] Add "Browse Catalog" button/card to Home page in src/pages/Home.tsx
+- [X] T020 [US4] Add "Browse Catalog" button/card to Home page in src/pages/Home.tsx
 
 **Checkpoint**: All user stories complete - full feature functionality
 
@@ -114,10 +116,10 @@
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T021 [P] Verify responsive layout on mobile (320px), tablet, and desktop (1920px)
-- [ ] T022 [P] Verify keyboard accessibility across catalog components
-- [ ] T023 [P] Verify offline functionality (catalog data bundled statically)
-- [ ] T024 Run quickstart.md validation checklist
+- [X] T021 [P] Verify responsive layout on mobile (320px), tablet, and desktop (1920px)
+- [X] T022 [P] Verify keyboard accessibility across catalog components
+- [X] T023 [P] Verify offline functionality (catalog data bundled statically)
+- [X] T024 Run quickstart.md validation checklist
 
 ---
 
@@ -191,13 +193,13 @@ Task T006: "Create useCatalogRecommendations hook in src/hooks/useCatalogRecomme
 
 | Phase | Tasks | Cumulative |
 |-------|-------|------------|
-| Setup | 4 | 4 |
-| Foundational | 3 | 7 |
-| User Story 1 | 4 | 11 |
-| User Story 2 | 4 | 15 |
-| User Story 3 | 4 | 19 |
-| User Story 4 | 1 | 20 |
-| Polish | 4 | 24 |
+| Setup | 5 | 5 |
+| Foundational | 3 | 8 |
+| User Story 1 | 5 | 13 |
+| User Story 2 | 4 | 17 |
+| User Story 3 | 4 | 21 |
+| User Story 4 | 1 | 22 |
+| Polish | 4 | 26 |
 
 ---
 
