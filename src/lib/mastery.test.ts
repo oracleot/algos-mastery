@@ -15,6 +15,7 @@ function createTestProblem(overrides: Partial<Problem> = {}): Problem {
     difficulty: 'easy',
     status: 'unsolved',
     notes: '',
+    resources: [],
     createdAt: new Date(),
     updatedAt: new Date(),
     ...overrides,

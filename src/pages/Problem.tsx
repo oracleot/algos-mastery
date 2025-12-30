@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, Plus, ExternalLink, CalendarPlus } from 'lucide-react';
+import { ArrowLeft, Plus, ExternalLink, CalendarPlus, BookOpen } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/dialog';
 import { SolutionForm } from '@/components/SolutionForm';
 import { SolutionList } from '@/components/SolutionList';
+import { ResourceList } from '@/components/ResourceList';
 import { TopicBadge } from '@/components/TopicBadge';
 import { DifficultyBadge } from '@/components/DifficultyBadge';
 import { AddToReviewButton } from '@/components/AddToReviewButton';
@@ -282,6 +283,44 @@ function Problem() {
             onAdd={handleOpenAddForm}
           />
         </div>
+
+        {/* Learning Resources Section */}
+        <Card>
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-lg flex items-center gap-2">
+                <BookOpen className="h-5 w-5" />
+                Learning Resources
+                {problem.resources && problem.resources.length > 0 && (
+                  <span className="text-sm font-normal text-muted-foreground">
+                    ({problem.resources.length})
+                  </span>
+                )}
+              </CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent>
+            {problem.resources && problem.resources.length > 0 ? (
+              <ResourceList resources={problem.resources} />
+            ) : (
+              <div className="text-center py-6">
+                <BookOpen className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                <p className="text-sm text-muted-foreground mb-2">
+                  No learning resources yet
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  Add resources when{' '}
+                  <Link
+                    to={`/problems`}
+                    className="text-primary hover:underline"
+                  >
+                    editing this problem
+                  </Link>
+                </p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
       </main>
 
       {/* Add Solution Dialog */}

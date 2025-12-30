@@ -22,6 +22,7 @@ describe('useProblems', () => {
         topic: 'arrays-hashing',
         difficulty: 'easy',
         notes: 'Use a hash map',
+        resources: [],
       };
 
       let problemId: string | undefined;
@@ -53,6 +54,7 @@ describe('useProblems', () => {
         topic: 'stack',
         difficulty: 'easy',
         notes: '',
+        resources: [],
       };
 
       let problemId: string | undefined;
@@ -74,6 +76,7 @@ describe('useProblems', () => {
         topic: 'binary-search',
         difficulty: 'easy',
         notes: '',
+        resources: [],
       };
 
       let problemId: string | undefined;
@@ -98,6 +101,7 @@ describe('useProblems', () => {
         topic: 'arrays-hashing',
         difficulty: 'easy',
         notes: 'Original notes',
+        resources: [],
       };
 
       let problemId: string | undefined;
@@ -129,6 +133,7 @@ describe('useProblems', () => {
         topic: 'trees',
         difficulty: 'medium',
         notes: '',
+        resources: [],
       };
 
       let problemId: string | undefined;
@@ -165,6 +170,7 @@ describe('useProblems', () => {
         topic: 'graphs',
         difficulty: 'hard',
         notes: '',
+        resources: [],
       };
 
       let problemId: string | undefined;
@@ -198,6 +204,7 @@ describe('useProblems', () => {
         topic: 'dynamic-programming',
         difficulty: 'hard',
         notes: '',
+        resources: [],
       };
 
       let problemId: string | undefined;
@@ -238,6 +245,7 @@ describe('useProblems', () => {
         topic: 'heap',
         difficulty: 'medium',
         notes: 'Test notes',
+        resources: [],
       };
 
       let problemId: string | undefined;
@@ -287,6 +295,7 @@ describe('useProblems', () => {
           topic: 'tries',
           difficulty: 'medium',
           notes: '',
+          resources: [],
         });
       });
 

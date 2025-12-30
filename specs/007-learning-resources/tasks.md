@@ -24,11 +24,11 @@
 
 **Purpose**: Type definitions and database migration - shared by all user stories
 
-- [ ] T001 Add `RESOURCE_TYPES`, `ResourceType`, and `LearningResource` interface to src/types/index.ts
-- [ ] T002 Add `resources: LearningResource[]` field to `Problem` interface in src/types/index.ts
-- [ ] T003 Add `resources: LearningResource[]` field to `ProblemFormData` interface in src/types/index.ts
-- [ ] T004 Add `ResourceValidationErrors` interface to src/types/index.ts
-- [ ] T005 Add database v5 migration to initialize `resources: []` for existing problems in src/lib/db.ts
+- [X] T001 Add `RESOURCE_TYPES`, `ResourceType`, and `LearningResource` interface to src/types/index.ts
+- [X] T002 Add `resources: LearningResource[]` field to `Problem` interface in src/types/index.ts
+- [X] T003 Add `resources: LearningResource[]` field to `ProblemFormData` interface in src/types/index.ts
+- [X] T004 Add `ResourceValidationErrors` interface to src/types/index.ts
+- [X] T005 Add database v5 migration to initialize `resources: []` for existing problems in src/lib/db.ts
 
 ---
 
@@ -38,12 +38,12 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T006 [P] Create `detectResourceSource()` function with 15+ URL patterns in src/lib/resourceUtils.ts
-- [ ] T007 Create `getResourceTypeIcon()` and `getResourceTypeLabel()` helper functions in src/lib/resourceUtils.ts (depends on T006)
-- [ ] T008 [P] Add `validateResource()` and `isResourceValid()` functions to src/lib/validation.ts
-- [ ] T009 [P] Write unit tests for `detectResourceSource()` covering all 15+ platforms in src/lib/resourceUtils.test.ts
-- [ ] T010 [P] Write unit tests for `validateResource()` in src/lib/validation.test.ts
-- [ ] T011 [P] Write unit tests for database migration v5 in src/lib/db.test.ts
+- [X] T006 [P] Create `detectResourceSource()` function with 15+ URL patterns in src/lib/resourceUtils.ts
+- [X] T007 Create `getResourceTypeIcon()` and `getResourceTypeLabel()` helper functions in src/lib/resourceUtils.ts (depends on T006)
+- [X] T008 [P] Add `validateResource()` and `isResourceValid()` functions to src/lib/validation.ts
+- [X] T009 [P] Write unit tests for `detectResourceSource()` covering all 15+ platforms in src/lib/resourceUtils.test.ts
+- [X] T010 [P] Write unit tests for `validateResource()` in src/lib/validation.test.ts
+- [X] T011 [P] Write unit tests for database migration v5 in src/lib/db.test.ts
 
 **Checkpoint**: Foundation ready - user story implementation can now begin
 
@@ -57,13 +57,13 @@
 
 ### Tests for User Story 1
 
-- [ ] T012 [P] [US1] Write component tests for ResourceForm (form expansion, validation, submission, source auto-detect on blur) in src/components/ResourceForm.test.tsx
+- [X] T012 [P] [US1] Write component tests for ResourceForm (form expansion, validation, submission, source auto-detect on blur) in src/components/ResourceForm.test.tsx
 
 ### Implementation for User Story 1
 
-- [ ] T013 [US1] Create `ResourceForm` component with collapsible form, title/URL/type inputs, source auto-detection on blur in src/components/ResourceForm.tsx
-- [ ] T014 [US1] Integrate `ResourceForm` into `ProblemForm` with local resources state management in src/components/ProblemForm.tsx
-- [ ] T015 [US1] Update `useProblems` hook to handle `resources` array in `addProblem` and `updateProblem` in src/hooks/useProblems.ts
+- [X] T013 [US1] Create `ResourceForm` component with collapsible form, title/URL/type inputs, source auto-detection on blur in src/components/ResourceForm.tsx
+- [X] T014 [US1] Integrate `ResourceForm` into `ProblemForm` with local resources state management in src/components/ProblemForm.tsx
+- [X] T015 [US1] Update `useProblems` hook to handle `resources` array in `addProblem` and `updateProblem` in src/hooks/useProblems.ts
 
 **Checkpoint**: Users can add resources when creating/editing problems
 
@@ -77,12 +77,12 @@
 
 ### Tests for User Story 2
 
-- [ ] T016 [P] [US2] Write component tests for ResourceList (empty state, icons per type, external links, remove button visibility) in src/components/ResourceList.test.tsx
+- [X] T016 [P] [US2] Write component tests for ResourceList (empty state, icons per type, external links, remove button visibility) in src/components/ResourceList.test.tsx
 
 ### Implementation for User Story 2
 
-- [ ] T017 [US2] Create `ResourceList` component with type icons (Play/FileText/BookOpen), external links, optional remove buttons in src/components/ResourceList.tsx
-- [ ] T018 [US2] Add Learning Resources section to problem detail page (after solutions) with empty state in src/pages/Problem.tsx
+- [X] T017 [US2] Create `ResourceList` component with type icons (Play/FileText/BookOpen), external links, optional remove buttons in src/components/ResourceList.tsx
+- [X] T018 [US2] Add Learning Resources section to problem detail page (after solutions) with empty state in src/pages/Problem.tsx
 
 **Checkpoint**: Users can view resources on problem detail page with appropriate icons and links
 
@@ -98,8 +98,8 @@
 
 ### Implementation for User Story 3
 
-- [ ] T019 [US3] Enable remove functionality in `ResourceList` by passing `onRemove` callback when in edit mode in src/components/ProblemForm.tsx
-- [ ] T020 [US3] Add remove button (Trash2 icon) to ResourceList items when `onRemove` is provided in src/components/ResourceList.tsx
+- [X] T019 [US3] Enable remove functionality in `ResourceList` by passing `onRemove` callback when in edit mode in src/components/ProblemForm.tsx
+- [X] T020 [US3] Add remove button (Trash2 icon) to ResourceList items when `onRemove` is provided in src/components/ResourceList.tsx
 
 **Checkpoint**: Users can remove resources from problems when editing
 
@@ -113,7 +113,7 @@
 
 ### Implementation for User Story 4
 
-- [ ] T021 [US4] Add resource count badge (BookOpen icon + count) to ProblemCard when resources exist in src/components/ProblemCard.tsx
+- [X] T021 [US4] Add resource count badge (BookOpen icon + count) to ProblemCard when resources exist in src/components/ProblemCard.tsx
 
 **Checkpoint**: Users can see resource count indicator on problem cards
 
@@ -123,12 +123,12 @@
 
 **Purpose**: Ensure data integrity across all operations and final validation
 
-- [ ] T022 [P] Write unit test for export/import round-trip with resources in src/lib/exportImport.test.ts
-- [ ] T023 Verify export includes resources as part of problem data (manual check or extend T022 test)
-- [ ] T024 Verify import preserves resources when importing problems (manual check or extend T022 test)
-- [ ] T025 Run full test suite and ensure all tests pass: `pnpm test --run`
-- [ ] T026 Run type check and lint: `pnpm typecheck && pnpm lint`
-- [ ] T027 Run build to verify no production errors: `pnpm build`
+- [X] T022 [P] Write unit test for export/import round-trip with resources in src/lib/exportImport.test.ts
+- [X] T023 Verify export includes resources as part of problem data (manual check or extend T022 test)
+- [X] T024 Verify import preserves resources when importing problems (manual check or extend T022 test)
+- [X] T025 Run full test suite and ensure all tests pass: `pnpm test --run`
+- [X] T026 Run type check and lint: `pnpm typecheck && pnpm lint`
+- [X] T027 Run build to verify no production errors: `pnpm build`
 - [ ] T028 Manual validation against quickstart.md acceptance criteria checklist
 
 ---

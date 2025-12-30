@@ -327,6 +327,7 @@ describe('import', () => {
         difficulty: 'hard',
         status: 'unsolved',
         notes: '',
+        resources: [],
         createdAt: new Date(),
         updatedAt: new Date(),
       });
@@ -416,6 +417,7 @@ describe('import', () => {
         difficulty: 'hard',
         status: 'solved',
         notes: 'Test notes with special chars: <>&"\'',
+        resources: [],
         createdAt: now,
         updatedAt: now,
       });

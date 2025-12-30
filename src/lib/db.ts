@@ -49,6 +49,22 @@ export class AlgoMasteryDB extends Dexie {
       reviewHistory: 'id, problemId, reviewedAt',
       timeLogs: 'problemId',
     });
+
+    // v5: Add resources field to problems (embedded array, no index change)
+    this.version(5).stores({
+      problems: 'id, topic, difficulty, status, createdAt',
+      solutions: 'id, problemId, language, createdAt',
+      reviews: 'problemId, nextReview',
+      reviewHistory: 'id, problemId, reviewedAt',
+      timeLogs: 'problemId',
+    }).upgrade(async (tx) => {
+      // Initialize resources array for existing problems
+      await tx.table('problems').toCollection().modify((problem) => {
+        if (!problem.resources) {
+          problem.resources = [];
+        }
+      });
+    });
   }
 }
 

@@ -75,6 +75,7 @@ export function Dashboard() {
         topic: problem.topic,
         difficulty: problem.difficulty,
         notes: '',
+        resources: [],
       });
       toast.success(`Added "${problem.title}" to your problems`);
     } catch {

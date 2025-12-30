@@ -85,6 +85,7 @@ export function useProblems(filters?: ProblemFilters): UseProblemsReturn {
         notes: data.notes.trim(),
         createdAt: now,
         updatedAt: now,
+        resources: data.resources ?? [],
       };
 
       await db.problems.add(problem);
@@ -122,6 +123,9 @@ export function useProblems(filters?: ProblemFilters): UseProblemsReturn {
         }
         if (data.notes !== undefined) {
           updates.notes = data.notes.trim();
+        }
+        if (data.resources !== undefined) {
+          updates.resources = data.resources;
         }
 
         await db.problems.update(id, updates);

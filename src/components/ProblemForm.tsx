@@ -12,9 +12,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { ResourceForm } from '@/components/ResourceForm';
+import { ResourceList } from '@/components/ResourceList';
 import { getTopicOptions } from '@/data/topics';
 import { validateProblem, isValid } from '@/lib/validation';
-import type { Problem, ProblemFormData, ValidationErrors, Difficulty } from '@/types';
+import type { Problem, ProblemFormData, ValidationErrors, Difficulty, LearningResource } from '@/types';
 import { DIFFICULTIES } from '@/types';
 
 interface ProblemFormProps {
@@ -41,6 +43,7 @@ function ProblemForm({ initialData, onSubmit, onCancel, isSubmitting }: ProblemF
     topic: initialData?.topic ?? '',
     difficulty: initialData?.difficulty ?? '',
     notes: initialData?.notes ?? '',
+    resources: initialData?.resources ?? [],
   });
 
   const [errors, setErrors] = useState<ValidationErrors>({});
@@ -67,9 +70,23 @@ function ProblemForm({ initialData, onSubmit, onCancel, isSubmitting }: ProblemF
   ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     // Clear error when user starts typing
-    if (errors[field]) {
+    if (errors[field as keyof ValidationErrors]) {
       setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
+  };
+
+  const handleAddResource = (resource: LearningResource) => {
+    setFormData((prev) => ({
+      ...prev,
+      resources: [...prev.resources, resource],
+    }));
+  };
+
+  const handleRemoveResource = (resourceId: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      resources: prev.resources.filter((r) => r.id !== resourceId),
+    }));
   };
 
   return (
@@ -197,6 +214,18 @@ function ProblemForm({ initialData, onSubmit, onCancel, isSubmitting }: ProblemF
             {errors.notes}
           </p>
         )}
+      </div>
+
+      {/* Learning Resources Section */}
+      <div className="space-y-3 pt-2">
+        <Label>Learning Resources (optional)</Label>
+        {formData.resources.length > 0 && (
+          <ResourceList
+            resources={formData.resources}
+            onRemove={handleRemoveResource}
+          />
+        )}
+        <ResourceForm onAdd={handleAddResource} />
       </div>
 
       {/* Form Actions */}

@@ -72,6 +72,7 @@ describe('export', () => {
         difficulty: 'easy',
         status: 'solved',
         notes: 'Test notes',
+        resources: [],
         createdAt: new Date(),
         updatedAt: new Date(),
       });
@@ -141,6 +142,7 @@ describe('export', () => {
         difficulty: 'easy',
         status: 'solved',
         notes: 'Test notes',
+        resources: [],
         createdAt: new Date('2025-01-01'),
         updatedAt: new Date('2025-01-02'),
       });
@@ -229,6 +231,7 @@ describe('export', () => {
         difficulty: 'easy',
         status: 'unsolved',
         notes: '',
+        resources: [],
         createdAt: new Date(),
         updatedAt: new Date(),
       });

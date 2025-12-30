@@ -19,6 +19,7 @@ describe('useSuggestedProblem', () => {
     difficulty: 'medium',
     status,
     notes: '',
+    resources: [],
     createdAt: new Date(),
     updatedAt: new Date(),
   });
