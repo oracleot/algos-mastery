@@ -1,18 +1,25 @@
 // components/Dashboard.tsx - Main progress dashboard combining all elements
 
 import { lazy, Suspense } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { ArrowRight, Sparkles, CheckCircle2 } from 'lucide-react';
+import { toast } from 'sonner';
 import { StreakCounter } from './StreakCounter';
 import { SuggestedNext } from './SuggestedNext';
 import { NextToUnlock } from './NextToUnlock';
 import { DueToday } from './DueToday';
-import { Card, CardContent } from '@/components/ui/card';
+import { CatalogRecommendationRow } from './CatalogRecommendationRow';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { useStreak } from '@/hooks/useStreak';
 import { useStats } from '@/hooks/useStats';
 import { useSuggestedProblem } from '@/hooks/useSuggestedProblem';
 import { useProgress } from '@/hooks/useProgress';
 import { useReviewQueue } from '@/hooks/useReviewQueue';
-import type { Problem } from '@/types';
+import { useCatalogRecommendations } from '@/hooks/useCatalogRecommendations';
+import { useProblems } from '@/hooks/useProblems';
+import { PROBLEM_CATALOG } from '@/data/catalog';
+import type { Problem, CatalogProblem } from '@/types';
 
 // Lazy load WeeklyStatsChart to reduce initial bundle size (Recharts is ~100KB gzipped)
 const WeeklyStatsChart = lazy(() => 
@@ -43,6 +50,8 @@ export function Dashboard() {
   const { suggestion, reason, topic, refresh } = useSuggestedProblem();
   const { progress, nextToUnlock } = useProgress();
   const { dueToday, isLoading: queueLoading } = useReviewQueue();
+  const { recommendations, availableProblems, isLoading: recommendationsLoading } = useCatalogRecommendations(3);
+  const { addProblem } = useProblems();
 
   // Find the current topic (last unlocked topic with incomplete mastery)
   const currentTopic = progress?.slice().reverse().find(
@@ -54,6 +63,25 @@ export function Dashboard() {
     ? Math.max(0, Math.ceil(currentTopic.totalProblems * 0.7) - currentTopic.solvedProblems)
     : 0;
 
+  // All catalog problems have been added
+  const allProblemsAdded = availableProblems.length === 0 && !recommendationsLoading;
+
+  // Handler for adding a catalog problem
+  const handleAddRecommendation = async (problem: CatalogProblem) => {
+    try {
+      await addProblem({
+        title: problem.title,
+        url: problem.url,
+        topic: problem.topic,
+        difficulty: problem.difficulty,
+        notes: '',
+      });
+      toast.success(`Added "${problem.title}" to your problems`);
+    } catch {
+      toast.error('Failed to add problem');
+    }
+  };
+
   // Handlers
   const handleStartReview = () => {
     navigate('/review');
@@ -63,7 +91,7 @@ export function Dashboard() {
     navigate(`/problems/${problem.id}`);
   };
 
-  const isLoading = streakLoading || statsLoading || queueLoading;
+  const isLoading = streakLoading || statsLoading || queueLoading || recommendationsLoading;
 
   if (isLoading) {
     return (
@@ -142,6 +170,51 @@ export function Dashboard() {
           />
         </Suspense>
       )}
+
+      {/* Recommended to Add section */}
+      <Card>
+        <CardHeader className="pb-3">
+          <div className="flex items-center justify-between">
+            <CardTitle className="flex items-center gap-2 text-base">
+              <Sparkles className="h-4 w-4 text-primary" />
+              Recommended to Add
+            </CardTitle>
+            {!allProblemsAdded && (
+              <Button variant="ghost" size="sm" asChild className="gap-1 text-xs">
+                <Link to="/catalog">
+                  View full catalog
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </Button>
+            )}
+          </div>
+        </CardHeader>
+        <CardContent className="pt-0">
+          {allProblemsAdded ? (
+            <div className="flex flex-col items-center justify-center py-6 text-center">
+              <CheckCircle2 className="h-8 w-8 text-green-500 mb-2" />
+              <p className="text-sm font-medium text-foreground">All {PROBLEM_CATALOG.length} catalog problems added!</p>
+              <p className="text-xs text-muted-foreground mt-1">
+                You've added every problem from the curated catalog.
+              </p>
+            </div>
+          ) : recommendations.length > 0 ? (
+            <div className="space-y-2">
+              {recommendations.map((problem) => (
+                <CatalogRecommendationRow
+                  key={problem.id}
+                  problem={problem}
+                  onAdd={() => handleAddRecommendation(problem)}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-muted-foreground text-center py-4">
+              No recommendations available
+            </p>
+          )}
+        </CardContent>
+      </Card>
 
       {/* Bottom row: Suggestions and Unlock progress */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
