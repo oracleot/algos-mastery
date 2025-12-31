@@ -10,6 +10,8 @@ interface TimerPresetsProps {
   onSelect: (minutes: number) => void;
   /** Whether presets can be changed (disabled when timer is running) */
   disabled?: boolean;
+  /** Compact mode for smaller layouts */
+  compact?: boolean;
   /** Additional CSS classes */
   className?: string;
 }
@@ -27,10 +29,15 @@ export function TimerPresets({
   selectedMinutes,
   onSelect,
   disabled = false,
+  compact = false,
   className,
 }: TimerPresetsProps) {
   return (
-    <div className={cn('flex items-center gap-2 sm:gap-2', className)}>
+    <div className={cn(
+      'flex items-center gap-2',
+      compact && 'flex-wrap justify-center',
+      className
+    )}>
       {PRESETS.map((preset) => {
         const isSelected = selectedMinutes === preset.minutes;
         return (
@@ -41,7 +48,10 @@ export function TimerPresets({
             onClick={() => onSelect(preset.minutes)}
             disabled={disabled}
             className={cn(
-              'min-w-[60px] h-10 sm:h-9 text-sm sm:text-xs touch-manipulation',
+              'touch-manipulation',
+              compact 
+                ? 'min-w-[50px] h-8 text-xs' 
+                : 'min-w-[60px] h-10 sm:h-9 text-sm sm:text-xs',
               isSelected && 'ring-2 ring-primary ring-offset-2'
             )}
           >

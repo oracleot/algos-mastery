@@ -63,7 +63,7 @@ function ReviewPage() {
     return (
       <div className="min-h-screen bg-background">
         <PageHeader title="Review Session" />
-        <main className="max-w-3xl mx-auto px-4 py-8">
+        <main className="max-w-7xl mx-auto px-4 lg:px-6 py-8">
           <div className="h-96 bg-muted animate-pulse rounded-lg" />
         </main>
       </div>
@@ -92,7 +92,7 @@ function ReviewPage() {
       />
 
       {/* Main Content */}
-      <main className="max-w-3xl mx-auto px-4 py-6 sm:py-8">
+      <main className="max-w-7xl mx-auto px-4 lg:px-6 py-6 sm:py-8">
         <ReviewSession
           problems={sessionProblems}
           onComplete={handleComplete}

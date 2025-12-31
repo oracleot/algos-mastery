@@ -190,7 +190,7 @@ function Problems() {
       />
 
       {/* Content */}
-      <main className="max-w-6xl mx-auto px-4 py-8 space-y-6">
+      <main className="max-w-7xl mx-auto px-4 lg:px-6 py-8 space-y-6">
         {/* Filter Bar */}
         <FilterBar
           ref={searchInputRef}

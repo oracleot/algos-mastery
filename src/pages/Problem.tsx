@@ -132,7 +132,7 @@ function Problem() {
     return (
       <div className="min-h-screen bg-background">
         <PageHeader title="Loading..." />
-        <main className="max-w-4xl mx-auto px-4 py-8">
+        <main className="max-w-7xl mx-auto px-4 lg:px-6 py-8">
           <div className="space-y-4">
             <div className="h-32 bg-muted animate-pulse rounded-lg" />
             <div className="h-64 bg-muted animate-pulse rounded-lg" />
@@ -177,7 +177,7 @@ function Problem() {
       />
 
       {/* Content */}
-      <main className="max-w-4xl mx-auto px-4 py-8 space-y-6">
+      <main className="max-w-7xl mx-auto px-4 lg:px-6 py-8 space-y-6">
         {/* Problem Info Card */}
         <Card>
           <CardHeader>

@@ -25,7 +25,7 @@ function Progress() {
           subtitle="Master each topic by solving 70% of problems to unlock the next level"
           icon={<TrendingUp className="h-5 w-5" />}
         />
-        <main className="max-w-4xl mx-auto px-4 py-8">
+        <main className="max-w-7xl mx-auto px-4 lg:px-6 py-8">
           <div className="space-y-4">
             <div className="h-32 bg-muted animate-pulse rounded-lg" />
             <div className="h-24 bg-muted animate-pulse rounded-lg" />
@@ -47,7 +47,7 @@ function Progress() {
       />
 
       {/* Content */}
-      <main className="max-w-4xl mx-auto px-4 py-8">
+      <main className="max-w-7xl mx-auto px-4 lg:px-6 py-8">
         {/* Next to unlock hint */}
         {nextToUnlock && (
           <div className="mb-6 p-4 bg-primary/5 border border-primary/20 rounded-lg">

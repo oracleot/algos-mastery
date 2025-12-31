@@ -214,7 +214,7 @@ export function Practice() {
         icon={<Clock className="h-5 w-5" />}
       />
       
-      <div className="max-w-4xl mx-auto px-4 py-6 sm:py-8">
+      <div className="max-w-7xl mx-auto px-4 lg:px-6 py-6 sm:py-8">
 
         {/* Problem Selection View */}
         {practiceState === 'selection' && (

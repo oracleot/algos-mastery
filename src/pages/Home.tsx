@@ -17,7 +17,7 @@ function Home() {
       {/* Sticky header with Settings and Theme toggle */}
       <StickyHeader />
       
-      <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12 pt-16 sm:pt-12">
+      <div className="max-w-7xl mx-auto px-4 lg:px-6 py-8 sm:py-12 pt-16 sm:pt-12">
         {/* Header Section */}
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">

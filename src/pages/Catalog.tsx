@@ -110,7 +110,7 @@ export function Catalog() {
         icon={<BookOpen className="h-5 w-5 text-primary" />}
       />
 
-      <main className="container mx-auto max-w-6xl px-4 py-6">
+      <main className="container mx-auto max-w-7xl px-4 lg:px-6 py-6">
         {/* Filters */}
         <div className="mb-6">
           <CatalogFilters

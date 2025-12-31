@@ -2,7 +2,8 @@
 
 import { useState, useCallback, useMemo, useEffect, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
-import { ExternalLink, Eye, EyeOff, ChevronDown, ChevronUp, FileCode, Code } from 'lucide-react';
+import { ExternalLink, Eye, EyeOff, ChevronDown, ChevronUp, FileCode, Code, Copy, Check } from 'lucide-react';
+import { toast } from 'sonner';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '@/lib/db';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -95,8 +96,25 @@ export function PracticeSession({
   const [practiceLanguage, setPracticeLanguage] = useState<SupportedLanguage>(
     recoveredState?.practiceLanguage ?? 'python'
   );
+  const [copied, setCopied] = useState(false);
 
   const { startTracking, stopTracking } = useTimeLog();
+
+  // Handle copy practice code
+  const handleCopyCode = useCallback(async () => {
+    if (!practiceCode.trim()) {
+      toast.error('No code to copy');
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(practiceCode);
+      setCopied(true);
+      toast.success('Code copied to clipboard');
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      toast.error('Failed to copy code');
+    }
+  }, [practiceCode]);
 
   // Handle timer completion
   const handleTimerComplete = useCallback(() => {
@@ -313,37 +331,40 @@ export function PracticeSession({
   }
 
   return (
-    <div className="space-y-6">
-      {/* Timer Section */}
-      <Card>
-        <CardContent className="pt-6">
-          <div className="flex flex-col items-center gap-4">
-            {/* Timer Display */}
-            <Timer state={timerState} size="lg" />
+    <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
+      {/* Timer Section - Sticky on desktop */}
+      <div className="lg:sticky lg:top-6 lg:self-start">
+        <Card>
+          <CardContent className="pt-6">
+            <div className="flex flex-col items-center gap-4">
+              {/* Timer Display */}
+              <Timer state={timerState} size="lg" />
 
-            {/* Timer Controls */}
-            <TimerControls
-              state={timerState}
-              onStart={handleStart}
-              onPause={handlePause}
-              onResume={handleResume}
-              onReset={handleReset}
-              onStop={handleEndSession}
-              showStop={hasSessionStarted}
-              size="lg"
-            />
-
-            {/* Duration Presets - only show before starting */}
-            {!hasSessionStarted && (
-              <TimerPresets
-                selectedMinutes={durationMinutes}
-                onSelect={handlePresetChange}
-                disabled={timerState.isRunning}
+              {/* Timer Controls */}
+              <TimerControls
+                state={timerState}
+                onStart={handleStart}
+                onPause={handlePause}
+                onResume={handleResume}
+                onReset={handleReset}
+                onStop={handleEndSession}
+                showStop={hasSessionStarted}
+                size="md"
               />
-            )}
-          </div>
-        </CardContent>
-      </Card>
+
+              {/* Duration Presets - only show before starting */}
+              {!hasSessionStarted && (
+                <TimerPresets
+                  selectedMinutes={durationMinutes}
+                  onSelect={handlePresetChange}
+                  disabled={timerState.isRunning}
+                  compact
+                />
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Problem Card */}
       <Card>
@@ -424,10 +445,26 @@ export function PracticeSession({
                 <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
                   Your Practice Code
                 </h3>
-                <LanguageSelector
-                  value={practiceLanguage}
-                  onChange={setPracticeLanguage}
-                />
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={handleCopyCode}
+                    disabled={!practiceCode.trim()}
+                    className="gap-1.5 h-8"
+                  >
+                    {copied ? (
+                      <Check className="h-4 w-4 text-green-500" />
+                    ) : (
+                      <Copy className="h-4 w-4" />
+                    )}
+                    <span className="hidden sm:inline">{copied ? 'Copied' : 'Copy'}</span>
+                  </Button>
+                  <LanguageSelector
+                    value={practiceLanguage}
+                    onChange={setPracticeLanguage}
+                  />
+                </div>
               </div>
               <Suspense fallback={<EditorSkeleton height="300px" />}>
                 <SolutionEditor
