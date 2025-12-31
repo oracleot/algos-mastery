@@ -5,21 +5,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, Sparkles, CheckCircle2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { StreakCounter } from './StreakCounter';
-import { SuggestedNext } from './SuggestedNext';
-import { NextToUnlock } from './NextToUnlock';
 import { DueToday } from './DueToday';
 import { CatalogRecommendationRow } from './CatalogRecommendationRow';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useStreak } from '@/hooks/useStreak';
 import { useStats } from '@/hooks/useStats';
-import { useSuggestedProblem } from '@/hooks/useSuggestedProblem';
-import { useProgress } from '@/hooks/useProgress';
 import { useReviewQueue } from '@/hooks/useReviewQueue';
 import { useCatalogRecommendations } from '@/hooks/useCatalogRecommendations';
 import { useProblems } from '@/hooks/useProblems';
 import { PROBLEM_CATALOG } from '@/data/catalog';
-import type { Problem, CatalogProblem } from '@/types';
+import type { CatalogProblem } from '@/types';
 
 // Lazy load WeeklyStatsChart to reduce initial bundle size (Recharts is ~100KB gzipped)
 const WeeklyStatsChart = lazy(() => 
@@ -47,21 +43,9 @@ export function Dashboard() {
   // Hooks for dashboard data
   const { streak, isLoading: streakLoading, hasReviewedToday } = useStreak();
   const { weeklyStats, weeklyTotal, dailyAverage, isLoading: statsLoading } = useStats();
-  const { suggestion, reason, topic, refresh } = useSuggestedProblem();
-  const { progress, nextToUnlock } = useProgress();
   const { dueToday, isLoading: queueLoading } = useReviewQueue();
   const { recommendations, availableProblems, isLoading: recommendationsLoading } = useCatalogRecommendations(3);
   const { addProblem } = useProblems();
-
-  // Find the current topic (last unlocked topic with incomplete mastery)
-  const currentTopic = progress?.slice().reverse().find(
-    (t) => t.unlocked && t.masteryPercent < 70
-  ) ?? progress?.find((t) => t.unlocked);
-
-  // Calculate problems needed to unlock next topic
-  const problemsNeeded = currentTopic && nextToUnlock
-    ? Math.max(0, Math.ceil(currentTopic.totalProblems * 0.7) - currentTopic.solvedProblems)
-    : 0;
 
   // All catalog problems have been added
   const allProblemsAdded = availableProblems.length === 0 && !recommendationsLoading;
@@ -86,10 +70,6 @@ export function Dashboard() {
   // Handlers
   const handleStartReview = () => {
     navigate('/review');
-  };
-
-  const handleSelectProblem = (problem: Problem) => {
-    navigate(`/problems/${problem.id}`);
   };
 
   const isLoading = streakLoading || statsLoading || queueLoading || recommendationsLoading;
@@ -127,7 +107,7 @@ export function Dashboard() {
   return (
     <div className="space-y-4 sm:space-y-6">
       {/* Top row: Streak and quick stats */}
-      <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center justify-between gap-3 sm:gap-4" data-tour="dashboard-stats">
+      <div className="flex flex-row flex-wrap items-center justify-between gap-3 sm:gap-4" data-tour="dashboard-stats">
         <div className="flex items-center gap-4">
           <StreakCounter
             count={streak?.currentStreak ?? 0}
@@ -152,17 +132,19 @@ export function Dashboard() {
         </div>
       </div>
 
-      {/* Due Today section */}
-      <div data-tour="due-today">
-        <DueToday
-          items={dueToday ?? []}
-          onStartReview={handleStartReview}
-          compact={false}
-        />
-      </div>
+      {/* Due Today section - only show if there are items due */}
+      {dueToday && dueToday.length > 0 && (
+        <div data-tour="due-today">
+          <DueToday
+            items={dueToday}
+            onStartReview={handleStartReview}
+            compact={false}
+          />
+        </div>
+      )}
 
-      {/* Weekly chart - lazy loaded to reduce initial bundle size */}
-      {weeklyStats && (
+      {/* Weekly chart - only show if there's activity this week */}
+      {weeklyStats && weeklyTotal > 0 && (
         <Suspense fallback={<ChartSkeleton />}>
           <WeeklyStatsChart
             data={weeklyStats}
@@ -216,25 +198,6 @@ export function Dashboard() {
           )}
         </CardContent>
       </Card>
-
-      {/* Bottom row: Suggestions and Unlock progress */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <SuggestedNext
-          problem={suggestion}
-          topic={topic}
-          reason={reason}
-          onSelect={handleSelectProblem}
-          onRefresh={refresh}
-        />
-
-        {currentTopic && nextToUnlock && (
-          <NextToUnlock
-            currentTopic={currentTopic}
-            nextTopic={nextToUnlock}
-            problemsNeeded={problemsNeeded}
-          />
-        )}
-      </div>
     </div>
   );
 }

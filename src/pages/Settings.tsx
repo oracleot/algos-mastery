@@ -1,9 +1,8 @@
 // pages/Settings.tsx - Settings page with data export/import and theme
 
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
-  ArrowLeft,
   Download,
   Upload,
   HardDrive,
@@ -19,8 +18,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ExportDialog } from '@/components/ExportDialog';
 import { ImportDialog } from '@/components/ImportDialog';
-import { ThemeToggle } from '@/components/ThemeToggle';
-import { OfflineIndicator } from '@/components/OfflineIndicator';
+import { PageHeader } from '@/components/PageHeader';
 import { useTheme } from '@/hooks/useTheme';
 import { usePWA } from '@/hooks/usePWA';
 import { usePreferences } from '@/hooks/usePreferences';
@@ -38,7 +36,7 @@ function Settings() {
   const [showExportDialog, setShowExportDialog] = useState(false);
   const [showImportDialog, setShowImportDialog] = useState(false);
   const { theme, setTheme } = useTheme();
-  const { isOnline, isInstalled } = usePWA();
+  const { isInstalled, isOnline } = usePWA();
   const { updatePreference } = usePreferences();
   const navigate = useNavigate();
 
@@ -60,34 +58,15 @@ function Settings() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Top bar with theme toggle and offline indicator */}
-      <div className="fixed top-4 right-4 flex items-center gap-2 z-10">
-        <OfflineIndicator isOnline={isOnline} />
-        <ThemeToggle />
-      </div>
+      {/* Page header with back button and settings toggle */}
+      <PageHeader 
+        title="Settings" 
+        subtitle="Manage your data and preferences"
+        icon={<SettingsIcon className="h-5 w-5 text-primary" />}
+        showSettings={false}
+      />
       
-      <div className="max-w-2xl mx-auto px-4 py-6 sm:py-8 pt-16 sm:pt-8">
-        {/* Header */}
-        <div className="mb-6 sm:mb-8">
-          <Button variant="ghost" size="sm" asChild className="mb-4 touch-manipulation">
-            <Link to="/">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Home
-            </Link>
-          </Button>
-
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-primary/10 rounded-lg shrink-0">
-              <SettingsIcon className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-            </div>
-            <div>
-              <h1 className="text-xl sm:text-2xl font-bold text-foreground">Settings</h1>
-              <p className="text-xs sm:text-sm text-muted-foreground">
-                Manage your data and preferences
-              </p>
-            </div>
-          </div>
-        </div>
+      <div className="max-w-2xl mx-auto px-4 py-6 sm:py-8">
 
         {/* Appearance Section */}
         <Card className="mb-6">

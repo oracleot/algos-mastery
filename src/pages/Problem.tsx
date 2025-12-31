@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, Plus, ExternalLink, CalendarPlus, BookOpen } from 'lucide-react';
+import { Plus, ExternalLink, CalendarPlus, BookOpen } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -20,10 +20,8 @@ import { TopicBadge } from '@/components/TopicBadge';
 import { DifficultyBadge } from '@/components/DifficultyBadge';
 import { AddToReviewButton } from '@/components/AddToReviewButton';
 import { NextReviewDate } from '@/components/NextReviewDate';
-import { ThemeToggle } from '@/components/ThemeToggle';
-import { OfflineIndicator } from '@/components/OfflineIndicator';
+import { PageHeader } from '@/components/PageHeader';
 import { useProblems } from '@/hooks/useProblems';
-import { usePWA } from '@/hooks/usePWA';
 import { useSolutions } from '@/hooks/useSolutions';
 import { useReviewQueue } from '@/hooks/useReviewQueue';
 import { getTopicName } from '@/data/topics';
@@ -32,7 +30,6 @@ import type { Problem as ProblemType, SolutionFormData, SupportedLanguage } from
 function Problem() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { isOnline } = usePWA();
   const { getProblem } = useProblems();
   const {
     solutions,
@@ -134,18 +131,7 @@ function Problem() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background">
-        <header className="bg-card border-b border-border">
-          <div className="max-w-4xl mx-auto px-4 py-4">
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" asChild>
-                <Link to="/problems">
-                  <ArrowLeft className="h-5 w-5" />
-                </Link>
-              </Button>
-              <div className="h-6 w-48 bg-muted animate-pulse rounded" />
-            </div>
-          </div>
-        </header>
+        <PageHeader title="Loading..." />
         <main className="max-w-4xl mx-auto px-4 py-8">
           <div className="space-y-4">
             <div className="h-32 bg-muted animate-pulse rounded-lg" />
@@ -165,37 +151,30 @@ function Problem() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="bg-card border-b border-border">
-        <div className="max-w-4xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" asChild>
-                <Link to="/problems">
-                  <ArrowLeft className="h-5 w-5" />
-                </Link>
-              </Button>
-              <div>
-                <h1 className="text-xl font-semibold text-foreground">
-                  {problem.title}
-                </h1>
-                <div className="flex items-center gap-2 mt-1">
-                  <TopicBadge topic={problem.topic} />
-                  <DifficultyBadge difficulty={problem.difficulty} />
-                </div>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <OfflineIndicator isOnline={isOnline} />
-              <ThemeToggle />
-              <Button onClick={handleOpenAddForm}>
-                <Plus className="h-4 w-4" />
-                Add Solution
-              </Button>
-            </div>
+      {/* Page header with problem title and add solution button */}
+      <PageHeader 
+        title={problem.title}
+        subtitle={
+          <div className="flex items-center gap-2 mt-1">
+            <TopicBadge topic={problem.topic} />
+            <DifficultyBadge difficulty={problem.difficulty} />
           </div>
-        </div>
-      </header>
+        }
+        useHistoryBack
+        actions={
+          <>
+            {/* Desktop: full button with text */}
+            <Button onClick={handleOpenAddForm} size="sm" className="hidden sm:flex">
+              <Plus className="h-4 w-4" />
+              Add Solution
+            </Button>
+            {/* Mobile: icon only */}
+            <Button onClick={handleOpenAddForm} size="icon" className="h-9 w-9 sm:hidden">
+              <Plus className="h-5 w-5" />
+            </Button>
+          </>
+        }
+      />
 
       {/* Content */}
       <main className="max-w-4xl mx-auto px-4 py-8 space-y-6">

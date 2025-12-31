@@ -1,22 +1,18 @@
 // pages/Review.tsx - Active review session page
 
 import { useCallback, useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { ReviewSession } from '@/components/ReviewSession';
-import { ThemeToggle } from '@/components/ThemeToggle';
-import { OfflineIndicator } from '@/components/OfflineIndicator';
+import { PageHeader } from '@/components/PageHeader';
 import type { ReviewResult } from '@/components/ReviewSession';
 import { useReviewQueue } from '@/hooks/useReviewQueue';
-import { usePWA } from '@/hooks/usePWA';
 import type { Problem as ProblemType } from '@/types';
 
 function ReviewPage() {
   const navigate = useNavigate();
-  const { isOnline } = usePWA();
   const { dueToday, isLoading: queueLoading } = useReviewQueue();
 
   // State for dialog and session
@@ -66,18 +62,7 @@ function ReviewPage() {
   if (queueLoading || sessionProblems === null) {
     return (
       <div className="min-h-screen bg-background">
-        <header className="bg-card border-b border-border">
-          <div className="max-w-3xl mx-auto px-4 py-4">
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" asChild>
-                <Link to="/">
-                  <ArrowLeft className="h-5 w-5" />
-                </Link>
-              </Button>
-              <div className="h-6 w-32 bg-muted animate-pulse rounded" />
-            </div>
-          </div>
-        </header>
+        <PageHeader title="Review Session" />
         <main className="max-w-3xl mx-auto px-4 py-8">
           <div className="h-96 bg-muted animate-pulse rounded-lg" />
         </main>
@@ -92,39 +77,19 @@ function ReviewPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="bg-card border-b border-border sticky top-0 z-10">
-        <div className="max-w-3xl mx-auto px-4 py-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={handleExit}
-                aria-label="Exit review session"
-              >
-                <X className="h-5 w-5" />
-              </Button>
-              <div>
-                <h1 className="text-lg font-semibold">Review Session</h1>
-              </div>
-            </div>
-
-            {/* End Session button */}
-            <div className="flex items-center gap-2">
-              <OfflineIndicator isOnline={isOnline} />
-              <ThemeToggle />
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleExit}
-              >
-                End Session
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* Page header with exit button and settings toggle */}
+      <PageHeader 
+        title="Review Session"
+        actions={
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleExit}
+          >
+            End Session
+          </Button>
+        }
+      />
 
       {/* Main Content */}
       <main className="max-w-3xl mx-auto px-4 py-6 sm:py-8">

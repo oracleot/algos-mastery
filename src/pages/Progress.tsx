@@ -1,18 +1,15 @@
 // pages/Progress.tsx - Progress ladder page showing topic mastery
 
-import { Link, useNavigate } from 'react-router-dom';
-import { Home } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { TrendingUp } from 'lucide-react';
 import { ProgressLadder } from '@/components/ProgressLadder';
-import { ThemeToggle } from '@/components/ThemeToggle';
-import { OfflineIndicator } from '@/components/OfflineIndicator';
+import { PageHeader } from '@/components/PageHeader';
 import { useProgress } from '@/hooks/useProgress';
-import { usePWA } from '@/hooks/usePWA';
 import type { TopicSlug } from '@/types';
 
 function Progress() {
   const navigate = useNavigate();
   const { progress, isLoading, nextToUnlock } = useProgress();
-  const { isOnline } = usePWA();
 
   const handleTopicClick = (topic: TopicSlug) => {
     // Navigate to problems filtered by this topic
@@ -23,11 +20,11 @@ function Progress() {
   if (isLoading || !progress) {
     return (
       <div className="min-h-screen bg-background">
-        <header className="bg-card border-b border-border">
-          <div className="max-w-4xl mx-auto px-4 py-4">
-            <h1 className="text-xl font-semibold text-foreground">Progress Ladder</h1>
-          </div>
-        </header>
+        <PageHeader
+          title="Progress Ladder"
+          subtitle="Master each topic by solving 70% of problems to unlock the next level"
+          icon={<TrendingUp className="h-5 w-5" />}
+        />
         <main className="max-w-4xl mx-auto px-4 py-8">
           <div className="space-y-4">
             <div className="h-32 bg-muted animate-pulse rounded-lg" />
@@ -42,32 +39,12 @@ function Progress() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="bg-card border-b border-border">
-        <div className="max-w-4xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Link
-                to="/"
-                className="p-2 -ml-2 text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
-                aria-label="Go to home"
-              >
-                <Home className="h-5 w-5" />
-              </Link>
-              <div>
-                <h1 className="text-xl font-semibold text-foreground">Progress Ladder</h1>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Master each topic by solving 70% of problems to unlock the next level
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <OfflineIndicator isOnline={isOnline} />
-              <ThemeToggle />
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* Page Header */}
+      <PageHeader
+        title="Progress Ladder"
+        subtitle="Master each topic by solving 70% of problems to unlock the next level"
+        icon={<TrendingUp className="h-5 w-5" />}
+      />
 
       {/* Content */}
       <main className="max-w-4xl mx-auto px-4 py-8">

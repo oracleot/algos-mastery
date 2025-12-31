@@ -15,6 +15,8 @@ import {
 interface UseTimerOptions {
   /** Initial duration in minutes */
   initialMinutes?: number;
+  /** Initial elapsed time in seconds (for session recovery) */
+  initialElapsed?: number;
   /** Called when timer completes */
   onComplete?: () => void;
   /** Called on each tick with current state */
@@ -44,11 +46,21 @@ interface UseTimerReturn {
  * Timer hook using requestAnimationFrame for precise timing
  */
 export function useTimer(options: UseTimerOptions = {}): UseTimerReturn {
-  const { initialMinutes = 45, onComplete, onTick } = options;
+  const { initialMinutes = 45, initialElapsed = 0, onComplete, onTick } = options;
 
-  const [state, setState] = useState<TimerState>(() =>
-    createTimerState(initialMinutes)
-  );
+  const [state, setState] = useState<TimerState>(() => {
+    const base = createTimerState(initialMinutes);
+    // If we have initial elapsed time, adjust the state
+    if (initialElapsed > 0) {
+      return {
+        ...base,
+        elapsed: initialElapsed,
+        remaining: Math.max(0, base.duration - initialElapsed),
+        isPaused: true, // Start paused when recovering
+      };
+    }
+    return base;
+  });
 
   const rafRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number | null>(null);

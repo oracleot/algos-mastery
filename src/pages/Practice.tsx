@@ -1,8 +1,8 @@
 // pages/Practice.tsx - Timed practice page with session flow
 
 import { useState, useCallback, useMemo } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, Clock, Play, Shuffle, CheckCircle, RotateCcw } from 'lucide-react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Clock, Play, Shuffle, CheckCircle, RotateCcw } from 'lucide-react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { toast } from 'sonner';
 import { db } from '@/lib/db';
@@ -11,11 +11,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PracticeSession, type PracticeSessionResult } from '@/components/PracticeSession';
 import { TopicBadge } from '@/components/TopicBadge';
 import { DifficultyBadge } from '@/components/DifficultyBadge';
-import { ThemeToggle } from '@/components/ThemeToggle';
-import { OfflineIndicator } from '@/components/OfflineIndicator';
+import { PageHeader } from '@/components/PageHeader';
 import { formatTotalTime } from '@/lib/timeLog';
 import { formatTime } from '@/lib/timer';
-import { usePWA } from '@/hooks/usePWA';
 import {
   getSavedSession,
   clearSavedSession,
@@ -52,7 +50,6 @@ export function Practice() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const problemIdFromUrl = searchParams.get('problemId');
-  const { isOnline } = usePWA();
 
   const [practiceState, setPracticeState] = useState<PracticeState>(
     problemIdFromUrl ? 'session' : 'selection'
@@ -68,9 +65,13 @@ export function Practice() {
     () => problemIdFromUrl ? null : getInitialRecoverySession()
   );
 
-  // Load all problems
+  // Load all problems (only those that have been attempted or solved for practice)
   const problems = useLiveQuery(
-    async () => await db.problems.toArray(),
+    async () => {
+      const allProblems = await db.problems.toArray();
+      // Filter to only include problems that have been attempted or solved
+      return allProblems.filter(p => p.status === 'attempted' || p.status === 'solved');
+    },
     [],
     [] as Problem[]
   );
@@ -81,9 +82,9 @@ export function Practice() {
     return problems.find((p) => p.id === selectedProblemId) ?? null;
   }, [problems, selectedProblemId]);
 
-  // Get unsolved problems for suggestions
+  // Get unsolved (but attempted) problems for suggestions - exclude fully solved
   const unsolvedProblems = useMemo(
-    () => problems.filter((p) => p.status !== 'solved'),
+    () => problems.filter((p) => p.status === 'attempted'),
     [problems]
   );
 
@@ -206,30 +207,14 @@ export function Practice() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Page Header */}
+      <PageHeader
+        title="Timed Practice"
+        subtitle="Practice problems under time pressure"
+        icon={<Clock className="h-5 w-5" />}
+      />
+      
       <div className="max-w-4xl mx-auto px-4 py-6 sm:py-8">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8">
-          <div className="flex items-center gap-3 sm:gap-4">
-            <Button variant="ghost" size="icon" asChild className="h-9 w-9 sm:h-10 sm:w-10 touch-manipulation shrink-0">
-              <Link to="/">
-                <ArrowLeft className="h-5 w-5" />
-              </Link>
-            </Button>
-            <div>
-              <h1 className="text-xl sm:text-2xl font-bold text-foreground flex items-center gap-2">
-                <Clock className="h-5 w-5 sm:h-6 sm:w-6" />
-                Timed Practice
-              </h1>
-              <p className="text-sm text-muted-foreground hidden sm:block">
-                Practice problems under time pressure
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 self-end sm:self-auto">
-            <OfflineIndicator isOnline={isOnline} />
-            <ThemeToggle />
-          </div>
-        </div>
 
         {/* Problem Selection View */}
         {practiceState === 'selection' && (
@@ -296,12 +281,12 @@ export function Practice() {
               <CardContent>
                 {problems.length === 0 ? (
                   <div className="text-center py-8">
-                    <p className="text-muted-foreground mb-4">
-                      No problems added yet
+                    <p className="text-muted-foreground">
+                      No problems available for practice yet.
                     </p>
-                    <Button asChild>
-                      <Link to="/problems">Add Problems</Link>
-                    </Button>
+                    <p className="text-sm text-muted-foreground mt-2">
+                      Mark problems as "Attempted" or "Solved" to practice them here.
+                    </p>
                   </div>
                 ) : (
                   <div className="space-y-2 max-h-[400px] overflow-y-auto">

@@ -129,7 +129,7 @@
 - [X] T025 Run full test suite and ensure all tests pass: `pnpm test --run`
 - [X] T026 Run type check and lint: `pnpm typecheck && pnpm lint`
 - [X] T027 Run build to verify no production errors: `pnpm build`
-- [ ] T028 Manual validation against quickstart.md acceptance criteria checklist
+- [X] T028 Manual validation against quickstart.md acceptance criteria checklist
 
 ---
 
