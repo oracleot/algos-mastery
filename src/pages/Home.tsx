@@ -1,28 +1,21 @@
 // pages/Home.tsx - Home page with dashboard and navigation
 
 import { Link } from 'react-router-dom';
-import { BookOpen, ArrowRight, TrendingUp, Clock, Settings, Library } from 'lucide-react';
+import { BookOpen, ArrowRight, TrendingUp, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Dashboard } from '@/components/Dashboard';
-import { ThemeToggle } from '@/components/ThemeToggle';
-import { OfflineIndicator } from '@/components/OfflineIndicator';
+import { StickyHeader } from '@/components/StickyHeader';
 import { OnboardingTour } from '@/components/OnboardingTour';
-import { usePWA } from '@/hooks/usePWA';
 
 function Home() {
-  const { isOnline } = usePWA();
-
   return (
     <div className="min-h-screen bg-background">
       {/* Onboarding Tour */}
       <OnboardingTour />
       
-      {/* Top bar with theme toggle and offline indicator */}
-      <div className="fixed top-4 right-4 flex items-center gap-2 z-10">
-        <OfflineIndicator isOnline={isOnline} />
-        <ThemeToggle />
-      </div>
+      {/* Sticky header with Settings and Theme toggle */}
+      <StickyHeader />
       
       <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12 pt-16 sm:pt-12">
         {/* Header Section */}
@@ -48,12 +41,6 @@ function Home() {
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild className="w-full sm:w-auto touch-manipulation" data-tour="browse-catalog">
-              <Link to="/catalog">
-                <Library className="h-5 w-5" />
-                Browse Catalog
-              </Link>
-            </Button>
             <Button size="lg" variant="outline" asChild className="w-full sm:w-auto touch-manipulation" data-tour="timed-practice">
               <Link to="/practice">
                 <Clock className="h-5 w-5" />
@@ -67,53 +54,45 @@ function Home() {
               </Link>
             </Button>
           </div>
+        </div>
 
-          {/* Settings link */}
-          <div className="mt-4">
-            <Button variant="ghost" size="sm" asChild className="touch-manipulation">
-              <Link to="/settings">
-                <Settings className="h-4 w-4 mr-2" />
-                Settings
-              </Link>
-            </Button>
+        {/* Features Section - Horizontally scrollable on mobile */}
+        <div className="mb-8 -mx-4 px-4 sm:mx-0 sm:px-0">
+          <div className="flex gap-4 overflow-x-auto pb-4 sm:pb-0 sm:grid sm:grid-cols-3 sm:overflow-visible snap-x snap-mandatory">
+            <Card className="min-w-[200px] max-w-[240px] sm:min-w-0 sm:max-w-none snap-start shrink-0 sm:shrink">
+              <CardContent className="pt-6">
+                <div className="text-2xl mb-2">📝</div>
+                <h3 className="font-semibold text-foreground mb-1">Track Problems</h3>
+                <p className="text-sm text-muted-foreground">
+                  Add problems from LeetCode, HackerRank, or any source with notes and links.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="min-w-[200px] max-w-[240px] sm:min-w-0 sm:max-w-none snap-start shrink-0 sm:shrink">
+              <CardContent className="pt-6">
+                <div className="text-2xl mb-2">🏷️</div>
+                <h3 className="font-semibold text-foreground mb-1">Organize by Topic</h3>
+                <p className="text-sm text-muted-foreground">
+                  Categorize problems by 15 algorithm topics following a learning progression.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="min-w-[200px] max-w-[240px] sm:min-w-0 sm:max-w-none snap-start shrink-0 sm:shrink">
+              <CardContent className="pt-6">
+                <div className="text-2xl mb-2">📊</div>
+                <h3 className="font-semibold text-foreground mb-1">Track Progress</h3>
+                <p className="text-sm text-muted-foreground">
+                  Mark problems as unsolved, attempted, or solved to track your mastery.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
 
         {/* Dashboard Section */}
         <Dashboard />
-
-        {/* Features Section */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <Card>
-            <CardContent className="pt-6">
-              <div className="text-2xl mb-2">📝</div>
-              <h3 className="font-semibold text-foreground mb-1">Track Problems</h3>
-              <p className="text-sm text-muted-foreground">
-                Add problems from LeetCode, HackerRank, or any source with notes and links.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="pt-6">
-              <div className="text-2xl mb-2">🏷️</div>
-              <h3 className="font-semibold text-foreground mb-1">Organize by Topic</h3>
-              <p className="text-sm text-muted-foreground">
-                Categorize problems by 15 algorithm topics following a learning progression.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="pt-6">
-              <div className="text-2xl mb-2">📊</div>
-              <h3 className="font-semibold text-foreground mb-1">Track Progress</h3>
-              <p className="text-sm text-muted-foreground">
-                Mark problems as unsolved, attempted, or solved to track your mastery.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
       </div>
     </div>
   );

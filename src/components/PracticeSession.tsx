@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useMemo, useEffect, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
-import { ExternalLink, Eye, EyeOff, ChevronDown, ChevronUp, FileCode } from 'lucide-react';
+import { ExternalLink, Eye, EyeOff, ChevronDown, ChevronUp, FileCode, Code } from 'lucide-react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '@/lib/db';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,6 +13,7 @@ import { TimerPresets } from '@/components/TimerPresets';
 import { TopicBadge } from '@/components/TopicBadge';
 import { DifficultyBadge } from '@/components/DifficultyBadge';
 import { EditorSkeleton } from '@/components/EditorSkeleton';
+import { LanguageSelector } from '@/components/LanguageSelector';
 import { useTimer } from '@/hooks/useTimer';
 import { useTimeLog } from '@/hooks/useTimeLog';
 import { useTemplates } from '@/hooks/useTemplates';
@@ -24,7 +25,7 @@ import {
   saveSessionState,
   clearSavedSession,
 } from '@/lib/practiceSession';
-import type { Problem, Solution, Template } from '@/types';
+import type { Problem, Solution, Template, SupportedLanguage } from '@/types';
 
 // Lazy load SolutionEditor
 const SolutionEditor = lazy(() =>
@@ -83,6 +84,17 @@ export function PracticeSession({
     recoveredState?.isRunning || recoveredState?.isPaused || false
   );
   const [timerExpired, setTimerExpired] = useState(false);
+  
+  // Practice code editor state - restore from session or default to open
+  const [showPracticeEditor, setShowPracticeEditor] = useState(
+    recoveredState?.showPracticeEditor ?? true
+  );
+  const [practiceCode, setPracticeCode] = useState(
+    recoveredState?.practiceCode ?? ''
+  );
+  const [practiceLanguage, setPracticeLanguage] = useState<SupportedLanguage>(
+    recoveredState?.practiceLanguage ?? 'python'
+  );
 
   const { startTracking, stopTracking } = useTimeLog();
 
@@ -100,6 +112,7 @@ export function PracticeSession({
     setDuration,
   } = useTimer({
     initialMinutes: durationMinutes,
+    initialElapsed: recoveredState?.elapsed ?? 0,
     onComplete: handleTimerComplete,
   });
 
@@ -114,8 +127,11 @@ export function PracticeSession({
       isPaused: timerState.isPaused,
       revealedSolution: showSolution,
       revealedTemplate: showTemplate,
+      practiceCode,
+      practiceLanguage,
+      showPracticeEditor,
     });
-  }, [problem.id, timerState, durationMinutes, showSolution, showTemplate]);
+  }, [problem.id, timerState, durationMinutes, showSolution, showTemplate, practiceCode, practiceLanguage, showPracticeEditor]);
 
   // Auto-save session state when timer is running (every 5 seconds)
   useEffect(() => {
@@ -128,6 +144,13 @@ export function PracticeSession({
     const intervalId = setInterval(saveState, 5000);
     return () => clearInterval(intervalId);
   }, [timerState.isRunning, saveState]);
+
+  // Save session state when practice code, language, or editor visibility changes
+  useEffect(() => {
+    if (hasSessionStarted) {
+      saveState();
+    }
+  }, [practiceCode, practiceLanguage, showPracticeEditor, hasSessionStarted, saveState]);
 
   // Load solutions for problem
   const solutions = useLiveQuery(
@@ -186,6 +209,8 @@ export function PracticeSession({
     setSelectedTemplate(null);
     setExpandedSolutions(new Set());
     setTimerExpired(false);
+    setPracticeCode('');
+    setShowPracticeEditor(true);
     clearSavedSession();
   }, [reset]);
 
@@ -216,21 +241,24 @@ export function PracticeSession({
     setTimerExpired(false);
   }, []);
 
-  // Toggle timer pause/resume via keyboard
-  const handleTogglePauseResume = useCallback(() => {
-    if (timerState.isRunning && !timerState.isPaused) {
+  // Toggle timer start/pause/resume via keyboard
+  const handleToggleTimer = useCallback(() => {
+    if (!hasSessionStarted) {
+      // Start the session
+      handleStart();
+    } else if (timerState.isRunning && !timerState.isPaused) {
       handlePause();
     } else if (timerState.isPaused) {
       handleResume();
     }
-  }, [timerState.isRunning, timerState.isPaused, handlePause, handleResume]);
+  }, [hasSessionStarted, timerState.isRunning, timerState.isPaused, handleStart, handlePause, handleResume]);
 
-  // Keyboard shortcut: Space to pause/resume timer
+  // Keyboard shortcut: Space to start/pause/resume timer
   useKeyboardShortcuts([
     { 
       key: ' ', 
-      handler: handleTogglePauseResume, 
-      enabled: hasSessionStarted && !timerExpired 
+      handler: handleToggleTimer, 
+      enabled: !timerExpired 
     },
   ]);
 
@@ -354,6 +382,16 @@ export function PracticeSession({
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-2">
             <Button
+              variant={showPracticeEditor ? 'secondary' : 'default'}
+              size="sm"
+              onClick={() => setShowPracticeEditor(!showPracticeEditor)}
+              className="gap-2"
+            >
+              <Code className="h-4 w-4" />
+              {showPracticeEditor ? 'Hide Editor' : 'Practice Code'}
+            </Button>
+            
+            <Button
               variant={showTemplate ? 'secondary' : 'outline'}
               size="sm"
               onClick={handleToggleTemplate}
@@ -378,6 +416,30 @@ export function PracticeSession({
               {showSolution ? 'Hide Solution' : 'Reveal Solution'}
             </Button>
           </div>
+
+          {/* Practice Code Editor */}
+          {showPracticeEditor && (
+            <div className="border rounded-lg p-4 space-y-3">
+              <div className="flex items-center justify-between">
+                <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
+                  Your Practice Code
+                </h3>
+                <LanguageSelector
+                  value={practiceLanguage}
+                  onChange={setPracticeLanguage}
+                />
+              </div>
+              <Suspense fallback={<EditorSkeleton height="300px" />}>
+                <SolutionEditor
+                  value={practiceCode}
+                  language={practiceLanguage}
+                  onChange={setPracticeCode}
+                  height="300px"
+                  placeholder="Write your solution here..."
+                />
+              </Suspense>
+            </div>
+          )}
 
           {/* Template Section */}
           {showTemplate && templates.length > 0 && (
@@ -483,11 +545,20 @@ export function PracticeSession({
 
           {/* Navigation Buttons */}
           <div className="flex justify-between pt-4 border-t">
-            <Button variant="outline" onClick={onExit}>
+            <Button 
+              variant="outline" 
+              onClick={onExit}
+              disabled={timerState.isRunning && !timerState.isPaused}
+            >
               Exit Practice
             </Button>
             {onNext && (
-              <Button onClick={onNext}>Next Problem</Button>
+              <Button 
+                onClick={onNext}
+                disabled={hasSessionStarted && !timerState.isComplete}
+              >
+                Next Problem
+              </Button>
             )}
           </div>
         </CardContent>

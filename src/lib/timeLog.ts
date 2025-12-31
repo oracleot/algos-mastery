@@ -64,7 +64,7 @@ export async function deleteTimeLog(problemId: string): Promise<void> {
  */
 export function formatTotalTime(totalSeconds: number): string {
   if (totalSeconds < 60) {
-    return `${totalSeconds}s`;
+    return `${totalSeconds.toFixed(2)}s`;
   }
 
   const hours = Math.floor(totalSeconds / 3600);

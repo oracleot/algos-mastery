@@ -1,6 +1,6 @@
 // components/ProblemCard.tsx - Card displaying problem details with badges
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ExternalLink, Pencil, Trash2, Code, Check, ChevronDown, BookOpen } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -51,9 +51,27 @@ const allStatuses: Status[] = ['unsolved', 'attempted', 'solved'];
 
 function ProblemCard({ problem, onEdit, onDelete, onStatusChange }: ProblemCardProps) {
   const { label, badgeClassName } = statusConfig[problem.status];
+  const navigate = useNavigate();
+
+  // Navigate to problem details when card is clicked
+  const handleCardClick = (e: React.MouseEvent) => {
+    // Don't navigate if clicking on interactive elements
+    const target = e.target as HTMLElement;
+    if (
+      target.closest('a') ||
+      target.closest('button') ||
+      target.closest('[role="menuitem"]')
+    ) {
+      return;
+    }
+    navigate(`/problems/${problem.id}`);
+  };
 
   return (
-    <Card className="transition-shadow hover:shadow-md">
+    <Card 
+      className="transition-shadow hover:shadow-md cursor-pointer"
+      onClick={handleCardClick}
+    >
       <CardHeader className="pb-2">
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
           <div className="flex-1 min-w-0">
@@ -90,7 +108,7 @@ function ProblemCard({ problem, onEdit, onDelete, onStatusChange }: ProblemCardP
               </TooltipTrigger>
               <TooltipContent>View solutions</TooltipContent>
             </Tooltip>
-            <DropdownMenu>
+            <DropdownMenu modal={false}>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <DropdownMenuTrigger asChild>
@@ -107,7 +125,7 @@ function ProblemCard({ problem, onEdit, onDelete, onStatusChange }: ProblemCardP
                 </TooltipTrigger>
                 <TooltipContent>Change status</TooltipContent>
               </Tooltip>
-              <DropdownMenuContent align="end">
+              <DropdownMenuContent align="start">
                 {allStatuses.map((status) => (
                   <DropdownMenuItem
                     key={status}

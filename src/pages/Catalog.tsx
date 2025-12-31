@@ -1,12 +1,12 @@
 // pages/Catalog.tsx - Browse and add problems from the curated catalog
 
 import { useState, useMemo, useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, BookOpen } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { CatalogCard } from '@/components/CatalogCard';
 import { CatalogFilters } from '@/components/CatalogFilters';
+import { PageHeader } from '@/components/PageHeader';
 import { PROBLEM_CATALOG } from '@/data/catalog';
 import { useProblems } from '@/hooks/useProblems';
 import { normalizeUrl } from '@/lib/utils';
@@ -104,16 +104,11 @@ export function Catalog() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur">
-        <div className="container mx-auto flex h-14 max-w-6xl items-center gap-4 px-4">
-          <Link to="/">
-            <Button variant="ghost" size="icon" aria-label="Go back home">
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
-          </Link>
-          <h1 className="text-lg font-semibold">Problem Catalog</h1>
-        </div>
-      </header>
+      {/* Page header with back button and settings toggle */}
+      <PageHeader 
+        title="Problem Catalog"
+        icon={<BookOpen className="h-5 w-5 text-primary" />}
+      />
 
       <main className="container mx-auto max-w-6xl px-4 py-6">
         {/* Filters */}

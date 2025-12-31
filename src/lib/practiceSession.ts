@@ -1,5 +1,7 @@
 // lib/practiceSession.ts - Practice session storage utilities
 
+import type { SupportedLanguage } from '@/types';
+
 const SESSION_STORAGE_KEY = 'algomasteryPracticeSession';
 
 export interface SessionState {
@@ -11,6 +13,10 @@ export interface SessionState {
   isPaused: boolean;
   revealedSolution: boolean;
   revealedTemplate: boolean;
+  // Practice code state
+  practiceCode?: string;
+  practiceLanguage?: SupportedLanguage;
+  showPracticeEditor?: boolean;
 }
 
 /**

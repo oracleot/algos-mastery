@@ -2,7 +2,7 @@
 
 import { useState, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Plus, SearchX, TrendingUp, Library } from 'lucide-react';
+import { Plus, SearchX, TrendingUp, Library, Menu } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import {
@@ -12,21 +12,24 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { EmptyState } from '@/components/EmptyState';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { ProblemForm } from '@/components/ProblemForm';
 import { ProblemList } from '@/components/ProblemList';
 import { FilterBar } from '@/components/FilterBar';
-import { ThemeToggle } from '@/components/ThemeToggle';
-import { OfflineIndicator } from '@/components/OfflineIndicator';
+import { PageHeader } from '@/components/PageHeader';
 import { useProblems } from '@/hooks/useProblems';
-import { usePWA } from '@/hooks/usePWA';
 import { useFilters } from '@/hooks/useFilters';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import type { Problem, ProblemFormData, Status } from '@/types';
 
 function Problems() {
-  const { isOnline } = usePWA();
   const {
     filters,
     setTopic,
@@ -130,22 +133,14 @@ function Problems() {
   const problemsList = problems ?? [];
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="bg-card border-b border-border">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" asChild>
-                <Link to="/">
-                  <ArrowLeft className="h-5 w-5" />
-                </Link>
-              </Button>
-              <h1 className="text-xl font-semibold text-foreground">Problems</h1>
-            </div>
-            <div className="flex items-center gap-2">
-              <OfflineIndicator isOnline={isOnline} />
-              <ThemeToggle />
+    <div className="min-h-screen bg-background overflow-x-hidden">
+      {/* Page Header */}
+      <PageHeader
+        title="Problems"
+        actions={
+          <>
+            {/* Desktop nav buttons */}
+            <div className="hidden sm:flex items-center gap-2">
               <Button variant="outline" size="sm" asChild>
                 <Link to="/catalog">
                   <Library className="h-4 w-4" />
@@ -158,14 +153,41 @@ function Problems() {
                   Progress
                 </Link>
               </Button>
-              <Button onClick={handleOpenAddForm}>
+              <Button onClick={handleOpenAddForm} size="sm">
                 <Plus className="h-4 w-4" />
                 Add Problem
               </Button>
             </div>
-          </div>
-        </div>
-      </header>
+            {/* Mobile hamburger menu */}
+            <div className="flex sm:hidden items-center gap-1">
+              <Button onClick={handleOpenAddForm} size="icon" className="h-9 w-9">
+                <Plus className="h-5 w-5" />
+              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="icon" className="h-9 w-9">
+                    <Menu className="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem asChild>
+                    <Link to="/catalog" className="flex items-center gap-2">
+                      <Library className="h-4 w-4" />
+                      Browse Catalog
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/progress" className="flex items-center gap-2">
+                      <TrendingUp className="h-4 w-4" />
+                      Progress
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </>
+        }
+      />
 
       {/* Content */}
       <main className="max-w-6xl mx-auto px-4 py-8 space-y-6">
