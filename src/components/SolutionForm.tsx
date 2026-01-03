@@ -143,6 +143,7 @@ export function SolutionForm({
             onChange={handleCodeChange}
             readOnly={disabled}
             placeholder="Write your solution here..."
+            showRunButton={true}
           />
         </Suspense>
         {errors.code && (

@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useMemo, useEffect, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
-import { ExternalLink, Eye, EyeOff, ChevronDown, ChevronUp, FileCode, Code, Copy, Check } from 'lucide-react';
+import { ExternalLink, Eye, EyeOff, ChevronDown, ChevronUp, FileCode, Code, Copy, Check, Maximize2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '@/lib/db';
@@ -15,6 +15,7 @@ import { TopicBadge } from '@/components/TopicBadge';
 import { DifficultyBadge } from '@/components/DifficultyBadge';
 import { EditorSkeleton } from '@/components/EditorSkeleton';
 import { LanguageSelector } from '@/components/LanguageSelector';
+import { FullscreenOverlay } from '@/components/FullscreenOverlay';
 import { useTimer } from '@/hooks/useTimer';
 import { useTimeLog } from '@/hooks/useTimeLog';
 import { useTemplates } from '@/hooks/useTemplates';
@@ -42,6 +43,12 @@ interface PracticeSessionProps {
   onNext?: () => void;
   /** Called when user wants to exit */
   onExit?: () => void;
+  /** Total count of problems available for timed practice (attempted + solved) */
+  availableProblemsCount?: number;
+  /** Current practice queue for visibility calculations */
+  practiceQueue?: string[];
+  /** Current index in the practice queue */
+  currentQueueIndex?: number;
 }
 
 export interface PracticeSessionResult {
@@ -60,6 +67,9 @@ export function PracticeSession({
   onComplete,
   onNext,
   onExit,
+  availableProblemsCount = 0,
+  practiceQueue = [],
+  currentQueueIndex = 0,
 }: PracticeSessionProps) {
   const preferences = getPreferences();
   const { getTemplatesForTopic } = useTemplates();
@@ -97,6 +107,9 @@ export function PracticeSession({
     recoveredState?.practiceLanguage ?? 'python'
   );
   const [copied, setCopied] = useState(false);
+  
+  // Fullscreen focus mode state
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const { startTracking, stopTracking } = useTimeLog();
 
@@ -133,6 +146,24 @@ export function PracticeSession({
     initialElapsed: recoveredState?.elapsed ?? 0,
     onComplete: handleTimerComplete,
   });
+
+  // Compute editor disabled state based on timer
+  const isEditorDisabled = !timerState.isRunning && !timerState.isComplete;
+
+  // Compute whether there are more problems available for practice
+  const hasMoreProblems = useMemo(() => {
+    // If not at end of queue, there are more problems
+    if (currentQueueIndex < practiceQueue.length - 1) return true;
+    // Check if there are available problems not yet in queue
+    return availableProblemsCount > practiceQueue.length;
+  }, [currentQueueIndex, practiceQueue.length, availableProblemsCount]);
+
+  // Compute disabled message for editor based on timer state
+  const disabledMessage = useMemo((): string | undefined => {
+    if (timerState.isRunning || timerState.isComplete) return undefined;
+    if (timerState.isPaused) return 'Resume timer to continue';
+    return 'Start timer to begin coding';
+  }, [timerState.isRunning, timerState.isComplete, timerState.isPaused]);
 
   // Save session state on changes
   const saveState = useCallback(() => {
@@ -283,6 +314,23 @@ export function PracticeSession({
   // Toggle solution visibility
   const handleToggleSolution = useCallback(() => {
     setShowSolution((prev) => !prev);
+  }, []);
+
+  // Toggle fullscreen mode
+  const handleToggleFullscreen = useCallback(() => {
+    setIsFullscreen((prev) => !prev);
+  }, []);
+
+  // Exit fullscreen mode
+  const handleExitFullscreen = useCallback(() => {
+    setIsFullscreen(false);
+  }, []);
+
+  // Auto-exit fullscreen when component unmounts (leaving practice session)
+  useEffect(() => {
+    return () => {
+      setIsFullscreen(false);
+    };
   }, []);
 
   // Toggle template visibility
@@ -436,6 +484,19 @@ export function PracticeSession({
               )}
               {showSolution ? 'Hide Solution' : 'Reveal Solution'}
             </Button>
+
+            {/* Fullscreen mode button */}
+            {showPracticeEditor && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleToggleFullscreen}
+                className="gap-2"
+              >
+                <Maximize2 className="h-4 w-4" />
+                Focus Mode
+              </Button>
+            )}
           </div>
 
           {/* Practice Code Editor */}
@@ -473,6 +534,9 @@ export function PracticeSession({
                   onChange={setPracticeCode}
                   height="300px"
                   placeholder="Write your solution here..."
+                  readOnly={isEditorDisabled}
+                  disabledMessage={disabledMessage}
+                  showRunButton={true}
                 />
               </Suspense>
             </div>
@@ -589,7 +653,7 @@ export function PracticeSession({
             >
               Exit Practice
             </Button>
-            {onNext && (
+            {onNext && hasMoreProblems && (
               <Button 
                 onClick={onNext}
                 disabled={hasSessionStarted && !timerState.isComplete}
@@ -600,6 +664,20 @@ export function PracticeSession({
           </div>
         </CardContent>
       </Card>
+
+      {/* Fullscreen Focus Mode Overlay */}
+      {isFullscreen && (
+        <FullscreenOverlay
+          problem={problem}
+          timerState={timerState}
+          onPause={handlePause}
+          onResume={handleResume}
+          code={practiceCode}
+          language={practiceLanguage}
+          onCodeChange={setPracticeCode}
+          onExit={handleExitFullscreen}
+        />
+      )}
     </div>
   );
 }

@@ -256,18 +256,18 @@ export function Practice() {
                 <CardTitle>Quick Start</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <Button
-                  size="lg"
-                  className="w-full gap-2"
-                  onClick={handleRandomProblem}
-                  disabled={unsolvedProblems.length === 0}
-                >
-                  <Shuffle className="h-5 w-5" />
-                  Random Unsolved Problem
-                </Button>
-                {unsolvedProblems.length === 0 && (
-                  <p className="text-sm text-muted-foreground text-center">
-                    All problems solved! Add more problems to practice.
+                {unsolvedProblems.length > 0 ? (
+                  <Button
+                    size="lg"
+                    className="w-full gap-2"
+                    onClick={handleRandomProblem}
+                  >
+                    <Shuffle className="h-5 w-5" />
+                    Random Unsolved Problem
+                  </Button>
+                ) : (
+                  <p className="text-sm text-muted-foreground text-center py-2">
+                    No unsolved problems available for practice
                   </p>
                 )}
               </CardContent>
@@ -324,6 +324,9 @@ export function Practice() {
             onComplete={handleSessionComplete}
             onNext={handleNextProblem}
             onExit={handleExit}
+            availableProblemsCount={problems.length}
+            practiceQueue={practiceQueue}
+            currentQueueIndex={currentQueueIndex}
           />
         )}
 
