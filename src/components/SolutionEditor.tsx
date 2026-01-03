@@ -10,6 +10,8 @@ import {
   DEFAULT_EDITOR_CONFIG,
 } from '@/lib/editor';
 import { useTheme } from '@/hooks/useTheme';
+import { EditorDisabledBanner } from '@/components/EditorDisabledBanner';
+import { CodeRunnerPanel } from '@/components/CodeRunnerPanel';
 
 interface SolutionEditorProps {
   /** Current code value */
@@ -24,6 +26,12 @@ interface SolutionEditorProps {
   placeholder?: string;
   /** Editor height */
   height?: string;
+  /** Show the Run Code button and output panel (default: false) */
+  showRunButton?: boolean;
+  /** Message to display when editor is disabled */
+  disabledMessage?: string;
+  /** Remove border styling (for fullscreen mode) */
+  borderless?: boolean;
 }
 
 /**
@@ -37,13 +45,30 @@ export function SolutionEditor({
   readOnly = false,
   placeholder = DEFAULT_EDITOR_CONFIG.placeholder,
   height = DEFAULT_EDITOR_CONFIG.height,
+  showRunButton = false,
+  disabledMessage,
+  borderless = false,
 }: SolutionEditorProps) {
   const { resolvedTheme } = useTheme();
   
   // Memoize extensions to prevent unnecessary re-renders
   const extensions = useMemo(() => {
-    return [...getLanguageExtension(language), EditorView.lineWrapping];
-  }, [language]);
+    const baseExtensions = [...getLanguageExtension(language), EditorView.lineWrapping];
+    
+    // Add borderless styling if needed
+    if (borderless) {
+      baseExtensions.push(
+        EditorView.theme({
+          '&': { border: 'none' },
+          '&.cm-focused': { outline: 'none' },
+          '.cm-gutters': { border: 'none' },
+          '.cm-gutter': { border: 'none' },
+        })
+      );
+    }
+    
+    return baseExtensions;
+  }, [language, borderless]);
 
   const theme = useMemo(() => {
     // Use resolved theme from context (handles system preference)
@@ -51,18 +76,30 @@ export function SolutionEditor({
   }, [resolvedTheme]);
 
   return (
-    <div className="rounded-md border overflow-hidden">
-      <CodeMirror
-        value={value}
-        height={height}
-        extensions={extensions}
-        theme={theme}
-        onChange={onChange}
-        readOnly={readOnly}
-        placeholder={placeholder}
-        basicSetup={DEFAULT_EDITOR_CONFIG.basicSetup}
-        className="text-sm"
-      />
+    <div className={borderless ? '' : 'space-y-2'}>
+      <div className={`relative overflow-hidden ${borderless ? '' : 'rounded-md border'}`}>
+        <CodeMirror
+          value={value}
+          height={height}
+          extensions={extensions}
+          theme={theme}
+          onChange={onChange}
+          readOnly={readOnly}
+          placeholder={placeholder}
+          basicSetup={DEFAULT_EDITOR_CONFIG.basicSetup}
+          className="text-sm"
+        />
+        {disabledMessage && (
+          <EditorDisabledBanner message={disabledMessage} />
+        )}
+      </div>
+      {showRunButton && (
+        <CodeRunnerPanel
+          code={value}
+          language={language}
+          disabled={readOnly}
+        />
+      )}
     </div>
   );
 }

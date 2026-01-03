@@ -24,7 +24,7 @@
 
 **Purpose**: No new project setup required - extending existing codebase
 
-- [ ] T001 Verify existing dependencies are sufficient (no new packages needed per plan.md)
+- [X] T001 Verify existing dependencies are sufficient (no new packages needed per plan.md)
 
 ---
 
@@ -34,9 +34,9 @@
 
 **⚠️ CRITICAL**: US2 (Code Validation) depends on code runner utilities; US3 (Fullscreen) depends on T012 (CodeRunnerPanel) only, not full US2 completion
 
-- [ ] T002 Create code execution utilities with timeout, console capture, and output truncation (1000 lines/100KB limit) in src/lib/codeRunner.ts
-- [ ] T003 Create useCodeRunner hook with run, result, and clear functions in src/hooks/useCodeRunner.ts
-- [ ] T004 Create useCodeRunner hook tests in src/hooks/useCodeRunner.test.ts
+- [X] T002 Create code execution utilities with timeout, console capture, and output truncation (1000 lines/100KB limit) in src/lib/codeRunner.ts
+- [X] T003 Create useCodeRunner hook with run, result, and clear functions in src/hooks/useCodeRunner.ts
+- [X] T004 Create useCodeRunner hook tests in src/hooks/useCodeRunner.test.ts
 
 **Checkpoint**: Foundation ready - code execution infrastructure complete
 
@@ -50,15 +50,15 @@
 
 ### Tests for User Story 1
 
-- [ ] T005 [P] [US1] Add tests for EditorDisabledBanner component in src/components/EditorDisabledBanner.test.tsx
-- [ ] T006 [P] [US1] Add tests for SolutionEditor readOnly behavior with disabled message in src/components/SolutionEditor.test.tsx
+- [X] T005 [P] [US1] Add tests for EditorDisabledBanner component in src/components/EditorDisabledBanner.test.tsx
+- [X] T006 [P] [US1] Add tests for SolutionEditor readOnly behavior with disabled message in src/components/SolutionEditor.test.tsx
 
 ### Implementation for User Story 1
 
-- [ ] T007 [P] [US1] Create EditorDisabledBanner component showing contextual disable message in src/components/EditorDisabledBanner.tsx
-- [ ] T008 [US1] Extend SolutionEditor with disabledMessage prop and integrate EditorDisabledBanner in src/components/SolutionEditor.tsx
-- [ ] T009 [US1] Modify PracticeSession to compute isEditorDisabled from timer state and pass to SolutionEditor in src/components/PracticeSession.tsx
-- [ ] T010 [US1] Add disabled message logic: "Start timer to begin coding" when not started, "Resume timer to continue" when paused in src/components/PracticeSession.tsx
+- [X] T007 [P] [US1] Create EditorDisabledBanner component showing contextual disable message in src/components/EditorDisabledBanner.tsx
+- [X] T008 [US1] Extend SolutionEditor with disabledMessage prop and integrate EditorDisabledBanner in src/components/SolutionEditor.tsx
+- [X] T009 [US1] Modify PracticeSession to compute isEditorDisabled from timer state and pass to SolutionEditor in src/components/PracticeSession.tsx
+- [X] T010 [US1] Add disabled message logic: "Start timer to begin coding" when not started, "Resume timer to continue" when paused in src/components/PracticeSession.tsx
 
 **Checkpoint**: User Story 1 complete - editor locks when timer isn't running
 
@@ -72,15 +72,15 @@
 
 ### Tests for User Story 2
 
-- [ ] T011 [P] [US2] Create CodeRunnerPanel component tests for run button, output display, and language restrictions in src/components/CodeRunnerPanel.test.tsx
+- [X] T011 [P] [US2] Create CodeRunnerPanel component tests for run button, output display, and language restrictions in src/components/CodeRunnerPanel.test.tsx
 
 ### Implementation for User Story 2
 
-- [ ] T012 [US2] Create CodeRunnerPanel component with run button, output panel, and language-aware tooltip in src/components/CodeRunnerPanel.tsx
-- [ ] T013 [US2] Extend SolutionEditor with showRunButton prop and integrate CodeRunnerPanel in src/components/SolutionEditor.tsx
-- [ ] T014 [US2] Enable run button in PracticeSession by passing showRunButton={true} to SolutionEditor in src/components/PracticeSession.tsx
-- [ ] T015 [US2] Enable run button in SolutionForm for problem detail page by passing showRunButton={true} in src/components/SolutionForm.tsx
-- [ ] T016 [US2] Ensure Run button is disabled when editor is in readOnly mode (timer not running) in src/components/CodeRunnerPanel.tsx
+- [X] T012 [US2] Create CodeRunnerPanel component with run button, output panel, and language-aware tooltip in src/components/CodeRunnerPanel.tsx
+- [X] T013 [US2] Extend SolutionEditor with showRunButton prop and integrate CodeRunnerPanel in src/components/SolutionEditor.tsx
+- [X] T014 [US2] Enable run button in PracticeSession by passing showRunButton={true} to SolutionEditor in src/components/PracticeSession.tsx
+- [X] T015 [US2] Enable run button in SolutionForm for problem detail page by passing showRunButton={true} in src/components/SolutionForm.tsx
+- [X] T016 [US2] Ensure Run button is disabled when editor is in readOnly mode (timer not running) in src/components/CodeRunnerPanel.tsx
 
 **Checkpoint**: User Story 2 complete - can run JS/TS code and see output in editor
 
@@ -94,15 +94,15 @@
 
 ### Tests for User Story 3
 
-- [ ] T017 [P] [US3] Create FullscreenOverlay component tests for portal rendering, Escape key, timer display in src/components/FullscreenOverlay.test.tsx
+- [X] T017 [P] [US3] Create FullscreenOverlay component tests for portal rendering, Escape key, timer display in src/components/FullscreenOverlay.test.tsx
 
 ### Implementation for User Story 3
 
-- [ ] T018 [US3] Create FullscreenOverlay component with React Portal, timer, editor, collapsible problem description in src/components/FullscreenOverlay.tsx
-- [ ] T019 [US3] Add fullscreen state and toggle button to PracticeSession in src/components/PracticeSession.tsx
-- [ ] T020 [US3] Integrate FullscreenOverlay rendering when isFullscreen is true in src/components/PracticeSession.tsx
-- [ ] T021 [US3] Ensure fullscreen mode automatically exits when leaving practice session via useEffect cleanup in src/components/PracticeSession.tsx
-- [ ] T022 [US3] Include CodeRunnerPanel in fullscreen view for code execution capability in src/components/FullscreenOverlay.tsx
+- [X] T018 [US3] Create FullscreenOverlay component with React Portal, timer, editor, collapsible problem description in src/components/FullscreenOverlay.tsx
+- [X] T019 [US3] Add fullscreen state and toggle button to PracticeSession in src/components/PracticeSession.tsx
+- [X] T020 [US3] Integrate FullscreenOverlay rendering when isFullscreen is true in src/components/PracticeSession.tsx
+- [X] T021 [US3] Ensure fullscreen mode automatically exits when leaving practice session via useEffect cleanup in src/components/PracticeSession.tsx
+- [X] T022 [US3] Include CodeRunnerPanel in fullscreen view for code execution capability in src/components/FullscreenOverlay.tsx
 
 **Checkpoint**: User Story 3 complete - fullscreen focus mode operational
 
@@ -116,15 +116,15 @@
 
 ### Tests for User Story 4
 
-- [ ] T023 [P] [US4] Add tests verifying navigation buttons exclude unsolved problems from availability calculation in src/components/PracticeSession.test.tsx
+- [X] T023 [P] [US4] Add tests verifying navigation buttons exclude unsolved problems from availability calculation in src/components/PracticeSession.test.tsx
 
 ### Implementation for User Story 4
 
-- [ ] T024 [US4] Add availableProblemsCount, practiceQueue, and currentQueueIndex props to PracticeSession component in src/components/PracticeSession.tsx (Note: Practice.tsx must calculate availableProblemsCount from attempted+solved problems and pass as prop)
-- [ ] T025 [US4] Implement hasMoreProblems calculation based on queue position and available problems count in src/components/PracticeSession.tsx
-- [ ] T026 [US4] Conditionally render "Next Problem" button only when hasMoreProblems is true in src/components/PracticeSession.tsx
-- [ ] T027 [US4] Fix Practice page to conditionally show "Random Unsolved Problem" button based on unsolvedProblems.length > 0 in src/pages/Practice.tsx
-- [ ] T028 [US4] Show informative message "No unsolved problems available for practice" when no unsolved problems exist in src/pages/Practice.tsx
+- [X] T024 [US4] Add availableProblemsCount, practiceQueue, and currentQueueIndex props to PracticeSession component in src/components/PracticeSession.tsx (Note: Practice.tsx must calculate availableProblemsCount from attempted+solved problems and pass as prop)
+- [X] T025 [US4] Implement hasMoreProblems calculation based on queue position and available problems count in src/components/PracticeSession.tsx
+- [X] T026 [US4] Conditionally render "Next Problem" button only when hasMoreProblems is true in src/components/PracticeSession.tsx
+- [X] T027 [US4] Fix Practice page to conditionally show "Random Unsolved Problem" button based on unsolvedProblems.length > 0 in src/pages/Practice.tsx
+- [X] T028 [US4] Show informative message "No unsolved problems available for practice" when no unsolved problems exist in src/pages/Practice.tsx
 
 **Checkpoint**: User Story 4 complete - navigation buttons accurately reflect available options
 
@@ -134,11 +134,11 @@
 
 **Purpose**: Final validation and cleanup
 
-- [ ] T029 [P] Run all tests and fix any failures with pnpm test --run
-- [ ] T030 [P] Run type checker and fix any type errors with pnpm typecheck
-- [ ] T031 [P] Run linter and fix any lint errors with pnpm lint
-- [ ] T032 Run quickstart.md manual validation scenarios
-- [ ] T033 Verify build succeeds with pnpm build
+- [X] T029 [P] Run all tests and fix any failures with pnpm test --run
+- [X] T030 [P] Run type checker and fix any type errors with pnpm typecheck
+- [X] T031 [P] Run linter and fix any lint errors with pnpm lint
+- [X] T032 Run quickstart.md manual validation scenarios
+- [X] T033 Verify build succeeds with pnpm build
 
 ---
 
