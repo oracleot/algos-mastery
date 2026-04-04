@@ -1,86 +1,49 @@
-// pages/Catalog.tsx - Browse and add problems from the curated catalog
+// pages/Catalog.tsx - Problem Catalog with sidebar layout, topic sections, and progress
 
-import { useState, useMemo, useCallback } from 'react';
-import { BookOpen } from 'lucide-react';
+import { useMemo } from 'react';
+import { BookOpen, Search } from 'lucide-react';
 import { toast } from 'sonner';
+import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { CatalogCard } from '@/components/CatalogCard';
-import { CatalogFilters } from '@/components/CatalogFilters';
+import { CatalogTopicSection } from '@/components/CatalogTopicSection';
+import { CatalogSidebar } from '@/components/CatalogSidebar';
+import { CatalogStats } from '@/components/CatalogStats';
 import { PageHeader } from '@/components/PageHeader';
-import { PROBLEM_CATALOG } from '@/data/catalog';
 import { useProblems } from '@/hooks/useProblems';
+import { useCatalogFilters } from '@/hooks/useCatalogFilters';
 import { normalizeUrl } from '@/lib/utils';
-import type { CatalogFilters as CatalogFiltersType, CatalogProblem } from '@/types';
+import type { CatalogProblem } from '@/types';
 
-const INITIAL_FILTERS: CatalogFiltersType = {
-  topic: null,
-  difficulty: null,
-  source: null,
-  search: '',
-};
-
-/**
- * Catalog page - allows users to browse the curated problem catalog
- */
 export function Catalog() {
   const { problems, addProblem, isLoading } = useProblems();
-  const [filters, setFilters] = useState<CatalogFiltersType>(INITIAL_FILTERS);
 
-  // Build a Set of normalized URLs for O(1) lookup
+  // Build normalized URL set for O(1) "is added" checks
   const existingUrls = useMemo(() => {
     if (!problems) return new Set<string>();
     return new Set(
-      problems
-        .filter((p) => p.url)
-        .map((p) => normalizeUrl(p.url!))
+      problems.filter((p) => p.url).map((p) => normalizeUrl(p.url!))
     );
   }, [problems]);
 
-  // Check if a URL is already added
-  const isAdded = useCallback(
-    (url: string) => existingUrls.has(normalizeUrl(url)),
-    [existingUrls]
-  );
+  const {
+    searchInput,
+    debouncedSearch,
+    setSearchInput,
+    selectedTopics,
+    selectedDifficulties,
+    selectedSources,
+    setTopics,
+    setDifficulties,
+    setSources,
+    clearAll,
+    hasActiveFilters,
+    activeFilterCount,
+    topicSections,
+    filteredCount,
+    stats,
+    isAdded,
+  } = useCatalogFilters(existingUrls);
 
-  // Filter catalog based on current filters
-  const filteredCatalog = useMemo(() => {
-    let result = PROBLEM_CATALOG;
-
-    if (filters.topic) {
-      result = result.filter((p) => p.topic === filters.topic);
-    }
-
-    if (filters.difficulty) {
-      result = result.filter((p) => p.difficulty === filters.difficulty);
-    }
-
-    if (filters.source) {
-      result = result.filter((p) => p.source === filters.source);
-    }
-
-    if (filters.search.trim()) {
-      const searchLower = filters.search.toLowerCase().trim();
-      result = result.filter((p) =>
-        p.title.toLowerCase().includes(searchLower)
-      );
-    }
-
-    return result;
-  }, [filters]);
-
-  // Count how many filtered problems are already added
-  const addedCount = useMemo(() => {
-    return filteredCatalog.filter((p) => isAdded(p.url)).length;
-  }, [filteredCatalog, isAdded]);
-
-  // Check if any filter is active
-  const hasActiveFilters =
-    filters.topic !== null ||
-    filters.difficulty !== null ||
-    filters.source !== null ||
-    filters.search.trim() !== '';
-
-  // Handle adding a problem
   const handleAddProblem = async (problem: CatalogProblem) => {
     try {
       await addProblem({
@@ -97,78 +60,136 @@ export function Catalog() {
     }
   };
 
-  // Clear all filters
-  const handleClearFilters = () => {
-    setFilters(INITIAL_FILTERS);
-  };
+  // When user is searching, force all sections open so matches are visible
+  const forceOpen = debouncedSearch.trim().length > 0;
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Page header with back button and settings toggle */}
-      <PageHeader 
+      <PageHeader
         title="Problem Catalog"
         icon={<BookOpen className="h-5 w-5 text-primary" />}
+        actions={
+          /* Search bar in header — visible on all screens */
+          <div className="relative w-48 sm:w-64">
+            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+            <Input
+              type="search"
+              placeholder="Search problems…"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              className="pl-8 h-8 text-sm"
+            />
+          </div>
+        }
       />
 
       <main className="container mx-auto max-w-7xl px-4 lg:px-6 py-6">
-        {/* Filters */}
-        <div className="mb-6">
-          <CatalogFilters
-            filters={filters}
-            onTopicChange={(topic) => setFilters((f) => ({ ...f, topic }))}
-            onDifficultyChange={(difficulty) =>
-              setFilters((f) => ({ ...f, difficulty }))
-            }
-            onSourceChange={(source) => setFilters((f) => ({ ...f, source }))}
-            onSearchChange={(search) => setFilters((f) => ({ ...f, search }))}
-            onClearAll={handleClearFilters}
-            hasActiveFilters={hasActiveFilters}
+        {/* Mobile filter button row */}
+        <div className="flex items-center gap-3 mb-4 lg:hidden">
+          <CatalogSidebar
+            selectedTopics={selectedTopics}
+            selectedDifficulties={selectedDifficulties}
+            selectedSources={selectedSources}
+            onTopicsChange={setTopics}
+            onDifficultiesChange={setDifficulties}
+            onSourcesChange={setSources}
+            onClearAll={clearAll}
+            activeFilterCount={activeFilterCount}
           />
-        </div>
-
-        {/* Stats bar */}
-        <div className="mb-4 text-sm text-muted-foreground">
-          Showing {filteredCatalog.length} of {PROBLEM_CATALOG.length} problems
-          {addedCount > 0 && ` • ${addedCount} already added`}
-        </div>
-
-        {/* Loading state */}
-        {isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div
-                key={i}
-                className="h-40 rounded-xl border bg-muted/50 animate-pulse"
-              />
-            ))}
-          </div>
-        ) : filteredCatalog.length === 0 ? (
-          /* Empty state */
-          <div className="flex flex-col items-center justify-center py-16 text-center">
-            <BookOpen className="h-16 w-16 text-muted-foreground mb-4" />
-            <h2 className="text-xl font-semibold mb-2">No problems found</h2>
-            <p className="text-muted-foreground max-w-md mb-4">
-              Try adjusting your filters to find problems.
-            </p>
+          <span className="text-sm text-muted-foreground">
+            {filteredCount} problem{filteredCount !== 1 ? 's' : ''}
             {hasActiveFilters && (
-              <Button variant="outline" onClick={handleClearFilters}>
-                Clear filters
-              </Button>
+              <>
+                {' '}
+                &middot;{' '}
+                <button
+                  onClick={clearAll}
+                  className="underline underline-offset-2 hover:text-foreground transition-colors"
+                >
+                  Clear filters
+                </button>
+              </>
+            )}
+          </span>
+        </div>
+
+        {/* Main two-column layout */}
+        <div className="flex gap-6">
+          {/* Desktop sidebar */}
+          <CatalogSidebar
+            selectedTopics={selectedTopics}
+            selectedDifficulties={selectedDifficulties}
+            selectedSources={selectedSources}
+            onTopicsChange={setTopics}
+            onDifficultiesChange={setDifficulties}
+            onSourcesChange={setSources}
+            onClearAll={clearAll}
+            activeFilterCount={activeFilterCount}
+          />
+
+          {/* Right content area */}
+          <div className="flex-1 min-w-0 flex flex-col gap-4">
+            {/* Stats bar */}
+            <CatalogStats stats={stats} />
+
+            {/* Result count (desktop) */}
+            <div className="hidden lg:flex items-center justify-between text-sm text-muted-foreground">
+              <span>
+                Showing {filteredCount} of {stats.total} problems
+              </span>
+              {hasActiveFilters && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={clearAll}
+                  className="h-7 text-xs px-2"
+                >
+                  Clear filters
+                </Button>
+              )}
+            </div>
+
+            {/* Loading skeletons */}
+            {isLoading ? (
+              <div className="flex flex-col gap-3">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-14 rounded-xl border bg-muted/50 animate-pulse"
+                  />
+                ))}
+              </div>
+            ) : topicSections.length === 0 ? (
+              /* Empty state */
+              <div className="flex flex-col items-center justify-center py-16 text-center">
+                <BookOpen className="h-16 w-16 text-muted-foreground mb-4" />
+                <h2 className="text-xl font-semibold mb-2">No problems found</h2>
+                <p className="text-muted-foreground max-w-md mb-4">
+                  Try adjusting your filters or search term.
+                </p>
+                {hasActiveFilters && (
+                  <Button variant="outline" onClick={clearAll}>
+                    Clear filters
+                  </Button>
+                )}
+              </div>
+            ) : (
+              /* Topic sections */
+              <div className="flex flex-col gap-3">
+                {topicSections.map((section) => (
+                  <CatalogTopicSection
+                    key={section.slug}
+                    section={section}
+                    isAdded={isAdded}
+                    onAdd={handleAddProblem}
+                    forceOpen={forceOpen}
+                    searchTerm={debouncedSearch}
+                  />
+                ))}
+              </div>
             )}
           </div>
-        ) : (
-          /* Problem grid */
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredCatalog.map((problem) => (
-              <CatalogCard
-                key={problem.id}
-                problem={problem}
-                isAdded={isAdded(problem.url)}
-                onAdd={() => handleAddProblem(problem)}
-              />
-            ))}
-          </div>
-        )}
+        </div>
       </main>
     </div>
   );
