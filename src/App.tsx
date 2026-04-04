@@ -5,6 +5,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { ShortcutHelp } from '@/components/ShortcutHelp';
 import { InstallPrompt } from '@/components/InstallPrompt';
 import { ServiceWorkerUpdate } from '@/components/ServiceWorkerUpdate';
+import { BackToTop } from '@/components/ui/BackToTop';
 import { useShortcuts } from '@/context/ShortcutsContext';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { usePWA } from '@/hooks/usePWA';
@@ -50,6 +51,7 @@ function App() {
       <ServiceWorkerUpdate isUpdateAvailable={isUpdateAvailable} onUpdate={update} />
       
       <Toaster position="bottom-right" />
+      <BackToTop />
     </>
   );
 }
