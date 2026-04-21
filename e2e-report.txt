@@ -1,0 +1,62 @@
+═══════════════════════════════════════════════════════════════
+  E2E TEST REPORT - algos-mastery
+  Run at: 2026-03-31T08:51:22.752Z
+═══════════════════════════════════════════════════════════════
+
+TEST 1: Homepage loads
+--------------------------------------------------
+   Closed onboarding overlay
+   Page title: "Algorithms Mastery Tracker"
+   📸 Screenshot: /root/projects/algos-mastery/e2e-results/01-homepage-loaded.png
+✅ PASS: Homepage loads successfully
+
+TEST 2: Navigation links work
+--------------------------------------------------
+   Found 8 links
+   - "link" -> /settings
+   - "View Problems" -> /problems
+   - "Timed Practice" -> /practice
+   - "Progress Ladder" -> /progress
+   - "View full catalog" -> /catalog
+   📸 Screenshot: /root/projects/algos-mastery/e2e-results/02-navigation-links.png
+✅ PASS: Navigation links work (5 internal links)
+
+TEST 3: Click into Arrays topic
+--------------------------------------------------
+   📸 Screenshot: /root/projects/algos-mastery/e2e-results/03-arrays-before-click.png
+   📸 Screenshot: /root/projects/algos-mastery/e2e-results/03-arrays-after-click.png
+   Current URL: http://localhost:5173/
+   Problem elements found: 5
+✅ PASS: Arrays topic clicked
+
+TEST 4: Search bar functionality
+--------------------------------------------------
+   📸 Screenshot: /root/projects/algos-mastery/e2e-results/04-problems-page.png
+   Found search input with selector: input[placeholder*="search" i]
+   📸 Screenshot: /root/projects/algos-mastery/e2e-results/04-search-query.png
+✅ PASS: Search bar works
+
+TEST 5: Difficulty filters
+--------------------------------------------------
+   📸 Screenshot: /root/projects/algos-mastery/e2e-results/05-filters-applied.png
+❌ FAIL: Difficulty filters - No difficulty filters found
+   📸 Screenshot: /root/projects/algos-mastery/e2e-results/05-filters-not-found.png
+
+TEST 6: Mobile viewport (375px wide)
+--------------------------------------------------
+   📸 Screenshot: /root/projects/algos-mastery/e2e-results/06-mobile-homepage.png
+   Mobile viewport: 375x812
+   Body visible: true
+   Scroll width: 375, Viewport: 375
+✅ PASS: Mobile viewport renders correctly
+
+═══════════════════════════════════════════════════════════════
+  SUMMARY
+═══════════════════════════════════════════════════════════════
+
+  Total Tests: 6
+  Passed: 5
+  Failed: 1
+  Pass Rate: 83%
+
+═══════════════════════════════════════════════════════════════
